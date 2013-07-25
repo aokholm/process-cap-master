@@ -1,0 +1,66 @@
+\documentclass[aip,amsmath,reprint, author-year]{revtex4-1}
+\usepackage{url}
+
+\usepackage{hyperref}
+\usepackage{graphicx} % for graphics
+%\usepackage{listings} % for code listtings
+%\usepackage{color}
+
+%\setcitestyle{round, author-year}
+
+\setcounter{page}{1}
+
+%\bibliographystyle{aipauth4-1.bst}
+
+\begin{document}
+
+\begin{abstract}Summery of literature on Process Capability Databases (PCDB). Why are PCDB's needed, what are the common configurations and what are the typical problems related to PCDB.
+\end{abstract}
+
+\title{Literature review of Process Capability Databases}
+\author{Andreas Bruun Okholm, s082562\\
+Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email[Email me at:] {or mathiasrask@gmail.com}
+\affiliation{Technical University of Denmark}
+ 
+\date{\today}
+\maketitle
+
+%Introduction
+
+\section{Introduction}
+For all manufacturing processes there is variation in dimension of the produced part. 
+If the production variance is not controlled it will lead to increased defect rate and increased cost for the manufactured goods and possibly decreased user satisfaction. 
+\citet{kern2003forecasting} identifies the following fields of study, which are concerned about creating high quality low cost parts: "Design for Quality" including Design for Six Sigma (DFSS) and Quality Function Deployment (QFD), Manufacturing Variation Modeling, Manufacturing Variation Propagation, Robust Design, Response Surface Methodology (RSM), Tolerance Allocation, Statistical Process Control (SPC), Using Manufacturing Process Capability Data during the Design of a Product and Selective Assembly.
+
+
+\section{Literature}
+
+\citet{sfantsikopoulos1990cost} Develops a model for the Tolerance - Price relationship and based on 5 different sources gives a range of parameters. 
+
+\citet{kern2003forecasting} has created a great well structured literature review of related work to PCDB and which fields of knowledge has interest in the PCDB data. He proposes a structure for the actual database scheme, which is useful as inspiration. To assign key features he develops a Matrix system, which seems very time consuming and complex. \citet{kern2003forecasting} also develops a framework to calculate Process mean and variance output based on variance and mean in. This could be very useful if only the variance and mean input it known.
+
+A tolerance grade guide base on machining operation can be found in \citet{american1978preferred}. It is however unclear how the data for the table has been generated. It also showed in \citet{united1967preferred} in a slightly reduced form.
+
+\citet{tata1999process} Summery of M. Tata's Master project, published in article form. Based on a survey send to major design and manufacturing firms. The problems of current PCDB implementations are investigated. 
+
+In \citet[p. 715]{oberg2008machinery} you will find a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. No source is given.
+
+\citet{arvidsson2008principles} has carried out a literature review of what Robust Design is.
+
+
+\citet{thornton2004variation} Whole appendix B is dedicated to PCDB design.Introduces concepts of Product Key chateristics and methods on how to manage these.
+
+\citet{feng1995dimension} A proposed Data model for integrating Tolerance specification into CAD data. 
+
+\citet{yang1998design} Example of Taguchi in use. 
+
+\citet{kane1986process} One of the most cited articles on Process capability indices. One of the first in English literature (Cp, Cpk …)
+
+\citet{thornton2000more}Study based on American fortune 500 and aerospace companies shows that they need "better low cost, systematic, and quantitative methods in all stages of variation risk management"
+
+\section*{References}
+\bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
+
+
+
+\end{document}
