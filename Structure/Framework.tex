@@ -30,15 +30,33 @@ Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email
 \section{Introduction}
 
 \section{Actors}
-In most manufacturings companies you will find that there are three main groups responsible for producing high quality products.
+In most goods manufacturing companies you will find that there are three main groups responsible for producing high quality products.
 
-The designer engineers task is to design products which great value for the end customer. 
+The designer engineers task is to design products with great value for the end customer. 
 His design should find the optimal compromise between design simplicity, insensitiveness to manufacturing variation and the actual manufacturing capabilities. 
 
-The manufacture, internal or external, will produce the design usually as an 'best effort'. Lastly it's the task of the control engineer to make sure that the  
+The internal manufacturing department or external sub supplier, will produce the design as an 'best effort' to achieve the specified tolerances by the designer. Sometime the manufacture will give feedback to the designer and require a redesign if the required tolerances are too tight. It's often possible to achieve the desired tight tolerances, however it's more time consuming and can causes delays.
+
+Lastly it's the task of the control engineer, which can be located at the manufacturing department, a separate internal quality control department or possibly also in the external suppler. 
+The job of the control engineers is to make sure that the components manufactured stay within the target tolerance for as long as the component is produced.
+
+This usual organisational setup has one particular issue. 
+The flow of information flow is mainly in one direction - the designer does not get much structured feedback. \citet{tata1999process} found that a lot of research published during the 90'ties showing that setting correct tolerances would reduce rework, cost, failure rate, assembly problems and improve product performance. 
+In a period from 1994 and 1999 there were 28 articles published on robust design, tolerance optimisation, variation modelling in five major journals in mechanical design. 
+These all assumed the existence of process capability data. 
+"However, no research discusses how to deliver process capability data to the designers in a form that they can use." \cite{tata1999process}
+
+ 
+
+ 
+There is no structured way to give feedback to the designer, which would be useful for creating new designs. 
+To enable the designers to efficient create robust designs they need insight into a vast amount of manufacturing knowledge. 
+The basic knowledge is which shapes and materials are possible with each manufacturing process. 
+To be able to create truly robust design the manufacturing variation needs to be know and taking into account. The manufacturing variation is typically only known specialists within the quality control department or sometime the manufacturing department. 
 
 
 
+One way of trying to solve this issue has typically been to create a company wide process capability database (PCDB). 
 
 \section{The Problem}
 
@@ -56,5 +74,10 @@ Reasons why PCDB are not more in use than it is today.
 
 
 \end{itemize} 
+
+
+
+\section*{References}
+\bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
 
 \end{document}
