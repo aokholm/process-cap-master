@@ -19,7 +19,7 @@
 
 \title{Literature review of Process Capability Databases}
 \author{Andreas Bruun Okholm, s082562\\
-Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email[Email me at:] {or mathiasrask@gmail.com}
+Mathias Rask Møller, s082536 }
 \affiliation{Technical University of Denmark}
  
 \date{\today}
@@ -28,9 +28,36 @@ Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email
 %Introduction
 
 \section{Introduction}
-For all manufacturing processes there is variation in the dimension of the produced part. 
-If the production variance is not controlled it will lead to increased cost for the manufactured goods and possibly decreased user satisfaction.
-\citet{kern2003forecasting} identifies the following fields of study, which are concerned about creating high quality low cost parts: 
+For all manufacturing processes there is variation in the dimension of the produced part.
+Understanding process variation and creating designs that take into account variation will decrease cost of manufactured goods and increase user satisfaction. Gathering, managing and delivering easy to understand process data posses a lot of challenges.  
+
+
+\section{Process capability data in literature}
+In the 90'ties there were several papers published on methods to predict process variation using process models \cite{thornton2000use}. However creating process models can be very complicated many practical manufacturing process. 
+\cite{perzyk1998selection} is one of the first descriptions of a database for storing general  mechanical process capability data.
+
+In a study of the use of PCDB from 1999 \citet{tata1999process} found there had been a significant amount of research during the 90'ties, which showed use of process capability data to set correct tolerances will reduce rework, cost, failure rate, assembly problems and improve product performance. 
+Tata and Thornton found that major US companies within automotive, aerospace, military and consumer had created PCDB and were successfully using them for manufacturing control, but were unable to successfully use the data for design.   
+At the time they identified a lack of research in effectively delivering process capability data to designers. 
+
+\cite{thornton2000use} seeked to solve many current industry challenges previously identified. 
+They proposed how to structure the process capability data, create an effective indexing system, and lastly developed some promising graphical visualisation of the process capability data. 
+
+Variance of a components dimension is usually the result of multiple processes. 
+In the doctor thesis \citet{kern2003forecasting} presents a framework for a general process capability database that can model the variation of the final component based contribution of variation from each sub-manufacturing process. 
+It is also recognised that the success of the system relies on consistent and correct data input. 
+A matrix "cookbook" system is developed to identify significant key features utilising fuzzy logic. 
+While being one of the most elaborate works on PCDB, it doesn't seem to have received much attention in academia potentially because the framework is too complex.
+
+\citet{thornton2004variation} appendix B is dedicated to PCDB design. Introduces concepts of Product Key chateristics and methods on how to manage these.
+
+Including cost into the process capability database will make will make it possible to easily include the production price for the within design decisions (\cite{perzyk1998selection}, \cite{thornton2000use}). 
+A general model for estimating the relationship between tolerance and price based on 5 different sources has been developed by \citet{sfantsikopoulos1990cost}.
+It can be concluded that the relationship follows a simple general formula, but the parameter to relate tolerance to price for the specific manufacturing method needs to be estimated for every process. 
+
+\section{Who can benifit from process capability data}
+
+\citet{kern2003forecasting} identifies the following fields of study, which are concerned about creating high quality low cost parts for which process capability data is nessary : 
 \begin{itemize}
 \item "Design for Quality" including Design for Six Sigma (DFSS) and Quality Function Deployment (QFD)
 \item Manufacturing Variation Modelling
@@ -43,54 +70,35 @@ If the production variance is not controlled it will lead to increased cost for 
 \item Selective Assembly
 \end{itemize}
 
-\section{Which statistics is interesting?}
-Most of the above mentioned fields of study are interested in data about current manufacturing capabilities. 
-As design engineers we have ourselves experienced the need during design of new products using Robust design methods. 
-It would be helpful to know long term variance and mean shift variation for the following ISO GPS  
-
-\section{Literature}
-
-\citet{sfantsikopoulos1990cost} Develops a model for the Tolerance - Price relationship and based on 5 different sources gives a range of parameters. 
-
-\citet{kern2003forecasting} has created a great well structured literature review of related work to PCDB and which fields of knowledge has interest in the PCDB data. 
-He proposes a structure for the actual database scheme, which is useful as inspiration. 
-To assign key features he develops a Matrix system, which seems very time consuming and complex. 
-\citet{kern2003forecasting} also develops a framework to calculate Process mean and variance output based on variance and mean in. 
-This could be very useful if only the variance and mean input it known.
-
-A tolerance grade guide base on machining operation can be found in \citet{american1978preferred}. It is however unclear how the data for the table has been generated. It also showed in \citet{united1967preferred} in a slightly reduced form.
-
-\citet{tata1999process} Summery of M. Tata's Master project, published in article form. Based on a survey send to major design and manufacturing firms. The problems of current PCDB implementations are investigated. 
-
-In \citet[p. 715]{oberg2008machinery} you will find a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. No source is given.
-
-\citet{arvidsson2008principles} has carried out a literature review of what Robust Design is.
+Most of these fields would in a usual organisational within a company be located in the mechanical design or quality control department. 
+The process capability data is also nessary for the sub contractor to make qualified offers.
 
 
-\citet{thornton2004variation} Whole appendix B is dedicated to PCDB design.Introduces concepts of Product Key chateristics and methods on how to manage these.
+\section{Key challenges}
+In the survey by \cite{tata1999process} they identified major issues in the current industry implementations of PCDBs. 
+Many of the issues has roots in the organisational infrastructure. 
+Managers does not fully understand the need for a PCDB and the resources required to collect and analyse the information.
+A PCDB does in most companies need to work across multiple departments, manufacturing, quality control and mechanical design within the company.
+Lack of company wide visions for the PCDB results in locally developed and maintained within a particular manufacturing location or departments.
+The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after data does not exists. 
+The data is not presented in a way which is easily understandable by mechanical designers.
 
-\citet{feng1995dimension} A proposed Data model for integrating Tolerance specification into CAD data. 
+\cite{thornton2000use} and \cite{thornton2004variation} does propose solutions on how to make a working PCDB presumably solving most of the previous mentioned problems, but there is no public records showing that data these PCDB actually works in industry.  
 
-\citet{yang1998design} Example of Taguchi in use. 
+\section{Information to store in a PCDB}
 
-\citet{kane1986process} One of the most cited articles on Process capability indices. One of the first in English literature (Cp, Cpk …)
+As a basis \cite{thornton2004build} propose to store material, stock, process, feature dimension, lower limit, upper limit, machine, operator number, batch size, mean, standard deviation for each record. Each record is a summation of multiple measurements made of a batch of parts.
 
-\citet{thornton2000more}Study based on American fortune 500 and aerospace companies shows that they need "better low cost, systematic, and quantitative methods in all stages of variation risk management"
-
-\section{Public Variance Prediction Database}
-
-We have searched using Google, Google scholar and DTU library, using the search words: "process capability database", "Example process capability", "open process database", "Process variance database", "variance prediction database", "process variance table" without succes. 
-Based on this search we have concluded that a public database for variance in different processes does not exist or is at least very difficult to find.
-
-\section{Software review}
-Solid works has a tool for adding tolerances to dimensions on 3 dimensional parts.
-The tool is relatively easy to apply both parametric and geometric tolerances from GPS -datums planes. 
-Solid works also have a tool for calculating 1 dimensional tolerance chains. 
-Determining worst case and RSS values. (Root sum square)
-
-Though it took a lot more digging around in menus and configuration editors Creo Parametric has the ability to apply and show tolerances. There exist a third party tool for calculating tolerances stack up but we haven't gotten our hands on this third party software yet.
+\subsection{Non linear parameters}
+Not much information has been given on storing non linear parameters i.e. angle. Coordinate measurement machines and optical measurements they all measures distances and as such any non-distance parameter would have to be derived from distances anyway.
 
 
+\section{Public Process Capability data}
+From our own search we haven't been able to find any public available process capability database. We have searched using Google, Google scholar and DTU library, using the search words: "process capability database", "Example process capability", "open process database", "Process variance database", "variance prediction database", "process variance table" without success. 
+
+There exists some very general guide tables. A tolerance grade guide base on machining operation can be found in \citet{united1967preferred} in it's initial version. It is however unclear how the data for the table has been generated. In a slightly expanded version \citet{american1978preferred}.
+
+In \citet[p. 715]{oberg2008machinery} there is given a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. Again no source of the information is given.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
