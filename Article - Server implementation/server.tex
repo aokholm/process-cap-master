@@ -17,9 +17,9 @@
 \begin{abstract}A presentation of server the technical implementation of MPCD.
 \end{abstract}
 
-\title{PCDB Structure}
-\author{Andreas Bruun Okholm, s082562\\
-Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email[Email me at:] {or mathiasrask@gmail.com}
+\title{Technical structure of a web based Process Capability Database }
+\author{Andreas Bruun Okholm, s082562 , aokholm@gmail.com\\
+Mathias Rask Møller, s082536, mathiasrask@gmail.com }
 \affiliation{Technical University of Denmark}
  
 \date{\today}
@@ -28,80 +28,47 @@ Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email
 %Introduction
 
 \section{Introduction}
-In most goods manufacturing companies you will find that there are three main groups responsible for producing high quality products.
+A Process Capability Database is a database of measurement data of components. The objective of this technical setup is the make a wast amount of specific technical data comprehensive and easy to use. Statistical analysis tools are used compute trends and uncertainty of these. The results are presented in graphical illustration for easy understanding.
 
-The designer engineers task is to design products with great value for the end customer. 
-His design should find the optimal compromise between design simplicity, insensitiveness to manufacturing variation and the actual manufacturing capabilities. 
+\section{Version Control}
+Version Control is important when developing applications. In this project the ability to track changes, merge changes from multiple users and revert to previous editions has proven valuable.
 
-The internal manufacturing department or external sub supplier, will produce the design as an 'best effort' to achieve the specified tolerances by the designer. Sometime the manufacture will give feedback to the designer and require a redesign if the required tolerances are too tight. It's often possible to achieve the desired tight tolerances, however it's more time consuming and can causes delays.
+All parts of the project; the literature study, library of articles, the website scripts and even this Latex document is under strict version control. 
+All changes are submitted and uploaded to a Git repository at Github. From there the changes are distributed to the developers and pushed to the webserver. 
 
-Lastly it's the task of the control engineer, which can be located at the manufacturing department, a separate internal quality control department or possibly also in the external suppler. 
-The job of the control engineers is to make sure that the components manufactured stay within the target tolerance for as long as the component is produced.
+\section{Hosted by Amazon}
+A web based structure is build to ensure easy access. 
 
-This usual organisational setup has one particular issue. 
-The flow of information flow is mainly in one direction - the designer does not get much structured feedback. \citet{tata1999process} found that a lot of research published during the 90'ties showing that setting correct tolerances would reduce rework, cost, failure rate, assembly problems and improve product performance. 
-In a period from 1994 and 1999 there were 28 articles published on robust design, tolerance optimisation, variation modelling in five major journals in mechanical design. 
-These all assumed the existence of process capability data. 
-"However, no research discusses how to deliver process capability data to the designers in a form that they can use." \cite{tata1999process}
+The website is hosted on a webserver. The webserver and back up of this is manage Amazon at their facility in ireland. To ensure that the data does not get corrupted due to error or overload of the webserver, the database which contains the Process Capability Data kept on a separate server specifically for the database. 
 
- 
+Choosing hosting solution from a big company like amazon instead of managing an own server is decided based on possibilities of scalability. This makes it easy to expand the by deploying servers in the US or increase performance to match demand.
 
- 
-There is no structured way to give feedback to the designer, which would be useful for creating new designs. 
-To enable the designers to efficient create robust designs they need insight into a vast amount of manufacturing knowledge. 
-The basic knowledge is which shapes and materials are possible with each manufacturing process. 
-To be able to create truly robust design the manufacturing variation needs to be know and taking into account. The manufacturing variation is typically only known specialists within the quality control department or sometime the manufacturing department. 
+\section{Switching to Python scipting}
+Initially much of the mathematic problems where solved and tested in Matlab. A commercial math-programming software. To create a viable solution, a programming language better suited for large scale operations had to be chosen which be capable of computing the statistics needed for this application.
 
+Python is a fast, open source language which was chosen as engine for computing statistics. The python server package called 'Django' was selected as base for a website.
 
+Django allows for an app based structure. The project is split into apps for more reusability. Some apps are universal, such as 'data input' and 'tagging' where some of the analyzing apps are more specialized.
 
-One way of trying to solve this issue has typically been to create a company wide process capability database (PCDB). 
+The maximize speed of view the data, much of the analysis is computed and saved to the database as soon at the data is imported. Only comparisons and other application requested by the user is computed upon request.
 
-\section{PDCB Issues}
+\section{interface}
+Making the database as useful and easy to use is the key essentials. 
 
-\begin{itemize}
+From (ref. KERN) and (ref. variance risk Management) the process of selecting the right data can be complicated. To ease this process a tagging system has been implemented.
+The searchable tags of the names of processes and materials and synonyms makes it possible to ways of selecting other conventional drop-downs and tree structures.
 
-\item{"Data doesn’t match what designers are looking for." The data used to monitor process performance and the data needed by design are often not the same. Although manufacturing collects statistical process control (SPC) data (85\%), key characteristic data (65\%), and part data (62\%) only the key characteristic data is typically requested by design}
+To easy input data and attach the right information the input form has been optimized. Tags will be auto completed upon typing. Dates is pre-filled or chosen from  a calendar. 'other' tags can be typed multiple in a text field and is recognized and split in to sortable, searchable items for finding the data later on.
 
-\item{"Managers do not have a clear understanding of why PCD is needed, nor do they understand the amount of time and effort that is required to collect and analyze the information."}
+Plots and graphs are made interactive with hover selections and popup explanation to increase understanding. This is done by using Google chart API, which allows fast and realtime rendering of the requested data.
 
-\item{"Designers are not required to look at PCD as part of their design process."}
+Each of the different data view are presented in a simple template where data (suposed to be) selected by dragging and dropping the tag on to a area.
+Default value for cpk can easy be change updating the plot for the specific value. or changing the unit scale from IT-grade to linear tolerance[mm]
 
-\item{"Over eighty-five percent of the databases are locally developed and maintained"}
+\section{conclusion}
+The setup in a full commercial developer framework with scalability, back up and version control management. Capable of handling the task of making data available in a comprehensive manner.
 
-\item{"The combination of the database design and the lack of education on process capabilities, lead users of the data to look for the wrong data and apply it incorrectly to the design."}
-
-\item{"CAD systems don’t interface with PCDB."}
-
-\item{"Data is not indexed by query desired"}
-
-\item{"There is a lack of integration due to fixed mentalities or old paradigms"}
-
-\item{"There is no user-friendly interface and only those that can write SQL queries can get data."}
-
-\item{"First, the databases often don’t include a measure of statistical validity including number of data points in a population or gage resolution and repeatability data. Second, special causes of variation are often not indicated. Third, the indexing schemes may not have significant resolution."}
-
-\item{"Manual data entry, PCD is updated infrequently."}
-
-
-\end{itemize} 
-
-\section{Other issues}
-
-Need Tweeks. 
-
-\begin{itemize}
-
-\item{Design engineers are often unfamiliar with their firm’s capability to manufacture parts (Tata and Thornton 1999).}
-\item{Making manufacturing data easy to retrieve for design engineers is difficult because it is often dispersed throughout an organization and can be in numerous unique forms, making it difficult to interpret. (Kern 2003).}
-\item{lack of a company-wide vision for PCD usage and poor communication between manufacturing and design. (tata 1999)}
-\item{Although companies have created process capability databases (PCDBs), the data is not being utilized by design. (tata 1999)}
-\item{Design’s lack of trust and understanding of data. (tata 1999).}
-\item{Lack of incentives for PCD use.(tata 1999).}
-\item{No systematic and low cost methods exist to quantitatively define customer requirement latitudes or flow requirements through subsystems, parts and processes. (thornton 2000)}
-
-\end{itemize} 
-
-
+The database cannot be control by  a one line search as seen on google but a lot of aiding facilitation has been implemented to make it as functional and easy to use as possible.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
