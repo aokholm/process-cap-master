@@ -14,12 +14,12 @@
 
 \begin{document}
 
-\begin{abstract}A presentation of a PCDB structure where organizational and management issues i taken in to account.
-\end{abstract}
+\begin{abstract}Using Generalized Process Capability Data to Reduces: Rework, Cost, Failure Rate, Assembly Problems and Increases Product Performance by using process capability from previous products.
+A description of the concept of generalization, uses and implementation strategy.\end{abstract}
 
-\title{PCDB Structure}
+\title{Use of General Process Capability Data}
 \author{Andreas Bruun Okholm, s082562\\
-Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email[Email me at:] {or mathiasrask@gmail.com}
+Mathias Rask Møller, s082536 }
 \affiliation{Technical University of Denmark}
  
 \date{\today}
@@ -28,80 +28,64 @@ Mathias Rask Møller, s082536 }\email[E-mail me at: ]{aokholm@gmail.com}  \email
 %Introduction
 
 \section{Introduction}
-In most goods manufacturing companies you will find that there are three main groups responsible for producing high quality products.
 
-The designer engineers task is to design products with great value for the end customer. 
-His design should find the optimal compromise between design simplicity, insensitiveness to manufacturing variation and the actual manufacturing capabilities. 
+robust design general
 
-The internal manufacturing department or external sub supplier, will produce the design as an 'best effort' to achieve the specified tolerances by the designer. Sometime the manufacture will give feedback to the designer and require a redesign if the required tolerances are too tight. It's often possible to achieve the desired tight tolerances, however it's more time consuming and can causes delays.
 
-Lastly it's the task of the control engineer, which can be located at the manufacturing department, a separate internal quality control department or possibly also in the external suppler. 
-The job of the control engineers is to make sure that the components manufactured stay within the target tolerance for as long as the component is produced.
+\section{Statistics}
 
-This usual organisational setup has one particular issue. 
-The flow of information flow is mainly in one direction - the designer does not get much structured feedback. \citet{tata1999process} found that a lot of research published during the 90'ties showing that setting correct tolerances would reduce rework, cost, failure rate, assembly problems and improve product performance. 
-In a period from 1994 and 1999 there were 28 articles published on robust design, tolerance optimisation, variation modelling in five major journals in mechanical design. 
-These all assumed the existence of process capability data. 
-"However, no research discusses how to deliver process capability data to the designers in a form that they can use." \cite{tata1999process}
+a measurement
+a measurement set
+std and bias
+cpk 
+\begin{equation}
+C_{pk} = \frac{bias}{3 \, \sigma}
+\label{eq:sddj}
+\end{equation}
 
- 
+confidence intevals
 
- 
-There is no structured way to give feedback to the designer, which would be useful for creating new designs. 
-To enable the designers to efficient create robust designs they need insight into a vast amount of manufacturing knowledge. 
-The basic knowledge is which shapes and materials are possible with each manufacturing process. 
-To be able to create truly robust design the manufacturing variation needs to be know and taking into account. The manufacturing variation is typically only known specialists within the quality control department or sometime the manufacturing department. 
+sample size  \ref{eq:sddj}
 
 
 
-One way of trying to solve this issue has typically been to create a company wide process capability database (PCDB). 
-
-\section{PDCB Issues}
-
-\begin{itemize}
-
-\item{"Data doesn’t match what designers are looking for." The data used to monitor process performance and the data needed by design are often not the same. Although manufacturing collects statistical process control (SPC) data (85\%), key characteristic data (65\%), and part data (62\%) only the key characteristic data is typically requested by design}
-
-\item{"Managers do not have a clear understanding of why PCD is needed, nor do they understand the amount of time and effort that is required to collect and analyze the information."}
-
-\item{"Designers are not required to look at PCD as part of their design process."}
-
-\item{"Over eighty-five percent of the databases are locally developed and maintained"}
-
-\item{"The combination of the database design and the lack of education on process capabilities, lead users of the data to look for the wrong data and apply it incorrectly to the design."}
-
-\item{"CAD systems don’t interface with PCDB."}
-
-\item{"Data is not indexed by query desired"}
-
-\item{"There is a lack of integration due to fixed mentalities or old paradigms"}
-
-\item{"There is no user-friendly interface and only those that can write SQL queries can get data."}
-
-\item{"First, the databases often don’t include a measure of statistical validity including number of data points in a population or gage resolution and repeatability data. Second, special causes of variation are often not indicated. Third, the indexing schemes may not have significant resolution."}
-
-\item{"Manual data entry, PCD is updated infrequently."}
 
 
-\end{itemize} 
+Obtaining Process Capability data is a process of measuring a lot of products.
+Products are measured and compared to the nominal size they were produced for, this is called error.
 
-\section{Other issues}
+In a production line control measurement are usually done by taking a set of samples to represent the entire population. Each product in the sample set, produces a measurement. From the set of measurements a standard deviation and a mean shift is calculated.
 
-Need Tweeks. 
-
-\begin{itemize}
-
-\item{Design engineers are often unfamiliar with their firm’s capability to manufacture parts (Tata and Thornton 1999).}
-\item{Making manufacturing data easy to retrieve for design engineers is difficult because it is often dispersed throughout an organization and can be in numerous unique forms, making it difficult to interpret. (Kern 2003).}
-\item{lack of a company-wide vision for PCD usage and poor communication between manufacturing and design. (tata 1999)}
-\item{Although companies have created process capability databases (PCDBs), the data is not being utilized by design. (tata 1999)}
-\item{Design’s lack of trust and understanding of data. (tata 1999).}
-\item{Lack of incentives for PCD use.(tata 1999).}
-\item{No systematic and low cost methods exist to quantitatively define customer requirement latitudes or flow requirements through subsystems, parts and processes. (thornton 2000)}
-
-\end{itemize} 
+\section{uses}
+existance of it-grade
+improvement per rework
+material selection
 
 
+
+In the design process is often a problem to apply tolerances. This aspect of the design phase is often pushed to the very end before production. Features are designed so delicate that in order to meet specification tight tolerances are applied, which can be difficult to produce.
+This problem could be solved by looking up the critical tolerance the industry typically can produce to and altering the design for a suitable tolerance.  I that way making tolerance selection a part of the design process.
+
+By looking at normalized data of the variance of products of the same material and process, it is possible to find a suitable tolerance
+
+\section{implementation}
+
+
+
+
+Industry secrets
+	experience
+	
+	
+active actors and interest groups
+	sub suppliers 
+	mechanical design consultants
+	
+
+difficulties
+	Non disclusure agreement
+	end-customer
+	
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
