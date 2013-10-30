@@ -28,25 +28,24 @@ Mathias Rask Møller, s082536, mathiasrask@gmail.com }
 %Introduction
 
 \section{Introduction}
-A Process Capability Database is a database of measurement data of components. The objective of this technical setup is the make a wast amount of specific technical data comprehensive and easy to use. Statistical analysis tools are used compute trends and uncertainty of these. The results are presented in graphical illustration for easy understanding.
+A Process Capability Database is a database of measurement data of components. The objective of this technical setup is the make a wast amount of specific technical data comprehensive and easy to use. Statistical analysis tools are used compute trends and uncertainty of these. The results are presented in graphical illustration that is easy to interpertate.
 
 \section{Version Control}
 Version Control is important when developing applications. In this project the ability to track changes, merge changes from multiple users and revert to previous editions has proven valuable.
 
-All parts of the project; the literature study, library of articles, the website scripts and even this Latex document is under strict version control. 
-All changes are submitted and uploaded to a Git repository at Github. From there the changes are distributed to the developers and pushed to the webserver. 
+All changes are submitted and uploaded to a Git repository at Github. From there the changes are distributed to the developers and can be directly pushed to the web server. 
 
-\section{Hosted by Amazon}
+\section{Cloud hosted}
 A web based structure is build to ensure easy access. 
 
-The website is hosted on a webserver. The webserver and back up of this is manage Amazon at their facility in ireland. To ensure that the data does not get corrupted due to error or overload of the webserver, the database which contains the Process Capability Data kept on a separate server specifically for the database. 
+The website is hosted in the cloud on Amazon AWS. The web server running the website is running on a using the scalable and flexible EC2. The database web server and database are separated on two different servers for increased flexibility and easier maintenance since amazon can take extra care storing backups of the database server. 
 
-Choosing hosting solution from a big company like amazon instead of managing an own server is decided based on possibilities of scalability. This makes it easy to expand the by deploying servers in the US or increase performance to match demand.
+Choosing hosting solution from a big company like amazon instead of managing an own server provides scalability, security and flexibility. This makes it easy to expand the by deploying servers in the US or increase performance to match demand.
 
 \section{Switching to Python scipting}
 Initially much of the mathematic problems where solved and tested in Matlab. A commercial math-programming software. To create a viable solution, a programming language better suited for large scale operations had to be chosen which be capable of computing the statistics needed for this application.
 
-Python is a fast, open source language which was chosen as engine for computing statistics. The python server package called 'Django' was selected as base for a website.
+Python is a fast, open source language which was chosen as engine for computing statistics. The python webdevelopment framework called 'Django' was selected as base for a website.
 
 Django allows for an app based structure. The project is split into apps for more reusability. Some apps are universal, such as 'data input' and 'tagging' where some of the analyzing apps are more specialized.
 
@@ -55,17 +54,17 @@ The maximize speed of view the data, much of the analysis is computed and saved 
 \section{interface}
 Making the database as useful and easy to use is the key essentials. 
 
-From (ref. KERN) and (ref. variance risk Management) the process of selecting the right data can be complicated. To ease this process a tagging system has been implemented.
+\cite{kern2003forecasting, thornton2004variation} proposes interfaces for fast selection of the data of interest, but we still believe that the process it too complicated. To ease this process a tagging system has been implemented.
 The searchable tags of the names of processes and materials and synonyms makes it possible to ways of selecting other conventional drop-downs and tree structures.
 
-To easy input data and attach the right information the input form has been optimized. Tags will be auto completed upon typing. Dates is pre-filled or chosen from  a calendar. 'other' tags can be typed multiple in a text field and is recognized and split in to sortable, searchable items for finding the data later on.
+To easy input data and attach the right information the input form has been optimised. Tags will be auto completed upon typing. Dates is pre-filled or chosen from  a calendar. 'other' tags can be typed multiple in a text field and is recognised and split in to sortable, searchable items for finding the data later on.
 
 Plots and graphs are made interactive with hover selections and popup explanation to increase understanding. This is done by using Google chart API, which allows fast and realtime rendering of the requested data.
 
-Each of the different data view are presented in a simple template where data (suposed to be) selected by dragging and dropping the tag on to a area.
-Default value for cpk can easy be change updating the plot for the specific value. or changing the unit scale from IT-grade to linear tolerance[mm]
+Each of the different data view are presented in a simple template where data (supposed to be) selected by dragging and dropping the tag on to a area.
+Default value for Cpk can easy be change updating the plot for the specific value. or changing the unit scale from IT-grade to linear tolerance [mm]
 
-\section{conclusion}
+\section{Conclusion}
 The setup in a full commercial developer framework with scalability, back up and version control management. Capable of handling the task of making data available in a comprehensive manner.
 
 The database cannot be control by  a one line search as seen on google but a lot of aiding facilitation has been implemented to make it as functional and easy to use as possible.
