@@ -1,4 +1,4 @@
-\documentclass[aip,amsmath,reprint, author-year]{revtex4-1}
+\documentclass[aip,amsmath, reprint, author-year]{revtex4-1}
 \usepackage{url}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
@@ -14,8 +14,10 @@
 
 \begin{document}
 
-\begin{abstract}A approach to generate Generalized Process Capability Data in order to populate and add functionality to a process capability database.
-A description of the concept of generalization, uses and implementation.\end{abstract}
+\begin{abstract}
+A approach to generate Generalized Process Capability Data in order to populate and add functionality to a process capability database.
+A description of the concept of generalization, uses and implementation.
+\end{abstract}
 
 \title{Concept of using General Process Capability Data}
 \author{Andreas Bruun Okholm, s082562\\
@@ -48,7 +50,6 @@ This problem could be solved by looking up the critical tolerance the industry t
 
 robust design general
 
-
 \section{Statistics}
 
 a measurement
@@ -60,10 +61,28 @@ C_{pk} = \frac{bias}{3 \, \sigma}
 \label{eq:sddj}
 \end{equation}
 
+
 confidence intevals
 
-sample size  \ref{eq:sddj}
+\section{How much data}
 
+
+\begin{figure}
+\includegraphics{stats_bias_confidence.pdf}
+\caption{\label{fig:std_uncertainty}The uncertainty of the standard deviation estimate is reduced as the number of samples is increased. The increase in accuracy gained per additional decreases with more samples. From the graph we have chosen 12 to be the optimal point for general process capability use.}
+\end{figure}
+
+
+
+\begin{figure}
+\includegraphics{stats_std_confidence.pdf}
+\caption{\label{fig:std_uncertainty}The uncertainty of the standard deviation estimate is reduced as the number of samples is increased. The increase in accuracy gained per additional decreases with more samples. From the graph we have chosen 12 to be the optimal point for general process capability use.}
+\end{figure}
+
+
+
+
+sample size  \ref{eq:sddj}
 
 
 
