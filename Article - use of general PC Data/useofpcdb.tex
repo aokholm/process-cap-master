@@ -15,7 +15,7 @@
 \begin{document}
 
 \begin{abstract}
-A approach to generate Generalized Process Capability Data in order to populate and add functionality to a process capability database.
+A approach to generate Generalized Process Capability Data in order to populate and add functionality to a Process Capability Database.
 A description of the concept of generalization, uses and implementation.
 \end{abstract}
 
@@ -31,24 +31,35 @@ Mathias Rask Møller, s082536 }
 
 \section{Introduction}
 
-A Process Capability DataBase (PCDB) is a tool for mechanical designers to get information of what is possible to achieve in production. By applying PC information in the design process it is possible to reduces: rework, cost, failure rate, assembly problems and increases product performance.
-A in few words a PCDB is a database of variance in features on produced products, different companies has different index system and standard for what to record.
+A Process Capability DataBase (PCDB)  is a tool for mechanical designers to get information of what is possible to achieve in the companys production. By applying PC information in the design process it is possible to reduces: rework, cost, failure rate, assembly problems and increases product performance.
+A in few words a PCDB is a database of variance in features on produced products. Different companies have different index system and standards for what to record. 
 
-For designer to use a PCDB in the design process, the database has to contain the needed data. The designers themselves does not generate the necessary data and from (Tata) we have learned that the data already recorded in the process control is not necessary the desired data for the mechanical designer. The data desired by the designer are usually the PC of a geometry, material and process in order design for what is achievable in production. The data recoded by process control can be generalized to describe geometries for the process and material instead of specific features on a specific product. 
+As mentioned in (\cite{raskokholm} , unpublished) and (\cite{kern2003forecasting}) a number for key challenges has to be addressed to expand the use of PCDB.
+\begin{itemize}
+	\item  Retrivable data: The database has to be populated with the desired data.
+	\item User Interface: Accessing the information should be easy.
+	\item Organisational: Development department are dependent on data from production. 
+	\item Information Technology: 
+\end{itemize}
 
-ISO 286? describes a non-linear function for comparing tolerances on objects of different dimension. This function used to normalize tolerances and display PC independent of size (with in the limits of the function.)  
+\section{The right data}
+For designer to use a PCDB in the design process, the database has to contain the needed data. The designers themselves does not generate the necessary data and from (Tata) we have learned that the data already recorded in the process control is not necessary the desired data for the mechanical designer. The data desired by the designer are usually the PC of a geometry, material and process in order design for what is achievable in production. 
 
+The data recoded by process control can be generalized to describe geometries for the process and material instead of specific features on a specific product. 
+
+User Interface: 
+
+
+Organisational: 
 
 
 The purpose of using general process capability data stems from robust design. The idea is to get better at developing a product that are more robust towards variance in production and that way decrease failure rate or cost of changes in production ramp up than otherwise is used to decrease failrate.
 
- Most inhouse PCDBs have problems with population
 
 
 In the design process is often a problem to apply tolerances. This aspect of the design phase is often pushed to the very end before production. Features are designed so delicate that in order to meet specification tight tolerances are applied, which can be difficult to produce.
 This problem could be solved by looking up the critical tolerance the industry typically can produce to and altering the design for a suitable tolerance.  I that way making tolerance selection a part of the design process.
 
-robust design general
 
 \section{Statistics}
 
@@ -61,6 +72,8 @@ C_{pk} = \frac{bias}{3 \, \sigma}
 \label{eq:sddj}
 \end{equation}
 
+
+ISO 286? describes a non-linear function for comparing tolerances on objects of different dimension. This function used to normalize tolerances and display PC independent of size (with in the limits of the function.)  
 
 confidence intevals
 
@@ -123,7 +136,7 @@ In a production company structure consisting of a Production unit, a Mechanical 
 A change in the existing system has to be made is .
  
 
-
+\cite{perzyk1998selection}
 
 To populate GPC 
 
