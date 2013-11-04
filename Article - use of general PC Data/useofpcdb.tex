@@ -54,22 +54,34 @@ Availability of the data is important. The reward for using PCDB or robust desig
 In order to make the mechanical designers use the tool, it is important that the data is easy to sort through and make decisions of what is the desired information, and then find it.
 
 \section{Predicting Process Capability}
-The process capability indices ($C_p, C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control and has since been extended \citep{wu2009overview}. 
-Instead of looking at process mean $\mu$ and standard deviation $\sigma$ and their estimates $\hat{\mu}, \hat{\sigma}$ and tolerance upper and lower limits USL, LSL using process capabilities indices  (PCIs) transforms these numbers into unit less numbers, which provides a quick overview of how a process is performing.
+The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
+Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using Process Capabilities Indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
+
+The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used CPI $C_pk$ 
+\begin{equation}
+	C_{pk} = \frac{d - | \mu - m|}{3 \sigma}
+\end{equation}
+can be reversed
+\begin{equation}
+	d = 3 C_{pk} \sigma + | \mu - m|
+\end{equation}
+where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. 
+
+The most common PCIs and what they describe \citep{wu2009overview, taguchi1986introduction}
+\begin{itemize}
+	\item $C_a$ : Closeness of process mean to target 
+	\item $C_p$ : Relative size of variation
+	\item $C_{pk}$ : Amount of nonconforming (\%NC)
+	\item $C_{pm}$ : Value loss (Taguchi loss function)
+	\item $C_{pmk}$: Version of $C_{pm}$,  sensitive to mean shift. 
+\end{itemize}
+
+For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result. The desired specification limit will result in a maximum percentage of NC products. Using $C_{pm}$ would be sensible sense if the desired tolerances directly influence product performance - for instance in optics construction.  
 
 
-Typically 
+
 
 \cite{tang1997graphical}
-
-a measurement
-a measurement set
-std and bias
-cpk 
-\begin{equation}
-C_{pk} = \frac{bias}{3 \, \sigma}
-\label{eq:sddj}
-\end{equation}
 
 
 ISO 286? describes a non-linear function for comparing tolerances on objects of different dimension. This function used to normalize tolerances and display PC independent of size (with in the limits of the function.)  
