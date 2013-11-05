@@ -36,9 +36,8 @@ A in few words a PCDB is a database of variance in features on produced products
 
 As mentioned in \citep{tata1999process, tata1999effective, raskokholm} and a number for key challenges has to be addressed to expand the use of PCDB.
 \begin{itemize}
-	\item Retrievable data: The database has to be populated with the desired data in a understandable manner. From (Tata) we have learned that the data already recorded in the process control is not necessary the desired data for the mechanical designer. 
-	\item User Interface: Accessing the information should be easy.
-	\item Organizational: Development department are dependent on data from production. 
+	\item Data Communication: The database has to be populated with the desired data in a understandable manner. From (Tata) we have learned that the data already recorded in the process control is not necessary the desired data for the mechanical designer. Accessing the information should be easy.
+	\item Fragmented Organization: Development department are dependent on data from production. 
 	\item Information Technology: Make a database which is fast, live, global, self populating, up to date and live up to the industry criteria of security and anonymity.
 \end{itemize}
 
@@ -56,12 +55,14 @@ Introduction to the Process of generalization of PCDB
  	\item Generate component measurement sets. 
 	\item Compute Process Capability Specification Limit (PCSL).
 	\item Normalize PCSL.
-	\item Fit distribution to selection of multiple normalized PCSL sets.
+	\item Interpret normalised PCSL data.
 \end{enumerate}
 
-	Generation of measurement sets might seem trivial but since what you measure is what you get. Teh selection of measurement data is important to the resulting information.
+\subsection{Measurement Sets}
 
-\subsection{Process Capability Indicies}
+Generation of measurement sets might seem trivial but since what you measure is what you get. Teh selection of measurement data is important to the resulting information.
+
+\subsection{Process Capability Specification Limit}
 The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
 Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using Process Capabilities Indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
 
@@ -105,6 +106,20 @@ ANSI ?!
 
 Choice of ISO based continious function and customary user in industry
 
+\subsection{Analyze normalized data}
+
+fit normal distribution of sub groups.
+find subgroups
+
+extracting data
+
+robustness 
+
+
+
+visible confidence intervals of interpertation
+
+
 \section{Statistical Validity}
 
 measurement sets are assumed to fit a normal distribution.
@@ -131,79 +146,62 @@ Number of measurement sets to predict process capability.
 
 Readability of accumulated normal distribution compared to a bell curve.
 
-visible confidence intervals
+Two figures showing the actual interface
 
-special courses comment of measurement sets.
+General
+	Interactivity in plots 
+		Special courses comment of measurement sets.
+	
+	Group sorting
+		Reference to Thornton graphical display article.
 
-Group sorting 
+	Visible confidence intervals
 
-user tole
+	User can set tolerence (from IT to specific dimentions)
 
-General charts from ANSI
+Two views
+	General charts inspired by ANSI
+	Process view inspired by Thornton Graphical display
 
 
 
 
-existance of it-grade
+
+show current production capability in terms of it-grade
+
+\section{Using the general process capability data}
+apply tolrance, By looking at normalized data of the variance of products of the same material and process, it is possible to find a suitable tolerance
 improvement per rework
 material selection
 
 
+\section{Discussion}
 
+Using todays techonolgy, generalization of PC data upon request from the user i feasble. A proposed techincal setup is described in \cite{OkholmRask}.
 
+Initiating PCG is a tough process. 
+The reward for doing robust design engineering is long reach
+The reward for using PCDB or robust design in general to make changes in early design is a long term and might only benefit the company and not feedback to the designers compared the reward for the hero in production solving the expensive errors in design.
 
-By looking at normalized data of the variance of products of the same material and process, it is possible to find a suitable tolerance
+Implementing GPC requires a change
+	economical barrier
+		big company
+			incement from quality department
+			gain: 	knowlegde of own PC
+					high precision data
+					Extensive knowlegde on causes and problem
+			loss:
+		cross companies
+			diverse data
+			gain:		Alot of data
+					knowlegde of processes and matrial outside your field
+					knowlegde of possible to achive in industry
+					Index storing of own data and partially analysed
+			loss:		Indusry espiange concerns
+					loss of information due to anonymity
 
-\section{implementation}
-Intro af cross company'
+proto running at a university, unbiast.
 
-løser cross company problem beskrevet tidligere.
-	Nej, eller jo måske.
-	-  Diversity in data
-	-  
-	- økonomisk barriere ved at lave det som samarbejde mellem mindre virksomheder.	
-		- fx. subsupplier og design konsulenter
-	- 
-
-One page upload, easier.
-
-
-Availability of the data is important. The reward for using PCDB or robust design in general to make changes in early design is a long reach compared the reward for the hero in production solving the expensive errors in design. The importance of the tool being easy to use 
-
-In order to make the mechanical designers use the tool, it is important that the data is easy to sort through and make decisions of what is the desired information, and then find it.
-
-
-A cross company platform is suggested to populate the database. The gain is diverse data to be able to compare materials and processes. 
-
-Even relatively big companies in Denmark does not have the resources record 
-
-Since companies tends to be conservative in their production 
-By 
-
-The more data the better. The GPC tool's strength is the ability of draw knowledge from actual components of big diversity. Allowing  
-
-In a production company structure consisting of a Production unit, a Mechanical Design unit and a Quality Reassurance unit, the Quality 
-
-A change in the existing system has to be made is .
- 
-
-\cite{perzyk1998selection}
-
-To populate GPC 
-
-Industry secretsxcxc
-	experience
-	
-	
-active actors and interest groups
-	sub suppliers 
-	mechanical design consultants
-	
-
-difficulties
-	Non disclusure agreement
-	end-customer
-	
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
