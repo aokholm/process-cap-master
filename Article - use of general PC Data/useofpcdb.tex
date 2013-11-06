@@ -15,8 +15,8 @@
 \begin{document}
 
 \begin{abstract}
-A approach to generate Generalized Process Capability Data in order to populate and add functionality to a Process Capability Database.
-A description of the concept of generalization, uses and implementation.
+A approach to generate Generalised Process Capability Data in order to populate and add functionality to a Process Capability Database.
+A description of the concept of generalisation, uses and implementation.
 \end{abstract}
 
 \title{Concept of using General Process Capability Data}
@@ -29,38 +29,47 @@ Mathias Rask Møller, s082536 }
 
 %Introduction
 
-\section{Introduction}
-
-A Process Capability DataBase (PCDB)  is a tool for mechanical designers to get information of what is possible to achieve in the companys production. By applying PC information in the design process it is possible to reduces: rework, cost, failure rate, assembly problems and increases product performance.
-A in few words a PCDB is a database of variance in features on produced products. Different companies have different index system and standards for what to record. 
+A Process Capability DataBase (PCDB) is a tool for mechanical designers to get information of what is possible to achieve in the companies production. This is done by storing and displaying statistical information about features on produced components.  
+By applying Process Capability (PC) information in the design process it is possible to reduces: rework, cost, failure rate, assembly problems and increases product performance \citep{tata1999process}.
 
 As mentioned in \citep{tata1999process, tata1999effective, raskokholm} and a number for key challenges has to be addressed to expand the use of PCDB.
 \begin{itemize}
-	\item Data Communication: The database has to be populated with the desired data in a understandable manner. From (Tata) we have learned that the data already recorded in the process control is not necessary the desired data for the mechanical designer. Accessing the information should be easy.
+	\item Data Communication: The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after data does not exists. Further more the data is not presented in a way which is easily understandable by mechanical designers.
 	\item Fragmented Organization: Development department are dependent on data from production. 
 	\item Information Technology: Make a database which is fast, live, global, self populating, up to date and live up to the industry criteria of security and anonymity.
 \end{itemize}
 
-Previous attempts on solving these problems 
-(\cite{kern2003forecasting, thornton2004variation})
+There has been a couple of attempts in academia to solve some of these difficulties \citep{thornton2000use, kern2003forecasting, thornton2004variation}, but there hasn't much attention on the subject since indicating there is still issues to resolve before it can be efficiently used in the industry.
 
-\section{Predicting Process Capability}
+In this article we present a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
+The general principle is to provide a interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
+The core indexing scheme is simplified, but details are retained or improved using a flexible tagging system. 
+Instead of presenting the designer with statistical information, actual recommended specifications limits is shown directly. 
+The specification limits is normalised in regards to the specified dimension making more use out of each dataset, minimising the risk of database queries not returning any results. 
 
-The data desired by the designer can be syntetisized to PC data of a geometry, material and process in order to design for what is achievable in production. 
-The data recoded by process control can be processed to describe geometries for the process and material instead of specific features on a specific product thus making the process control data from one product, whose only similarity with the designed product is the geometrical features only, available for use for the designer.
+Combined with advances in Information Technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
 
-Introduction to the Process of generalization of PCDB
+\section{Indexing}
+PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stores in a PCDBs are typically measurements sets; the statistical result of number of measurements of a given part dimension combined with the design characteristics design. Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary Design Characteristics (DC). For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning". 
+
+In some of the most used processes for mass produced parts like casting and injection moulding, it seems feature and geometry is not necessarily important DCs. The CAM machine milling the moulds does not recognise different features and does not adjust it's precision automatically (SOURCE?).
+
+For our index,  \emph{material} and \emph{process} should be only required DCs. This is combined with a tagging systems, where tags also lives in tree structures. Using tags gives more flexibility since more than one tag can be applied to one measurement set and it's possible to index for design characteristics that's specific to a single production method or material. As an example for injection moulding it would be interesting to index the material type of the mould - aluminium, steel, hardened, ... Indexing the mould iterations (T0, T1, T2) could also give valuable insights about, which specification limits requires mould rework or process adjustment. A last example could to tag if the dimension measured across a parting line in the mould potentially showing a general increase in desired specification limits.
+
+Most product specifications are just plain tolerances (SOURCE?)- these are all just variations of point to point measurements and can as such just be combines into one pool - diameters, positions, thickness, radii... ?
+
+What is measured and since indexed limits the possible conclusions, which can be mades when extracting the data. If the goal is to understand the long term process capability impact of an injection mould process it's either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through  the lifespan of a couple of products.    
+
+
+\section{Processing Capability Data}
+
+Processing the capability data consists of three setps: 
 
 \begin{enumerate}
- 	\item Generate component measurement sets. 
 	\item Compute Process Capability Specification Limit (PCSL).
 	\item Normalize PCSL.
 	\item Interpret normalised PCSL data.
 \end{enumerate}
-
-\subsection{Measurement Sets}
-
-Generation of measurement sets might seem trivial but since what you measure is what you get. Teh selection of measurement data is important to the resulting information.
 
 \subsection{Process Capability Specification Limit}
 The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
@@ -120,6 +129,28 @@ robustness
 visible confidence intervals of interpertation
 
 
+\section{User Interface}
+
+Readability of accumulated normal distribution compared to a bell curve.
+
+Two figures showing the actual interface
+
+General
+	Interactivity in plots 
+		Special courses comment of measurement sets.
+	
+	Group sorting
+		Reference to Thornton graphical display article.
+
+	Visible confidence intervals
+
+	User can set tolerance (from IT to specific dimentions)
+
+Two views
+	General charts inspired by ANSI
+	Process view inspired by Thornton Graphical display
+
+
 \section{Statistical Validity}
 
 measurement sets are assumed to fit a normal distribution.
@@ -140,31 +171,6 @@ Confidence intervals - sample size of each measurement set.
 \end{figure}
 
 Number of measurement sets to predict process capability.  
-
-
-\section{User Interface}
-
-Readability of accumulated normal distribution compared to a bell curve.
-
-Two figures showing the actual interface
-
-General
-	Interactivity in plots 
-		Special courses comment of measurement sets.
-	
-	Group sorting
-		Reference to Thornton graphical display article.
-
-	Visible confidence intervals
-
-	User can set tolerence (from IT to specific dimentions)
-
-Two views
-	General charts inspired by ANSI
-	Process view inspired by Thornton Graphical display
-
-
-
 
 
 show current production capability in terms of it-grade
