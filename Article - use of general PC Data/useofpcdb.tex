@@ -44,22 +44,26 @@ There has been a couple of attempts in academia to solve some of these difficult
 In this article we present a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
 The general principle is to provide a interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
 The core indexing scheme is simplified, but details are retained or improved using a flexible tagging system. 
-Instead of presenting the designer with statistical information, actual recommended specifications limits is shown directly. 
-The specification limits is normalised in regards to the specified dimension making more use out of each dataset, minimising the risk of database queries not returning any results. 
+Instead of presenting the designer with statistical information, recommended specifications limits based on actual PC is shown directly. 
+The specification limits is normalised in regards to the specified dimension making more use out of each dataset, minimising the risk of PC requests not returning any results. 
 
 Combined with advances in Information Technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
 
 \section{Indexing}
-PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stores in a PCDBs are typically measurements sets; the statistical result of number of measurements of a given part dimension combined with the design characteristics design. Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary Design Characteristics (DC). For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning". 
+PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stored in a PCDBs is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the Design Characteristics (DC). Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DC's. For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminum", "Turning" as feature, geometry, material and process respectively. 
 
-In some of the most used processes for mass produced parts like casting and injection moulding, it seems feature and geometry is not necessarily important DCs. The CAM machine milling the moulds does not recognise different features and does not adjust it's precision automatically (SOURCE?).
+For our index,  \emph{material} and \emph{process} should be only required DCs. This is combined with a tagging systems, where additional tags can be inputted. Common tags can be selected from tree structure. 
+Tags gives more flexibility since more than one tag can be applied to one measurement set and it is possible to index for DC's that are specific to a single production method or material. 
 
-For our index,  \emph{material} and \emph{process} should be only required DCs. This is combined with a tagging systems, where tags also lives in tree structures. Using tags gives more flexibility since more than one tag can be applied to one measurement set and it's possible to index for design characteristics that's specific to a single production method or material. As an example for injection moulding it would be interesting to index the material type of the mould - aluminium, steel, hardened, ... Indexing the mould iterations (T0, T1, T2) could also give valuable insights about, which specification limits requires mould rework or process adjustment. A last example could to tag if the dimension measured across a parting line in the mould potentially showing a general increase in desired specification limits.
+Example: For injection moulding it would be interesting to index the material type of the mould - aluminium, steel, hardened, ... Indexing the mould iterations (T0, T1, T2) could also give valuable insights of which specification limits requires mould rework or process adjustment. Another example: To tag if the dimension measured crosses a parting line in the mould potentially showing a general increase in desired specification limits.
 
-Most product specifications are just plain tolerances (SOURCE?)- these are all just variations of point to point measurements and can as such just be combines into one pool - diameters, positions, thickness, radii... ?
+In casting and injection moulding which are some of the most used processes for mass produced part, feature and geometry is not necessarily important DCs. In mould making the individual geometries are manufactured in the same CAM milling machine. 
+The variation in the product from the mould is most likely independent of geometry with exceptions of features that have high length to width ratios and small deep holes that are hard to manufacture. PC data for different geometries such as diameters, positions, thickness, radii are pooled together but can be marked with an exception-tag.
 
-What is measured and since indexed limits the possible conclusions, which can be mades when extracting the data. If the goal is to understand the long term process capability impact of an injection mould process it's either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through  the lifespan of a couple of products.    
+In a fully integrated robust design process interaction between component are reduced to as small and simple surfaces as possible. The need for indexing geometry of components should decrease.
 
+\emph{What you measure and index is what you can analyse from.}
+Since the index limits the possible conclusions, which can be mades when extracting the data. If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.    
 
 \section{Processing Capability Data}
 
@@ -106,13 +110,17 @@ For the purpose of our database we have chosen to use $C_{pk}$, since it provide
 
 \begin{table}
 \begin{ruledtabular}
-\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformaties}\begin{tabular}{llll}  $\mathbf{C}_{pk}$	& $\sigma$ level	& $\mathbf{NC_\mathrm{max}} \mathrm{\ (ppm)}$	&  $\mathbf{NC_\mathrm{min}} \mathrm{\ (ppm)}$	\\  1.00	& 3		& 2699.8		& 1349.9		\\
+\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformaties}
+\begin{tabular}{llll}
+  $\mathbf{C}_{pk}$	& $\sigma$ level	& $\mathbf{NC_\mathrm{max}} \mathrm{\ (ppm)}$	&  $\mathbf{NC_\mathrm{min}} \mathrm{\ (ppm)}$	\\
+  1.00	& 3		& 2699.8		& 1349.9		\\
   1.33 	& 4 		& 63.3		& 31.7 		\\
   1.50 	& 4.5 	& 6.7		& 3.4		\\
   1.66	& 5		& 0.6		& 0.3		\\
   2.00	& 6		& 0.002		& 0.001		\\
 \end{tabular}%
-\end{ruledtabular}\end{table}
+\end{ruledtabular}
+\end{table}
 
 CONCLUDE ON WHAT CPK LEVEL TO USE
 
@@ -120,16 +128,34 @@ Using $C_{pm}$ would be sensible sense if the desired tolerances directly influe
 
 
 \subsection{Normalization}
-Comparison of different standard tolerance dimension relations. 
 
-ISO 286? describes a non-linear function for comparing tolerances on objects of different dimension. This function used to normalize tolerances and display PC independent of size (with in the limits of the function.)  
+The data is normalized to relate the specify tolerance limits independent of size. By normalizing PC data it can be used to predict PC for any dimension within the limit of the normalization algorithm. 
+This eliminates part of the problem of unpopulated the database since in it possible to use PC information from components of different sizes.
 
-Tysk og fransk standarder plast støbe standarder
-finde kilder
+Different industrial standards present different relations between tolerance and dimension. 
 
-ANSI ?!
+For general linear tolerances as described in American ANSI B4-2 (1978) and the German DIN7168 (1991) and Europaen ISO 286-2 (1997) have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
 
-Choice of ISO based continious function and customary user in industry
+The danish standard DS812 and the French NFT58000 are standards that specifically relates to moulded plastic parts. These standards present an almost linear function. The difference can be a result of the creep in moulded plastic that is a percentage of volume and not a function of dimension.
+
+In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic specific linear tolerances are shown.
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
+\caption{\label{fig:tolstd} The danish standard DS812 (POM 120) and the French NFT58000 (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10mm The American ANSI B4-2 (gr. 13) and the german DIN7168 (medium) and Europaen ISO 286-2 (IT13) describes the linear tolerances dimension relation. The tolerance is smaller for }
+\end{figure}
+
+The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
+In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continues function is described for IT-grades between IT6 to IT16 for dimensions from 2mm to 500mm. This function is not included in newer versions of ISO 286.
+
+\begin{align}
+	tol =& 10^{0.2 (ITG -1)} \cdot i \\
+	i =& 0.45 \sqrt[3]{D} + 10^{-3} \, D 
+\end{align}
+
+Where $i$ is standard tolerance factor, $D$ is the nominal dimension $D = \sqrt{D_1 D_2}$ and $T$ is the international tolerance in $\mu m$.
+
+In the generalized PCDB the data is normalized using said function because ISO 286 is general practice in the industry. Future improvements to find formulation for normalization for the different process could be analyzed from a populated PCDB.
 
 \subsection{Analyze normalized data}
 
