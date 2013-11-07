@@ -110,30 +110,26 @@ For the purpose of our database we have chosen to use $C_{pk}$, since it provide
 
 \begin{table}
 \begin{ruledtabular}
-\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformaties}
-\begin{tabular}{llll}
-  $\mathbf{C}_{pk}$	& $\sigma$ level	& $\mathbf{NC_\mathrm{max}} \mathrm{\ (ppm)}$	&  $\mathbf{NC_\mathrm{min}} \mathrm{\ (ppm)}$	\\
-  1.00	& 3		& 2699.8		& 1349.9		\\
+\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformaties}\begin{tabular}{llll}  $\mathbf{C}_{pk}$	& $\sigma$ level	& $\mathbf{NC_\mathrm{max}} \mathrm{\ (ppm)}$	&  $\mathbf{NC_\mathrm{min}} \mathrm{\ (ppm)}$	\\  1.00	& 3		& 2699.8		& 1349.9		\\
   1.33 	& 4 		& 63.3		& 31.7 		\\
   1.50 	& 4.5 	& 6.7		& 3.4		\\
   1.66	& 5		& 0.6		& 0.3		\\
   2.00	& 6		& 0.002		& 0.001		\\
 \end{tabular}%
-\end{ruledtabular}
-\end{table}
+\end{ruledtabular}\end{table}
 
-The optimal process capability index values depends on the application, however there exists a practice in quality control called six sigma $(6 \sigma)$, which advocates the use of six sigma ($C_{pk} = 2$) for short term process capability will generally improve manufacturing quality and profits \cite{koch2004design}. 
-It's assumed that the process drifts over time up to $1.5 \sigma$ (effectively resulting in a sigma level of 4.5), which still results in an acceptable 3.4 ppm defects. 
-Depending wether the data inputed into the PCDB are mostly from newly setup processes or long term samples the $C_{pk}$ should be varied from 2.0 to 1.5 to achieve six sigma for the process. 
-We propose to use a value of $C_{pk} = 1.66$, which would result in six sigma levels of performance if the inputed datasets are a mixture of long term and short term measurements. 
-Alternatively it would be possible to set an acceptable $C_{pk}$ value when inputing each measurement set depending weather the measurement set reflects the short or long term capability. 
+CONCLUDE ON WHAT CPK LEVEL TO USE
 
-We have focused on $C_{pk}$ through most of this section, however using $C_{pm}$ would potentially be better if the desired tolerances directly influence product performance - for instance in lens optics construction. 
+Using $C_{pm}$ would be sensible sense if the desired tolerances directly influence product performance - for instance in optics construction.  
 
+
+<<<<<<< HEAD
 \subsection{Normalization}
-
+Comparison of different standard tolerance dimension relations. 
+=======
 The data is normalized to relate the specify tolerance limits independent of size. By normalizing PC data it can be used to predict PC for any dimension within the limit of the normalization algorithm. 
 This eliminates part of the problem of unpopulated the database since in it possible to use PC information from components of different sizes.
+>>>>>>> 36be5156c7572994047df8c75004a5d60326e09d
 
 Different industrial standards present different relations between tolerance and dimension. 
 
@@ -161,11 +157,6 @@ Where $i$ is standard tolerance factor, $D$ is the nominal dimension $D = \sqrt{
 In the generalized PCDB the data is normalized using said function because ISO 286 is general practice in the industry. Future improvements to find formulation for normalization for the different process could be analyzed from a populated PCDB.
 
 \subsection{Analyze normalized data}
-
-It is interesting for the user to be able to select a tolerance for a component of subset of specific DC.
-By looking at the frequency of PC tolerance 
-
-PC tolerances describes the precision of parts produced in the industry. 
 
 
 
