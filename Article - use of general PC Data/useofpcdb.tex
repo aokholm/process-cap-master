@@ -132,7 +132,7 @@ We have focused on $C_{pk}$ through most of this section, however using $C_{pm}$
 
 \subsection{Normalization}
 
-The data is normalised to relate the specify tolerance limits independent of size. By normalising PC data it can be used to predict PC for any dimension within the limit of the normalisation algorithm. 
+The data is normalised to relate the specific tolerance limits independent of size. By normalising PC data it can be used to predict PC for any dimension within the limit of the normalisation algorithm. 
 This eliminates part of the problem of unpopulated the database since in it possible to use PC information from components of different sizes.
 
 Different industrial standards present different relations between tolerance and dimension. 
@@ -149,7 +149,7 @@ In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic s
 \end{figure}
 
 The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
-In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continues function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
+In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continoues function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
 
 \begin{align}
 	tol =& 10^{0.2 (ITG -1)} \cdot i \\
@@ -162,12 +162,12 @@ In the generalised PCDB the data is normalised using said function because ISO 2
 
 \subsection{Analyze normalized data}
 
-\emph{Case 1. The user is interested in selecting a tolerance for a component of subset of specific DC's.}
+The  analysis is done to present the user with a useful information through graphics based on data of  a subset of DC's selected by the user. 
 
-Figure ~\ref{fig:acumfreq} shows the data from the selected subset in a normalised form. A normal distribution fitted to the data in an accumulated frequency plot. From the plot it is shown that  90 \% of the sample sets 
+To help the user determine which tolerance to use, a accumulated frequency plot of normalised PC is proposed. This allows the user to see the probability of any product produced ca maintain a specified $C_{pk}$ for a specific tolerance as shown in  figure \ref{fig:acumfreq}.
+A normal distribution fitted to the data to shown a continuous function. Confidence intervals for the distribution is calculated to to show the validity of the estimate.
 
-
-PC tolerances describes the precision of parts produced in the industry. 
+A tolerance of low probability can have impact to the price of production since it either: Risks the larger change for need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
@@ -175,25 +175,15 @@ PC tolerances describes the precision of parts produced in the industry.
 20 sample set each of a between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
 \end{figure}
 
+By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032' it is therefore better.
 
-
-
-
-Fit normal distribution of sub groups.
-find subgroups
-
-extracting data
-
-robustness 
-
-
-
-visible confidence intervals of interpretation
+\begin{figure}
+\includegraphics{Acum_freqF3.pdf}
+\caption{\label{fig:acumfreqF3} Data from 2 subsets for DC's. Measurement sets from machine nr. 1031 and 1032 respecfully. Accumulated frequency IT grade distribution, $C_{pk} =1.66$. Actual data from \cite{thornton2000use}. }
+\end{figure}
 
 
 \section{User Interface}
-
-Readability of accumulated normal distribution compared to a bell curve.
 
 Two figures showing the actual interface
 
