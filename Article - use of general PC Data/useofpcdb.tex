@@ -79,7 +79,7 @@ Processing the capability data consists of three steps:
 The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
 Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using Process Capabilities Indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
 
-The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used CPI $C_pk$ 
+The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used CPI $C_{pk}$ 
 \begin{equation}
 	C_{pk} = \frac{d - | \mu - m|}{3 \sigma}
 \end{equation}
@@ -87,7 +87,7 @@ can be reversed
 \begin{equation}
 	d = 3 C_{pk} \sigma + | \mu - m|
 \end{equation}
-where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. The half specification limit (symmetric tolerance value) is the required tolerance to achieve the desired process capability index value. 
+where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. Since the $d$ is the required tolerance to achieve the desired process capability index value we call this the Process Capability Specification Limit (PCSL). 
 
 There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
 \begin{itemize}
@@ -128,18 +128,20 @@ Depending wether the data inputed into the PCDB are mostly from newly setup proc
 We propose to use a value of $C_{pk} = 1.66$, which would result in six sigma levels of performance if the inputed datasets are a mixture of long term and short term measurements. 
 Alternatively it would be possible to set an acceptable $C_{pk}$ value when inputing each measurement set depending weather the measurement set reflects the short or long term capability. 
 
-We have focused on $C_{pk}$ through most of this section, however using $C_{pm}$ would potentially be better if the desired tolerances directly influence product performance - for instance in lens optics construction. 
+We have focused on $C_{pk}$ through most of this section.
+In situations where the desired tolerances directly influence product performance, for instance in lens optics construction, using the more abstract $C_{pm}$ might make more sense. 
 
 \subsection{Normalization}
 
-The data is normalized to relate the specify tolerance limits independent of size. By normalizing PC data it can be used to predict PC for any dimension within the limit of the normalization algorithm. 
-This eliminates part of the problem of unpopulated the database since in it possible to use PC information from components of different sizes.
+The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
+This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
 
-Different industrial standards present different relations between tolerance and dimension. 
+There exists industrial standards used for manufacturing which describe the 'normal' relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European ISO 286-2 (1993 ) and the German standard \citeauthor{DIN7168}.
+and the 
 
-For general linear tolerances as described in American ANSI B4-2 (1978) and the German DIN7168 (1991) and Europaen ISO 286-2 (1997) have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
+   and have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
 
-The danish standard DS812 and the French NFT58000 are standards that specifically relates to moulded plastic parts. These standards present an almost linear function. The difference can be a result of the creep in moulded plastic that is a percentage of volume and not a function of dimension.
+The german standard \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards that specifically relates to moulded plastic parts. These standards present an almost linear function. The difference can be a result of the creep in moulded plastic that is a percentage of volume and not a function of dimension.
 
 In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic specific linear tolerances are shown.
 
@@ -199,6 +201,8 @@ Two views
 
 
 \section{Statistical Validity}
+
+
 
 measurement sets are assumed to fit a normal distribution.
 
