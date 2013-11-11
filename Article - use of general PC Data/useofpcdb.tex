@@ -15,7 +15,7 @@
 \begin{document}
 
 \begin{abstract}
-A approach to generate Generalised Process Capability Data in order to populate and add functionality to a Process Capability Database.
+An approach to generate Generalised Process Capability Data in order to populate and add functionality to a Process Capability Database.
 A description of the concept of generalisation, uses and implementation.
 \end{abstract}
 
@@ -30,27 +30,27 @@ Mathias Rask Møller, s082536 }
 %Introduction
 
 A Process Capability DataBase (PCDB) is a tool for mechanical designers to get information of what is possible to achieve in the companies production. This is done by storing and displaying statistical information about features on produced components.  
-By applying Process Capability (PC) information in the design process it is possible to reduces: rework, cost, failure rate, assembly problems and increases product performance \citep{tata1999process}.
+By applying Process Capability (PC) information in the design process it is possible to reduce: rework, cost, failure rate, assembly problems and increases product performance \citep{tata1999process}.
 
 As mentioned in \citep{tata1999process, tata1999effective, raskokholm} and a number for key challenges has to be addressed to expand the use of PCDB.
 \begin{itemize}
 	\item Data Communication: The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after data does not exists. Further more the data is not presented in a way which is easily understandable by mechanical designers.
-	\item Fragmented Organization: Development department are dependent on data from production. 
+	\item Fragmented Organisation: Development department are dependent on data from production. 
 	\item Information Technology: Make a database which is fast, live, global, self populating, up to date and live up to the industry criteria of security and anonymity.
 \end{itemize}
 
 There has been a couple of attempts in academia to solve some of these difficulties \citep{thornton2000use, kern2003forecasting, thornton2004variation}, but there hasn't much attention on the subject since indicating there is still issues to resolve before it can be efficiently used in the industry.
 
 In this article we present a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
-The general principle is to provide a interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
+The general principle is to provide an interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
 The core indexing scheme is simplified, but details are retained or improved using a flexible tagging system. 
 Instead of presenting the designer with statistical information, recommended specifications limits based on actual PC is shown directly. 
-The specification limits is normalised in regards to the specified dimension making more use out of each dataset, minimising the risk of PC requests not returning any results. 
+The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of PC requests not returning any results. 
 
 Combined with advances in Information Technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
 
 \section{Indexing}
-PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stored in a PCDBs is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the Design Characteristics (DC). Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DC's. For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminum", "Turning" as feature, geometry, material and process respectively. 
+PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stored in a PCDBs is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the Design Characteristics (DC). Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DC's. For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning" as feature, geometry, material and process respectively. 
 
 For our index,  \emph{material} and \emph{process} should be only required DCs. This is combined with a tagging systems, where additional tags can be inputted. Common tags can be selected from tree structure. 
 Tags gives more flexibility since more than one tag can be applied to one measurement set and it is possible to index for DC's that are specific to a single production method or material. 
@@ -60,7 +60,7 @@ Example: For injection moulding it would be interesting to index the material ty
 In casting and injection moulding which are some of the most used processes for mass produced part, feature and geometry is not necessarily important DCs. In mould making the individual geometries are manufactured in the same CAM milling machine. 
 The variation in the product from the mould is most likely independent of geometry with exceptions of features that have high length to width ratios and small deep holes that are hard to manufacture. PC data for different geometries such as diameters, positions, thickness, radii are pooled together but can be marked with an exception-tag.
 
-In a fully integrated robust design process interaction between component are reduced to as small and simple surfaces as possible. The need for indexing geometry of components should decrease.
+In a fully integrated robust design process interaction between components are reduced to as small and simple surfaces as possible. The need for indexing geometry of components should decrease.
 
 \emph{What you measure and index is what you can analyse from.}
 Since the index limits the possible conclusions, which can be mades when extracting the data. If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.    
@@ -71,7 +71,7 @@ Processing the capability data consists of three steps:
 
 \begin{enumerate}
 	\item Compute Process Capability Specification Limit (PCSL).
-	\item Normalize PCSL.
+	\item Normalise PCSL.
 	\item Interpret normalised PCSL data.
 \end{enumerate}
 
@@ -88,6 +88,7 @@ can be reversed
 	d = 3 C_{pk} \sigma + | \mu - m|
 \end{equation}
 where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. Since the $d$ is the required tolerance to achieve the desired process capability index value we call this the Process Capability Specification Limit (PCSL). 
+Where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. The half specification limit (symmetric tolerance value) is the required tolerance to achieve the desired process capability index value. 
 
 There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
 \begin{itemize}
@@ -110,7 +111,7 @@ For the purpose of our database we have chosen to use $C_{pk}$, since it provide
 
 \begin{table}
 \begin{ruledtabular}
-\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformaties}
+\caption{\label{tab:cpl_nc} $C_{pk}$ Non-conformities}
 \begin{tabular}{llll}
   $\mathbf{C}_{pk}$	& $\sigma$ level	& $\mathbf{NC_\mathrm{max}} \mathrm{\ (ppm)}$	&  $\mathbf{NC_\mathrm{min}} \mathrm{\ (ppm)}$	\\
   1.00	& 3		& 2699.8		& 1349.9		\\
@@ -135,11 +136,14 @@ In situations where the desired tolerances directly influence product performanc
 
 The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
 This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
+The data is normalised to relate the specific tolerance limits independent of size. By normalising PC data it can be used to predict PC for any dimension within the limit of the normalisation algorithm. 
+This eliminates part of the problem of unpopulated the database since in it possible to use PC information from components of different sizes.
 
 There exists industrial standards used for manufacturing which describe the 'normal' relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European ISO 286-2 (1993 ) and the German standard \citeauthor{DIN7168}.
 and the 
 
    and have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
+For general linear tolerances as described in American ANSI B4-2 (1978) and the German DIN7168 (1991) have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
 
 The german standard \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards that specifically relates to moulded plastic parts. These standards present an almost linear function. The difference can be a result of the creep in moulded plastic that is a percentage of volume and not a function of dimension.
 
@@ -147,11 +151,11 @@ In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic s
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
-\caption{\label{fig:tolstd} The danish standard DS812 (POM 120) and the French NFT58000 (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10mm The American ANSI B4-2 (gr. 13) and the german DIN7168 (medium) and Europaen ISO 286-2 (IT13) describes the linear tolerances dimension relation. The tolerance is smaller for }
+\caption{\label{fig:tolstd} The danish standard DS812 (POM 120) and the French NFT58000 (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10 mm The American ANSI B4-2 (gr. 13) and the german DIN7168 (medium) describes the linear tolerances dimension relation. The tolerance is smaller for }
 \end{figure}
 
 The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
-In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continues function is described for IT-grades between IT6 to IT16 for dimensions from 2mm to 500mm. This function is not included in newer versions of ISO 286.
+In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continoues function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
 
 \begin{align}
 	tol =& 10^{0.2 (ITG -1)} \cdot i \\
@@ -160,27 +164,32 @@ In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continues functio
 
 Where $i$ is standard tolerance factor, $D$ is the nominal dimension $D = \sqrt{D_1 D_2}$ and $T$ is the international tolerance in $\mu m$.
 
-In the generalized PCDB the data is normalized using said function because ISO 286 is general practice in the industry. Future improvements to find formulation for normalization for the different process could be analyzed from a populated PCDB.
+In the generalised PCDB the data is normalised using said function because ISO 286 is general practice in the industry. Future improvements to find formulation for normalisation for the different process could be analysed from a populated PCDB.
 
 \subsection{Analyze normalized data}
 
+The  analysis is done to present the user with a useful information through graphics based on data of  a subset of DC's selected by the user. 
 
+To help the user determine which tolerance to use, a accumulated frequency plot of normalised PC is proposed. This allows the user to see the probability of any product produced ca maintain a specified $C_{pk}$ for a specific tolerance as shown in  figure \ref{fig:acumfreq}.
+A normal distribution fitted to the data to shown a continuous function. Confidence intervals for the distribution is calculated to to show the validity of the estimate.
 
-fit normal distribution of sub groups.
-find subgroups
+A tolerance of low probability can have impact to the price of production since it either: Risks the larger change for need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
 
-extracting data
+\begin{figure}
+\includegraphics{Acum_freqIT.pdf}
+\caption{\label{fig:acumfreq} Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
+20 sample set each of a between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
+\end{figure}
 
-robustness 
+By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032' it is therefore better.
 
-
-
-visible confidence intervals of interpertation
+\begin{figure}
+\includegraphics{Acum_freqF3.pdf}
+\caption{\label{fig:acumfreqF3} Data from 2 subsets for DC's. Measurement sets from machine nr. 1031 and 1032 respecfully. Accumulated frequency IT grade distribution, $C_{pk} =1.66$. Actual data from \cite{thornton2000use}. }
+\end{figure}
 
 
 \section{User Interface}
-
-Readability of accumulated normal distribution compared to a bell curve.
 
 Two figures showing the actual interface
 
@@ -193,7 +202,7 @@ General
 
 	Visible confidence intervals
 
-	User can set tolerance (from IT to specific dimentions)
+	User can set tolerance (from IT to specific dimensions)
 
 Two views
 	General charts inspired by ANSI
@@ -202,9 +211,7 @@ Two views
 
 \section{Statistical Validity}
 
-
-
-measurement sets are assumed to fit a normal distribution.
+Measurement sets are assumed to fit a normal distribution.
 
 What you measure is what you get.
 Each product in the sample set, produces a measurement. From the sample set is a  measurement set created. 
@@ -227,14 +234,14 @@ Number of measurement sets to predict process capability.
 show current production capability in terms of it-grade
 
 \section{Using the general process capability data}
-apply tolrance, By looking at normalized data of the variance of products of the same material and process, it is possible to find a suitable tolerance
+apply tolerance, By looking at normalised data of the variance of products of the same material and process, it is possible to find a suitable tolerance
 improvement per rework
 material selection
 
 
 \section{Discussion}
 
-Using todays techonolgy, generalization of PC data upon request from the user i feasble. A proposed techincal setup is described in \cite{OkholmRask}.
+Using todays technology, generalisation of PC data upon request from the user I feasible. A proposed technical setup is described in \cite{OkholmRask}.
 
 Initiating PCG is a tough process. 
 The reward for doing robust design engineering is long reach
@@ -244,20 +251,20 @@ Implementing GPC requires a change
 	economical barrier
 		big company
 			incement from quality department
-			gain: 	knowlegde of own PC
+			gain: 	knowledge of own PC
 					high precision data
-					Extensive knowlegde on causes and problem
-			loss:
+					Extensive knowledge on causes and problem
+			Loss:
 		cross companies
 			diverse data
 			gain:		Alot of data
-					knowlegde of processes and matrial outside your field
-					knowlegde of possible to achive in industry
+					knowledge of processes and material outside your field
+					knowledge of possible to achieve in industry
 					Index storing of own data and partially analysed
-			loss:		Indusry espiange concerns
+			loss:		Industry espionage concerns
 					loss of information due to anonymity
 
-proto running at a university, unbiast.
+proto running at a university, unbiased.
 
 
 \section*{References}
