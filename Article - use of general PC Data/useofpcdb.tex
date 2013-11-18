@@ -29,8 +29,8 @@ Mathias Rask Møller, s082536 }
 
 %Introduction
 
-A Process Capability DataBase (PCDB) is a tool for mechanical designers to get information of what is possible to achieve in the companies production. This is done by storing and displaying statistical information about features on produced components.  
-By applying Process Capability (PC) information in the design process it is possible to reduce: rework, cost, failure rate, assembly problems and increases product performance \citep{tata1999process}.
+A process capability database (PCDB) is a tool for mechanical designers to get information of what is possible to achieve in production. This is done by storing and displaying statistical information about features on produced components.  
+By applying process capability (PC) information in the design process it is possible to reduce: rework, cost, failure rate, assembly problems and increases product performance \citep{tata1999process}.
 
 As mentioned in \citep{tata1999process, tata1999effective, raskokholm} and a number for key challenges has to be addressed to expand the use of PCDB.
 \begin{itemize}
@@ -47,23 +47,56 @@ The core indexing scheme is simplified, but details are retained or improved usi
 Instead of presenting the designer with statistical information, recommended specifications limits based on actual PC is shown directly. 
 The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of PC requests not returning any results. 
 
-Combined with advances in Information Technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
+Combined with advances in information technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
 
 \section{Indexing}
-PCDB data needs to be indexed to efficiently retrieve data of relevance to the current design. The data stored in a PCDBs is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the Design Characteristics (DC). Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DC's. For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning" as feature, geometry, material and process respectively. 
 
-For our index,  \emph{material} and \emph{process} should be only required DCs. This is combined with a tagging systems, where additional tags can be inputted. Common tags can be selected from tree structure. 
-Tags gives more flexibility since more than one tag can be applied to one measurement set and it is possible to index for DC's that are specific to a single production method or material. 
+\begingroup
+\squeezetable
 
-Example: For injection moulding it would be interesting to index the material type of the mould - aluminium, steel, hardened, ... Indexing the mould iterations (T0, T1, T2) could also give valuable insights of which specification limits requires mould rework or process adjustment. Another example: To tag if the dimension measured crosses a parting line in the mould potentially showing a general increase in desired specification limits.
+\begin{table*}
+\begin{ruledtabular}
+\caption{\label{tab:sampleset} Measurement set - As stored in the PCDB}
+\begin{tabular}{lllllllll}
+\textbf{Material*} 		& \textbf{Process*} 		& \textbf{Meas. Equipment}  	& \textbf{Target*} 	& \textbf{LSL} 	& \textbf{USL} 	& \textbf{Deviation*} 	& \textbf{Std.}   $\hat{\sigma}$ * & 	\\
+Thermoplastic 			& Moulding			& CT Scanning				& 3.00			& 2.99		& 3.01		& -0.0486			& 0.0032				\\
+ - ABS, PC blend		& - Injection Mould.		& Zeiss metrotom 800	\\
+\\
+\textbf{General Tag (1)} 	& \textbf{General Tag (2)} & \textbf{General Tag (3)} 	& \textbf{Geometry}		& \textbf{Measurement Date} 	& \textbf{N samples} 	\\
+Mould Type			& Product color			& Production run			& Diameter				& 13 oct. 2013  			& 12\\
+- Steel 				& - Red				& - PR3				\\
+- - NAK80 
+\end{tabular}%
+\end{ruledtabular}
+\end{table*}
+\endgroup
 
-In casting and injection moulding which are some of the most used processes for mass produced part, feature and geometry is not necessarily important DCs. In mould making the individual geometries are manufactured in the same CAM milling machine. 
-The variation in the product from the mould is most likely independent of geometry with exceptions of features that have high length to width ratios and small deep holes that are hard to manufacture. PC data for different geometries such as diameters, positions, thickness, radii are pooled together but can be marked with an exception-tag.
 
-In a fully integrated robust design process interaction between components are reduced to as small and simple surfaces as possible. The need for indexing geometry of components should decrease.
+PCDBs needs to be indexed to efficiently retrieve data of relevance to the current design. 
+The data stored in a PCDB is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the design characteristics (DC). 
+Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DCs. 
+For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning" as feature, geometry, material and process respectively. 
 
-\emph{What you measure and index is what you can analyse from.}
-Since the index limits the possible conclusions, which can be mades when extracting the data. If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.    
+We propose to use \emph{material} and \emph{process} as the only required DCs. 
+\emph{Geometry} information: distance, radius, diameter or positions is readily available from the measurement tool and should be stored as well, but not necessarily used when querying the database.
+This is combined with a \emph{tagging system}, where additional tags can be inputted. 
+Common tags can be selected from tree structure. 
+Tags gives flexibility since more than one tag can be applied to one measurement set and it is possible to index for DCs that are specific to a single production method or material. 
+
+Example: For injection moulding it would be interesting to index the following DCs:
+\begin{itemize}
+\item Material type of the mould: aluminium, steel, hardened, etc.
+\item Mould/Process iterations (T0, T1, T2, ...) could also give valuable insights of which specification limits requires mould rework or process adjustment. 
+\item Tagging dimensions measured a crosses parting lines could potentially showing a general increase in desired specification limits.
+\end{itemize}
+It would not be possible to index these DCs, which are specific for the process without having optional tags. 
+A complete database record of a sample set can be seen in table \ref{tab:sampleset} showing all data connected to the sampleset. 
+
+\emph{No feature index:}
+In casting and injection moulding, two of the most used processes for mass produced part, feature is not necessarily an important DC. 
+The individual features are manufactured by the same computer-aided manufacturing (CAM) milling machine with the same process parameters. 
+For features with properties such as high length to width ratios could be optionally tagged. 
+In a fully integrated robust design process interaction between components are reduced to as small and simple surfaces as possible further reducing the need for a features index.
 
 \section{Processing Capability Data}
 
@@ -241,6 +274,9 @@ material selection
 
 \section{Discussion}
 
+\emph{What you measure and index is what you can analyse from.}
+The index and type of samples limits the possible conclusions, which can be mades when extracting the data.  (If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.   
+
 Using todays technology, generalisation of PC data upon request from the user I feasible. A proposed technical setup is described in \cite{OkholmRask}.
 
 Initiating PCG is a tough process. 
@@ -265,6 +301,8 @@ Implementing GPC requires a change
 					loss of information due to anonymity
 
 proto running at a university, unbiased.
+
+
 
 
 \section*{References}
