@@ -152,23 +152,31 @@ In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic s
 \end{figure}
 
 The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
-In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continoues function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
+In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continuous function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
 
 \begin{align}
-	tol =& 10^{0.2 (ITG -1)} \cdot i \\
+	T =& 10^{0.2 (ITG -1)} \cdot i \\
 	i =& 0.45 \sqrt[3]{D} + 10^{-3} \, D 
 \end{align}
 
-Where $i$ is standard tolerance factor, $D$ is the nominal dimension $D = \sqrt{D_1 D_2}$ and $T$ is the international tolerance in $\mu m$.
+Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T = 2 d$ is the tolerance width in $[\mu m]$. 
 
-In the generalised PCDB the data is normalised using said function because ISO 286 is general practice in the industry. Future improvements to find formulation for normalisation for the different process could be analysed from a populated PCDB.
+In the generalised PCDB the data is normalised using said function because ISO 286 is general practice in the industry. 
+Further work on improving the normalisation feature is possible, when more PCDB data is available and it's possible to do an fit to the actual data for the different processes.
 
 \subsection{Analyze normalized data}
 
-The  analysis is done to present the user with a useful information through graphics based on data of  a subset of DC's selected by the user. 
+The analysis is done to present the user with a useful information through graphics based on data of  a subset of DC's selected by the user. 
 
-To help the user determine which tolerance to use, a accumulated frequency plot of normalised PC is proposed. This allows the user to see the probability of any product produced ca maintain a specified $C_{pk}$ for a specific tolerance as shown in  figure \ref{fig:acumfreq}.
-A normal distribution fitted to the data to shown a continuous function. Confidence intervals for the distribution is calculated to to show the validity of the estimate.
+To help the user determine which tolerance to use, a accumulated frequency plot of the normalised PCSL is proposed. 
+This gives an overview of the current process process capability assuming it has not changed since the data has been recorded. 
+The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
+A normal distribution is fitted to the data to shown a continuous function.
+% Confidence intervals for the distribution is calculated to to show the validity of the estimate.
+
+The 
+
+
 
 A tolerance of low probability can have impact to the price of production since it either: Risks the larger change for need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
 
