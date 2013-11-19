@@ -203,7 +203,7 @@ The plot shows the probability, if production capability were randomly selected,
 A normal distribution is fitted to the data to shown a continuous function.
 % Confidence intervals for the distribution is calculated to to show the validity of the estimate.
 
-A tolerance of low probability can have impact to the price of production since it either: Risks the larger change for need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
+A tolerance of low probability can have impact to the price of production since it either: Risks the larger need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
@@ -211,7 +211,7 @@ A tolerance of low probability can have impact to the price of production since 
 20 sample set each of a between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
 \end{figure}
 
-By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032' it is therefore better.
+By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
 
 \begin{figure}
 \includegraphics{Acum_freqF3.pdf}
@@ -236,6 +236,8 @@ The user needs to trust the information provided by the PCDB. The uncertainty of
 The influence of the parameters are evaluated using a monte carlo simulation. Assuming that generalised PC data is normal distributed for at given process and material and the individual samples are normally distributed.
 
 A number of sample sets in drawn at random from the distribution of data sets. The specific tolerance limit for each sample set defines a mean and standard deviation of the normal distribution for individual data set. A sample is drawn at random for each data set. The samples and sample sets are generalised and are compared to the original distribution.
+
+The monte carlo simulation estimates the confidence interval width about $3/4$ smaller than a analytical binominal distribution at 50\% probability. The binominal distribution i less precise in the out region of the spectrum.
 
 \begin{figure}
 \includegraphics{CLW90_surf.pdf}
