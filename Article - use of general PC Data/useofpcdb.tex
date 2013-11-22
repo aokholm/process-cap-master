@@ -112,7 +112,7 @@ Processing the capability data consists of three steps:
 The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
 Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using process capabilities indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
 
-The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used CPI $C_{pk}$ 
+The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used PCI $C_{pk}$ 
 \begin{equation}
 	C_{pk} = \frac{d - | \mu - m|}{3 \sigma} \nonumber
 \end{equation}
@@ -136,7 +136,7 @@ Using $C_{pm}$ will in general be more conservative resulting in larger specific
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{graph_postscript_test.eps}
-\caption{\label{fig:CPI} $C_p$ referens only to the variance of the process. $C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. $C_{pmk}$ takes both the yield of the product and a loss function. }
+\caption{\label{fig:CPI} Nomalised standard deviation as a function of normalised meanshift. $C_p$ referens only to the variance of the process. $C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. $C_{pmk}$ takes both the yield of the product and a loss function. }
 \end{figure}
 
 For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result - directly related to the yield of the process. The yield of a process is within
@@ -196,7 +196,7 @@ In a note for \citeauthor{american1978preferred} and later mentioned in \citeaut
 Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T = 2 d$ is the tolerance width in $[\mu m]$. 
 
 In the generalised PCDB the data is normalised using said function because ISO 286 is general practice in the industry. 
-Further work on improving the normalisation feature is possible, when more PCDB data is available and it's possible to do an fit to the actual data for the different processes.
+Further work on improving the normalisation feature is possible, when more PCDB data is available to do a fit to the actual data for the different processes.
 
 \subsection{Analyze normalized data}
 
@@ -208,11 +208,7 @@ The plot shows the probability, if production capability were randomly selected,
 A normal distribution is fitted to the data to shown a continuous function.
 % Confidence intervals for the distribution is calculated to to show the validity of the estimate.
 
-The 
-
-
-
-A tolerance of low probability can have impact to the price of production since it either: Risks the larger change for need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
+A tolerance of low probability can have impact to the price of production since it either: Risks the larger need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
@@ -220,7 +216,7 @@ A tolerance of low probability can have impact to the price of production since 
 20 sample set each of a between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
 \end{figure}
 
-By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032' it is therefore better.
+By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
 
 \begin{figure}
 \includegraphics{Acum_freqF3.pdf}
@@ -246,6 +242,8 @@ The influence of the parameters are evaluated using a monte carlo simulation. As
 
 A number of sample sets in drawn at random from the distribution of data sets. The specific tolerance limit for each sample set defines a mean and standard deviation of the normal distribution for individual data set. A sample is drawn at random for each data set. The samples and sample sets are generalised and are compared to the original distribution.
 
+The monte carlo simulation estimates the confidence interval width about $3/4$ smaller than a analytical binominal distribution at 50\% probability. The binominal distribution i less precise in the out region of the spectrum.
+
 \begin{figure}
 \includegraphics{CLW90_surf.pdf}
 \caption{\label{fig:cl_surf} Montecarlo simulation of the cofidence interval width as a function of both sample size and number of sample sets. Confidence interval width in unit IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 10 samples.}
@@ -270,20 +268,18 @@ A suggestion to a suitable minimum confidence interval width is $\pm 0.5$ IT-gra
 
 In order to give the user good information the PCDB need to be populated with at least 30 sets of measured product samples of each selected set of DC's.
 
-\section{Using the general process capability data}
+\section{Discussion}
+
+Using todays technology, generalisation of PC data upon request from the user I feasible. A proposed technical setup is described in \cite{OkholmRask******* Techpaper}.
+
 
 
 apply tolerance, By looking at normalised data of the variance of products of the same material and process, it is possible to find a suitable tolerance
 improvement per rework
 material selection
 
-
-\section{Discussion}
-
 \emph{What you measure and index is what you can analyse from.}
 The index and type of samples limits the possible conclusions, which can be mades when extracting the data.  (If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.   
-
-Using todays technology, generalisation of PC data upon request from the user I feasible. A proposed technical setup is described in \cite{OkholmRask}.
 
 Initiating PCG is a tough process. 
 The reward for doing robust design engineering is long reach
