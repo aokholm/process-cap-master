@@ -103,24 +103,24 @@ In a fully integrated robust design process interaction between components are r
 Processing the capability data consists of three steps: 
 
 \begin{enumerate}
-	\item Compute Process Capability Specification Limit (PCSL).
-	\item Normalise PCSL.
-	\item Interpret normalised PCSL data.
+	\item Compute the process capability specification limit (PCSL) - the required specification limits (tolerance) to achieve a desired performance using the given process capability.
+	\item Normalise the PCSLs so it is independent of dimension.
+	\item Fit operating curves to the PCSL data grouped by different design characteristics.
 \end{enumerate}
 
 \subsection{Process Capability Specification Limit}
 The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
-Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using Process Capabilities Indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
+Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using process capabilities indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
 
 The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used CPI $C_{pk}$ 
 \begin{equation}
-	C_{pk} = \frac{d - | \mu - m|}{3 \sigma}
+	C_{pk} = \frac{d - | \mu - m|}{3 \sigma} \nonumber
 \end{equation}
 can be reversed
 \begin{equation}
 	d = 3 C_{pk} \sigma + | \mu - m|
 \end{equation}
-Where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. Since the $d$ is the required tolerance to achieve the desired process capability index value we call this the Process Capability Specification Limit (PCSL). 
+Where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. When $d$ is reversely used to estimated the required tolerance to achieve the desired process capability index value we call this the process capability specification limit (PCSL). 
 
 There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
 \begin{itemize}
@@ -139,7 +139,12 @@ Using $C_{pm}$ will in general be more conservative resulting in larger specific
 \caption{\label{fig:CPI} $C_p$ referens only to the variance of the process. $C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. $C_{pmk}$ takes both the yield of the product and a loss function. }
 \end{figure}
 
-For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result - directly related to the yield of the process. The yield of a process is within $2\Phi(3C_{pk})-1 \leq \text{yield} < \Phi(3C_{pk})$ where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. For typical capability levels the resulting non-conforming products in parts per million (ppm) is listed in table \ref{tab:cpl_nc}
+For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result - directly related to the yield of the process. The yield of a process is within
+\begin{equation}
+	2\Phi(3C_{pk})-1 \leq \text{yield} < \Phi(3C_{pk}) \nonumber
+\end{equation}
+
+where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. For typical capability levels the resulting non-conforming products in parts per million (ppm) is listed in table \ref{tab:cpl_nc}
 
 \begin{table}
 \begin{ruledtabular}
@@ -155,37 +160,33 @@ For the purpose of our database we have chosen to use $C_{pk}$, since it provide
 \end{ruledtabular}
 \end{table}
 
-The optimal process capability index values depends on the application, however there exists a practice in quality control called six sigma $(6 \sigma)$, which advocates the use of six sigma ($C_{pk} = 2$) for short term process capability will generally improve manufacturing quality and profits \cite{koch2004design}. 
-It's assumed that the process drifts over time up to $1.5 \sigma$ (effectively resulting in a sigma level of 4.5), which still results in an acceptable 3.4 ppm defects. 
-Depending wether the data inputed into the PCDB are mostly from newly setup processes or long term samples the $C_{pk}$ should be varied from 2.0 to 1.5 to achieve six sigma for the process. 
-We propose to use a value of $C_{pk} = 1.66$, which would result in six sigma levels of performance if the inputed datasets are a mixture of long term and short term measurements. 
-Alternatively it would be possible to set an acceptable $C_{pk}$ value when inputing each measurement set depending weather the measurement set reflects the short or long term capability. 
+The optimal process capability index value depends on the application, however there exists a practice in quality control called six sigma $(6 \sigma)$, which advocates the use of six sigma ($C_{pk} = 2$) for short term process capability will generally improve manufacturing quality and profits \cite{koch2004design}. 
+
+It's assumed that the process drifts over time up to $1.5 \sigma$  (effectively resulting in a sigma level of 4.5), which still results in an acceptable 3.4 ppm defects.
+For the PCSL to reflect six sigma production capability the $C_{pk}$ input with each measurement set should be varied from 2.0 to 1.5 $C_{pk}$ depending wether the measurement set reflects the short or long term capability. 
+For simplicity we propose to use a value general value of $C_{pk} = 1.66$ to account for a  mixture of long term and short term measurements. 
 
 We have focused on $C_{pk}$ through most of this section.
 In situations where the desired tolerances directly influence product performance, for instance in lens optics construction, using the more abstract $C_{pm}$ might make more sense. 
 
-\subsection{Normalization}
 
+\subsection{Normalization}
 The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
 This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
 
-There exists industrial standards used for manufacturing which describe the 'normal' relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European ISO 286-2 (1993 ) and the German standard \citeauthor{DIN7168}.
-and the 
+There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. The ANSI and the ISO standards uses the same formula and are quire close to the german DIN standard. 
+These standards display a non-linear relationship between tolerance and dimension. For the same level for precision, the tolerances of big dimensions are smaller relative to size than for small dimensions. See figure \ref{fig:tolstd}.
 
-   and have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
-For general linear tolerances as described in American ANSI B4-2 (1978) and the German DIN7168 (1991) have slight difference but all present a nonlinear curve. For the same level for precision the tolerance of big dimensions is smaller relative to size than for component of a small dimension.
-
-The german standard \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards that specifically relates to moulded plastic parts. These standards present an almost linear function. The difference can be a result of the creep in moulded plastic that is a percentage of volume and not a function of dimension.
-
-In figure ~\ref{fig:tolstd} both the standards for general and moulded plastic specific linear tolerances are shown.
+The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. These standards present an almost linear relationship between tolerance and dimension. This might be due that a major contributing error in moulded parts is a result of creep, since creep errors has a linear relationship between overall dimension and error.
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
-\caption{\label{fig:tolstd} The danish standard DS812 (POM 120) and the French NFT58000 (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10 mm The American ANSI B4-2 (gr. 13) and the german DIN7168 (medium) describes the linear tolerances dimension relation. The tolerance is smaller for }
+\caption{\label{fig:tolstd} \citeauthor{DIN16901} (POM 120) and \citeauthor{NFT58000} (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10 mm. 
+\citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium) describes a function of linear tolerances to dimension relationship.}
 \end{figure}
 
 The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
-In a note for ANSI B4-2  and later mentioned in ISO 286:1993 a continuous function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
+In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
 
 \begin{align}
 	T =& 10^{0.2 (ITG -1)} \cdot i \\
