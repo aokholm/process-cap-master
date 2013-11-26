@@ -15,11 +15,11 @@
 \begin{document}
 
 \begin{abstract}
-An approach to generate Generalised Process Capability Data in order to populate and add functionality to a Process Capability Database.
+An approach to generate generalised process capability data in order to populate and add functionality to a process capability database.
 A description of the concept of generalisation, uses and implementation.
 \end{abstract}
 
-\title{Concept of using General Process Capability Data}
+\title{Concept of using General Process Capability Data - DRAFT}
 \author{Andreas Bruun Okholm, s082562\\
 Mathias Rask Møller, s082536 }
 \affiliation{Technical University of Denmark}
@@ -174,19 +174,19 @@ In situations where the desired tolerances directly influence product performanc
 The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
 This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
 
-There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. The ANSI and the ISO standards uses the same formula and are quire close to the german DIN standard. 
-These standards display a non-linear relationship between tolerance and dimension. For the same level for precision, the tolerances of big dimensions are smaller relative to size than for small dimensions. See figure \ref{fig:tolstd}.
+There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. The ANSI and the ISO standards uses the same formula and are quite close to the german DIN standard. 
+These standards display a non-linear relationship between tolerance and dimension. For the same level for precision, the tolerances of large dimensions are smaller relatively than for small dimensions. See figure \ref{fig:tolstd}.
 
-The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. These standards present an almost linear relationship between tolerance and dimension. This might be due that a major contributing error in moulded parts is a result of creep, since creep errors has a linear relationship between overall dimension and error.
+The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. These standards present an almost linear relationship between tolerance and dimension. This might be due that a major contributing error in moulded parts is a result of creep, since creep errors in general has a linear relationship between overall dimension and error.
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
 \caption{\label{fig:tolstd} \citeauthor{DIN16901} (POM 120) and \citeauthor{NFT58000} (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10 mm. 
-\citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium) describes a function of linear tolerances to dimension relationship.}
+\citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium) describes a general relationship between linear tolerances and dimension. All standards included several levels of precission.}
 \end{figure}
 
-The descriptions of the standards presents the data as tables for tolerances in dimension intervals. This poses a problem when trying classify the specific tolerance dimension to a precision level.
-In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is not included in newer versions of ISO 286.
+These standards are all described using a tables showing the tolerances for a given dimension intervals and precision. 
+In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades (precision levels) between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is for unknown reasons not included in newer versions of ISO 286 yet table values seems still estimated using this function.
 
 \begin{align}
 	T =& 10^{0.2 (ITG -1)} \cdot i \\
@@ -195,117 +195,94 @@ In a note for \citeauthor{american1978preferred} and later mentioned in \citeaut
 
 Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T = 2 d$ is the tolerance width in $[\mu m]$. 
 
-In the generalised PCDB the data is normalised using said function because ISO 286 is general practice in the industry. 
-Further work on improving the normalisation feature is possible, when more PCDB data is available to do a fit to the actual data for the different processes.
+In the generalised PCDB the measurement sets PCSL are normalised using said function because ISO 286 is general practice in the industry. 
+Further work on improving the normalisation feature is possible, when more PCDB measurements sets are available to do a fit to the actual data for the different processes.
 
 \subsection{Analyze normalized data}
-
-The analysis is done to present the user with a useful information through graphics based on data of  a subset of DC's selected by the user. 
+A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. Relevant measurements sets are aggregated based on DC's selected by the user. 
 
 To help the user determine which tolerance to use, a accumulated frequency plot of the normalised PCSL is proposed. 
-This gives an overview of the current process process capability assuming it has not changed since the data has been recorded. 
+This gives an overview of the current process capability assuming it has not changed since the data has been recorded. 
 The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
-A normal distribution is fitted to the data to shown a continuous function.
-% Confidence intervals for the distribution is calculated to to show the validity of the estimate.
+A normal distribution is fitted to the data to show a continuous function.
 
-A tolerance of low probability can have impact to the price of production since it either: Risks the larger need of rework to hit the target $C_{pk}$. Requires more precise machines than what is used for the sample.
+Selecting a tolerance associated with a low probability will generally impact the price of production since it either: Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is typically used.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
 \caption{\label{fig:acumfreq} Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
-20 sample set each of a between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
+20 measurement sets each containing between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
 \end{figure}
 
-By selecting more than one subset of DC's for comparison it is possible to get a view of the individual subset. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
+It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
 
 \begin{figure}
 \includegraphics{Acum_freqF3.pdf}
-\caption{\label{fig:acumfreqF3} Data from 2 subsets for DC's. Measurement sets from machine nr. 1031 and 1032 respecfully. Accumulated frequency IT grade distribution, $C_{pk} =1.66$. Actual data from \cite{thornton2000use}. }
+\caption{\label{fig:acumfreqF3} Comparing two differnet DC's. Measurement sets from machine nr. 1031 and 1032 respecfully. Accumulated frequency IT grade distribution, $C_{pk} =1.66$. Actual data from \cite{thornton2000use}. }
 \end{figure}
 
 Further consideration are done in order display the information in a more comprehensible way.
 \begin{itemize}
-\item The tolerance can be shown in $[mm]$ for a user selected dimension.
-\item Include popup interactivity allowing the user to see specifics of each data point.
-\item Show the confidence limits for the estimated distribution.
+\item The tolerance can be shown in $[mm]$ instead of IT-grade for a user selected dimension.
+\item In a web environment a popup activated by hover interactivity allow the user to see specifics of each data point.
+\item Confidence limits for the estimated distribution should be shown to ensure statistically validity.
 \end{itemize}
 
 \section{Statistical Validity}
-The user needs to trust the information provided by the PCDB. The uncertainty of the generalisation method influenced by the data it is based on. The confidence of the bias and standard deviation is dependent of the sample size. For meanshift the uncertainty converges towards zero symmetrically with an increase in sample size. The confidence of standard deviation is shown in figure \ref{fig:std_uncertainty}. Confidence interval is not symmetrical in relation to the real standard deviation.
+The user needs to trust the information provided by the PCDB. The uncertainty of the correctness of the resulting distribution of PCSL is influenced by several factors. 
+More samples in each measurement set will increase certainty. 
+More measurements sets increases the certainty. 
+Lower standard deviation of the PCSL distribution will increase the certainty.
+Higher mean deviations from target $C_a$ will also slightly increase the certainty especially at low sample sizes.
+Sample size and number of measurement sets are the two possible actionable variables. The confidence interval of the population standard deviation is greatly effected by the sample size.  The confidence limits are given by
+
+\begin{equation}
+\left[ \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{\alpha/2,n-1}}},  \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{1-\alpha/2,n-1}}} \  \right]
+\end{equation}
+where $\chi^2$ is the chi-squared distribution, n is sample size and $\alpha$ is the significance level. The confidence limits are shown in Figure \ref{fig:std_uncertainty}. Even for samples sizes of 30 there still exist a quite large uncertainty of the standard deviation, which also directly effect the process capability indices and the calculated PCSL. 
 
 \begin{figure}
 \includegraphics{stats_std_confidence.pdf}
-\caption{\label{fig:std_uncertainty}Confidence interval for sample standard deviation compare to real standard deviation as a function of sample size. The uncertainty of the sample standard deviation is reduced as the number of samples is increased. For low sample sizes the standard deviation is overestimatied.}
+\caption{\label{fig:std_uncertainty}Confidence interval for the population standard deviation compared to a sample standard deviation as a function of sample size. The gained certainty per measurement is best for low sample sizes.}
 \end{figure}
 
-The influence of the parameters are evaluated using a monte carlo simulation. Assuming that generalised PC data is normal distributed for at given process and material and the individual samples are normally distributed.
+\subsection{Monte Carlo simulaiton}
+To model the uncertainty of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
+We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
 
-A number of sample sets in drawn at random from the distribution of data sets. The specific tolerance limit for each sample set defines a mean and standard deviation of the normal distribution for individual data set. A sample is drawn at random for each data set. The samples and sample sets are generalised and are compared to the original distribution.
+The randomly generated ITG it is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.9$. From this input the standard deviation $\sigma_{X}$ and deviation $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (\mu_{\mathrm{X}}, {| \mu - m|}^2)$. 
+Each measurement is generated from the measurement set distribution.
+When all the sample data has been generated the process is reversed and the distribution parameters of ITG is estimated. The simulation is run $N$ times.   
 
-The monte carlo simulation estimates the confidence interval width about $3/4$ smaller than a analytical binominal distribution at 50\% probability. The binominal distribution i less precise in the out region of the spectrum.
+We have chosen to estimate the confidence intervals at 50\% and 90\% cumulative probability ($\mathrm{ITG_{50}}, \mathrm{ITG_{90}}$) using the percentile method. The percentile method interval is the interval between the $100 \cdot \alpha$ and $100 \cdot (1-\alpha)$ percentiles of the Monte Carlo distribution of $\mathrm{ITG_{50}}, \mathrm{ITG_{90}}$.
+
+To verify the simulation we compared the confidence interval at $\mathrm{ITG_{50}}$ with a simple approximation of the interval based on the Wilson score interval for the ITG distribution. The Monte Carlo interval width is about $4/5$ of the wilson score, indicating that the Monte Carlo works and that the Wilson score is a fine approximation. 
 
 \begin{figure}
 \includegraphics{CLW90_surf.pdf}
-\caption{\label{fig:cl_surf} Montecarlo simulation of the cofidence interval width as a function of both sample size and number of sample sets. Confidence interval width in unit IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 10 samples.}
+\caption{\label{fig:cl_surf} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. Confidence interval width is measured in IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 10 samples.}
 \end{figure}
 
 \begin{figure}
 \includegraphics{CLW90_lines.pdf}
-\caption{\label{fig:cl_line}Shows the same data as in figure \ref{fig:cl_surf}. Montecartlo simulation of confidence interval width as a function of number of sample sets. Plotted for a sample size of ${3,7,11,15,19,23}$ respectively.
-For Sample size bigger than 10, the sample size has little influence on the confidence interval width of the fitted normal distribution.}
+\caption{\label{fig:cl_line} Presents the same data as in figure \ref{fig:cl_surf}. Monte Carlo simulation of confidence interval width as a function of number of sample sets. Plotted for a sample size of ${3,7,11,15,19,23}$ respectively. The unevenness of the lines is a result of random error due a relative low amount of Monte Carlo runs. }
 \end{figure}
 
-Figure \ref{fig:cl_surf} and \ref{fig:cl_line} show the confidence interval width for 90\% probability as a function of both sample size and number of samples. Sample size is only important for small sample sizes. 
 
-\begin{figure}
-\includegraphics{effectoflowsamplesize.pdf}
-\caption{\label{fig:effect} Result of montecarlo simulation of the sample size 3 drawn from a normal distrubution. The effect of a small sample size is overestimation of the variance and underestimation of the meanshift. }
-\end{figure}
+\textbf{Result} Figure \ref{fig:cl_surf} and \ref{fig:cl_line} show the confidence interval width at a cumulative probability of 90 \% ($\mathrm{ITG_{90}}$) as a function of sample size and number of measurement sets . Increasing sample size only have an effect up to about 11 samples, additional measurements does not increase the number of measurement sets. The amount of measurements sets is the main factor for reducing the confidence intervals. If the purpose is too differentiate between DCs then the number of measurements sets is going to limit how small the differences between DCs can be resolved with statistical certainty.
 
-The effect of a low sample size is shown in figure \ref{fig:effect}. The mean shift is underestimated and the deviation is overestimated compared the input distribution.
-
-A suggestion to a suitable minimum confidence interval width is $\pm 0.5$ IT-grade for a good estimate of PC.  Based the monte carlo simulation shown on figure \ref{fig:cl_line} this requires a confidence interval width of $1$ IT-grade which corresponds to a sample size of 12 and a number of sample sets of 30. 
-
-In order to give the user good information the PCDB need to be populated with at least 30 sets of measured product samples of each selected set of DC's.
 
 \section{Discussion}
 
-Using todays technology, generalisation of PC data upon request from the user I feasible. A proposed technical setup is described in \cite{OkholmRask******* Techpaper}.
+Section not completed yet. 
+
+The effect of a low sample size is shown in figure \ref{fig:effect}. The mean shift is underestimated and the deviation is overestimated compared the input distribution.
 
 
-
-apply tolerance, By looking at normalised data of the variance of products of the same material and process, it is possible to find a suitable tolerance
-improvement per rework
-material selection
-
-\emph{What you measure and index is what you can analyse from.}
-The index and type of samples limits the possible conclusions, which can be mades when extracting the data.  (If the goal is to understand the long term process capability impact of an injection mould process it is either necessary to have measurement sets from many products at different stages of their lifespan or multiple measurements through the lifespan of a couple of products.   
-
-Initiating PCG is a tough process. 
-The reward for doing robust design engineering is long reach
-The reward for using PCDB or robust design in general to make changes in early design is a long term and might only benefit the company and not feedback to the designers compared the reward for the hero in production solving the expensive errors in design.
-
-Implementing GPC requires a change
-	economical barrier
-		big company
-			incement from quality department
-			gain: 	knowledge of own PC
-					high precision data
-					Extensive knowledge on causes and problem
-			Loss:
-		cross companies
-			diverse data
-			gain:		Alot of data
-					knowledge of processes and material outside your field
-					knowledge of possible to achieve in industry
-					Index storing of own data and partially analysed
-			loss:		Industry espionage concerns
-					loss of information due to anonymity
-
-proto running at a university, unbiased.
-
-
-
+\begin{figure}
+\includegraphics{effectoflowsamplesize.pdf}
+\caption{\label{fig:effect} Result of Monte Carlo simulation of the sample size 3 drawn from a normal distrubution. The effect of a small sample size is overestimation of the variance and underestimation of the mean of the IT-grade distrubution. }
+\end{figure}
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
