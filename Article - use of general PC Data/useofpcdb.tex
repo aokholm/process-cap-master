@@ -247,28 +247,22 @@ Further consideration are done in order display the information in a more compre
 \end{itemize}
 
 \section{Statistical Validity}
-The user needs to trust the information provided by the PCDB. The uncertainty of the correctness of the resulting distribution of PCSL is influenced by several factors. 
-More samples in each measurement set will increase certainty. 
-More measurements sets increases the certainty. 
-Lower standard deviation of the PCSL distribution will increase the certainty.
-Higher mean shift from target $C_a$ will also slightly increase the certainty especially at low sample sizes.
-Sample size and number of measurement sets are the two possible actionable variables. The confidence interval of the population standard deviation is greatly effected by the sample size.  The confidence limits are given by
-
-\begin{equation}
-\left[ \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{\alpha/2,n-1}}},  \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{1-\alpha/2,n-1}}} \  \right]
-\end{equation}
-where $\chi^2$ is the chi-squared distribution, n is sample size and $\alpha$ is the significance level. The confidence limits are shown in Figure \ref{fig:std_uncertainty}. Even for samples sizes of 30 there still exist a quite large uncertainty of the standard deviation, which also directly effect the process capability indices and the calculated PCSL. 
-
-\begin{figure}
-\includegraphics{stats_std_confidence.pdf}
-\caption{\label{fig:std_uncertainty}Confidence interval for the population standard deviation compared to a sample standard deviation as a function of sample size. The gained certainty per measurement is best for low sample sizes.}
-\end{figure}
+The user needs to trust the information provided by the PCDB. The uncertainty of the resulting distribution of IT grades is influenced by several factors.
+\begin{itemize}
+\item More samples in each measurement set will increase certainty. 
+\item More measurements sets increases the certainty. 
+\item Lower standard deviation of the IT grade distribution will increase the certainty.
+\item Higher mean deviations from target $C_a$ will slightly increase the certainty especially at low sample sizes.
+\end{itemize}
+Sample size and number of measurement sets are the only two possible actionable variables. 
 
 \subsection{Monte Carlo simulaiton}
 To model the uncertainty of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
 We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
 
-The randomly generated ITG it is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.9$. From this input the standard deviation $\sigma_{X}$ and mean shift $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (\mu_{\mathrm{X}}, {| \mu - m|}^2)$. 
+The randomly generated ITG is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.6$. 
+The standard deviation $\sigma_{X}$ and mean shift $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (| \mu - m|, {\mu_{\mathrm{X}}}^2)$. 
+
 Each measurement is generated from the measurement set distribution.
 When all the sample data has been generated the process is reversed and the distribution parameters of ITG is estimated. The simulation is run $N$ times.   
 
@@ -277,13 +271,8 @@ We have chosen to estimate the confidence intervals at 50\% and 90\% cumulative 
 To verify the simulation we compared the confidence interval at $\mathrm{ITG_{50}}$ with a simple approximation of the interval based on the Wilson score interval for the ITG distribution. The Monte Carlo interval width is about $4/5$ of the wilson score, indicating that the Monte Carlo works and that the Wilson score is a fine approximation. 
 
 \begin{figure}
-\includegraphics{CLW90_surf.pdf}
-\caption{\label{fig:cl_surf} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. Confidence interval width is measured in IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 10 samples.}
-\end{figure}
-
-\begin{figure}
 \includegraphics{CLW90_lines.pdf}
-\caption{\label{fig:cl_line} Presents the same data as in figure \ref{fig:cl_surf}. Monte Carlo simulation of confidence interval width as a function of number of sample sets. Plotted for a sample size of ${3,7,11,15,19,23}$ respectively. The unevenness of the lines is a result of random error due a relative low amount of Monte Carlo runs. }
+\caption{\label{fig:cl_line} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. Confidence interval width is measured in IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 12 samples.}
 \end{figure}
 
 
@@ -293,20 +282,7 @@ To verify the simulation we compared the confidence interval at $\mathrm{ITG_{50
 \section{Discussion}
 
 
-
-
-
-
-
-Section not completed yet. 
-
-The effect of a low sample size is shown in figure \ref{fig:effect}. The mean shift is underestimated and the deviation is overestimated compared the input distribution.
-
-
-\begin{figure}
-\includegraphics{effectoflowsamplesize.pdf}
-\caption{\label{fig:effect} Result of Monte Carlo simulation of the sample size 3 drawn from a normal distrubution. The effect of a small sample size is overestimation of the variance and underestimation of the mean of the IT-grade distrubution. }
-\end{figure}
+The effect of a low sample size is shown in figure \ref{fig:effect}. the standard deviation of the deviation is overestimated compared the input distribution.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
