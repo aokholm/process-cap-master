@@ -58,7 +58,7 @@ Combined with advances in information technology we hope this will help make PCD
 \begin{ruledtabular}
 \caption{\label{tab:sampleset} Measurement set - As stored in the PCDB}
 \begin{tabular}{lllllllll}
-\textbf{Material*} 		& \textbf{Process*} 		& \textbf{Meas. Equipment}  	& \textbf{Target*} 	& \textbf{LSL} 	& \textbf{USL} 	& \textbf{Deviation*} 	& \textbf{Std.}   $\hat{\sigma}$ * & 	\\
+\textbf{Material*} 		& \textbf{Process*} 		& \textbf{Meas. Equipment}  	& \textbf{Target*} 	& \textbf{LSL} 	& \textbf{USL} 	& \textbf{Mean Shift*} 	& \textbf{Std.}   $\hat{\sigma}$ * & 	\\
 Thermoplastic 			& Moulding			& CT Scanning				& 3.00			& 2.99		& 3.01		& -0.0486			& 0.0032				\\
  - ABS, PC blend		& - Injection Mould.		& Zeiss metrotom 800	\\
 \\
@@ -121,6 +121,14 @@ can be reversed
 	d = 3 C_{pk} \sigma + | \mu - m|
 \end{equation}
 Where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. When $d$ is reversely used to estimated the required tolerance to achieve the desired process capability index value we call this the process capability specification limit (PCSL). 
+
+Using the data from table \ref{tab:sampleset} and a $C_{pk} = 1.66$. The PCSL is computed: 
+\begin{align*}
+PCSL &= 3 \cdot 1.66 \cdot 0.0032 \, \mathrm{mm}
++ |0.0486  \, \mathrm{mm}| \\
+&= 0.0645  \, \mathrm{mm}
+\end{align*}
+
 
 There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
 \begin{itemize}
@@ -193,10 +201,20 @@ In a note for \citeauthor{american1978preferred} and later mentioned in \citeaut
 	i =& 0.45 \sqrt[3]{D} + 10^{-3} \, D 
 \end{align}
 
-Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T = 2 d$ is the tolerance width in $[\mu m]$. 
+Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T $ is the tolerance width in $[\mu m]$ , which is equal to $2d$. 
 
 In the generalised PCDB the measurement sets PCSL are normalised using said function because ISO 286 is general practice in the industry. 
-Further work on improving the normalisation feature is possible, when more PCDB measurements sets are available to do a fit to the actual data for the different processes.
+Further work on improving the normalisation feature requires more data than what is available to us. Normalization actual data for the different processes.
+
+The IT-grade for the measurement set presented in table \ref{tab:sampleset} can be computed.
+
+\begin{align*}
+&\mathrm{ITG} = 5 \cdot \log_{10} \left\{ \frac{T \cdot 10^3}{ 0.45  D^{\frac{1}{3}} + D \cdot10^{-3} }\right\} +1 \\
+&\mathrm{ITG_{spec} }= 13.4 \\
+&\mathrm{ITG_{actual}} = 12.5
+\end{align*}
+
+The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated using $T = 2 \, PCSL$ and the $\mathrm{ITG_{spec}}$ is specified by the design and is calculated using $T = 2 \,USL$ for symmetric tolerances. 
 
 \subsection{Analyze normalized data}
 A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. Relevant measurements sets are aggregated based on DC's selected by the user. 
@@ -206,7 +224,7 @@ This gives an overview of the current process capability assuming it has not cha
 The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
 A normal distribution is fitted to the data to show a continuous function.
 
-Selecting a tolerance associated with a low probability will generally impact the price of production since it either: Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is typically used.
+Selecting a tolerance associated with a low probability will generally impact the price of production since it either: Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
@@ -233,7 +251,7 @@ The user needs to trust the information provided by the PCDB. The uncertainty of
 More samples in each measurement set will increase certainty. 
 More measurements sets increases the certainty. 
 Lower standard deviation of the PCSL distribution will increase the certainty.
-Higher mean deviations from target $C_a$ will also slightly increase the certainty especially at low sample sizes.
+Higher mean shift from target $C_a$ will also slightly increase the certainty especially at low sample sizes.
 Sample size and number of measurement sets are the two possible actionable variables. The confidence interval of the population standard deviation is greatly effected by the sample size.  The confidence limits are given by
 
 \begin{equation}
@@ -250,7 +268,7 @@ where $\chi^2$ is the chi-squared distribution, n is sample size and $\alpha$ is
 To model the uncertainty of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
 We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
 
-The randomly generated ITG it is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.9$. From this input the standard deviation $\sigma_{X}$ and deviation $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (\mu_{\mathrm{X}}, {| \mu - m|}^2)$. 
+The randomly generated ITG it is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.9$. From this input the standard deviation $\sigma_{X}$ and mean shift $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (\mu_{\mathrm{X}}, {| \mu - m|}^2)$. 
 Each measurement is generated from the measurement set distribution.
 When all the sample data has been generated the process is reversed and the distribution parameters of ITG is estimated. The simulation is run $N$ times.   
 
