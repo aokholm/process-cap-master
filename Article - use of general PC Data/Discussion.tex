@@ -39,4 +39,21 @@ Implementing GPC requires a change
 
 proto running at a university, unbiased.
 
+
+
+
+The confidence interval of the population standard deviation is greatly effected by the sample size.  The confidence limits are given by
+
+\begin{equation}
+\left[ \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{\alpha/2,n-1}}},  \sqrt{\frac{(n-1) \hat{\sigma}^2 }{\chi^2_{1-\alpha/2,n-1}}} \  \right]
+\end{equation}
+where $\chi^2$ is the chi-squared distribution, n is sample size and $\alpha$ is the significance level. The confidence limits are shown in Figure \ref{fig:std_uncertainty}. Even for samples sizes of 30 there still exist a quite large uncertainty of the standard deviation, which also directly effect the process capability indices and the calculated PCSL. 
+
+\begin{figure}
+\includegraphics{stats_std_confidence.pdf}
+\caption{\label{fig:std_uncertainty}Confidence interval for the population standard deviation compared to a sample standard deviation as a function of sample size. The gained certainty per measurement is best for low sample sizes.}
+\end{figure}
+
+
+
 \end{document}
