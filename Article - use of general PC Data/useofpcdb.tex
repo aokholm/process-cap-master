@@ -257,31 +257,35 @@ The user needs to trust the information provided by the PCDB. The uncertainty of
 Sample size and number of measurement sets are the only two possible actionable variables. 
 
 \subsection{Monte Carlo simulaiton}
-To model the uncertainty of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
+To model the uncertainty and accuracy of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
 We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
 
 The randomly generated ITG is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.6$. 
 The standard deviation $\sigma_{X}$ and mean shift $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (| \mu - m|, {\mu_{\mathrm{X}}}^2)$. 
 
 Each measurement is generated from the measurement set distribution.
-When all the sample data has been generated the process is reversed and the distribution parameters of ITG is estimated. The simulation is run $N$ times.   
+When all measurements has been generated the process is reversed and the distribution parameters of ITG is estimated.
+The simulation is run $N$ times.
 
-We have chosen to estimate the confidence intervals at 50\% and 90\% cumulative probability ($\mathrm{ITG_{50}}, \mathrm{ITG_{90}}$) using the percentile method. The percentile method interval is the interval between the $100 \cdot \alpha$ and $100 \cdot (1-\alpha)$ percentiles of the Monte Carlo distribution of $\mathrm{ITG_{50}}, \mathrm{ITG_{90}}$.
-
-To verify the simulation we compared the confidence interval at $\mathrm{ITG_{50}}$ with a simple approximation of the interval based on the Wilson score interval for the ITG distribution see Figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is about $4/5$ of the wilson score, indicating that the Monte Carlo works and that the Wilson score is a fine approximation. 
+Using the Monte Carlo simulation found that the standard deviation of the IT grade distribution is overestimated especially at lower sample sizes dues the increased uncertainty of these. Even at sample sizes of 10 it's still overestimated by 10 \%. This effect can be seen on figure \ref{fig:confidenceIntervals}. The mean value is within 1 \% of the original value and is independent of sample size and number of measurements.  
 
 \begin{figure}
 \includegraphics{confidenceIntervals.pdf}
-\caption{\label{fig:confidenceIntervals}Cummulated frequency plot of the input distribution of IT-grade (mean 10 ITG and std. 1 ITG). The 95\% confidence intervals estimated by the Monte Carlo agrees well with the Wilson score in the center part.}
+\caption{\label{fig:confidenceIntervals}Cummulated frequency plot showing the input distribution of IT-grade $\mathrm{ITG} \sim \mathcal{N} (10, 1)$. The Monte Carlo simulation were run $N = 10,000$ times. The 95\% confidence intervals estimated by the Monte Carlo is simelar to the Wilson score in the center in the part of the probability distribution.}
 \end{figure}
+
+The Monte Carlo simulation were also used to estimated the confidence intervals at different cumulative probabilities using the percentile method.
+The percentile method interval is the interval between the $100 \cdot \alpha$ and $100 \cdot (1-\alpha)$ percentiles of the Monte Carlo distribution. 
+
+To verify the simulation we compared the confidence intervals with a simple approximation of the interval based on the Wilson score interval as can be seen in Figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is about $4/5$ of the wilson score, indicating that the Monte Carlo works and that the Wilson score is a fine approximation.
+
+The effects of sample size and number of measurements sets is displayed in Figure \ref{CLW90_lines.pdf} which shows the confidence interval width at a cumulative probability of 90 \% as a function of sample size and number of measurement sets. Increasing sample size only have an effect up to about 11 samples, additional measurements does not increase the number of measurement sets. The amount of measurements sets is the main factor for reducing the confidence intervals. If the purpose is too differentiate between DCs then the number of measurements sets is going to limit how small the differences between DCs can be resolved with statistical certainty.
 
 \begin{figure}
 \includegraphics{CLW90_lines.pdf}
 \caption{\label{fig:cl_line} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. Confidence interval width is measured in IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 12 samples.}
 \end{figure}
 
-
-The primary result of the Monte Carlo simulation is displayed in Figure \ref{CLW90_lines.pdf} which shows the confidence interval width at a cumulative probability of 90 \% ($\mathrm{ITG_{90}}$) as a function of sample size and number of measurement sets. REFERENCE TO OTHER FIG Increasing sample size only have an effect up to about 11 samples, additional measurements does not increase the number of measurement sets. The amount of measurements sets is the main factor for reducing the confidence intervals. If the purpose is too differentiate between DCs then the number of measurements sets is going to limit how small the differences between DCs can be resolved with statistical certainty.
 
 
 \section{Discussion}
