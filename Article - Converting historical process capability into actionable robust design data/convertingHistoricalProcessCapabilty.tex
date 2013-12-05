@@ -219,7 +219,7 @@ Using $C_{pm}$ will in general be more conservative resulting in larger specific
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{graph_postscript_test.eps}
-\caption{\label{fig:CPI} Nomalised standard deviation as a function of normalised meanshift. $C_p$ referens only to the variance of the process. 
+\caption{\label{fig:CPI} Nomalised standard deviation as a function of $C_a$ \emph{closeness of process mean to target}. $C_p$ referens only to the variance of the process. 
 $C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. 
 $C_{pmk}$ takes both the yield of the product and a loss function. }
 \end{figure}
@@ -272,7 +272,7 @@ This might be due that a major contributing error in moulded parts is a result o
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
-\caption{\label{fig:tolstd} \citeauthor{DIN16901} (POM 120) and \citeauthor{NFT58000} (normal) are standards specifically for moulded plastic components. They are almost linear for sizes above 10 mm. 
+\caption{\label{fig:tolstd} \citeauthor{DIN16901} (POM 120) and \citeauthor{NFT58000} (normal) are standards that relate dimension and tolerance specifically for moulded plastic components. They are almost linear for sizes above 10 mm. 
 \citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium) describes a general relationship between linear tolerances and dimension. All standards included several levels of precission.}
 \end{figure}
 
@@ -309,8 +309,7 @@ A further analysis of the underlying measurements sets is done to present the us
 Relevant measurements sets are aggregated based on DC's selected by the user. 
 
 To help the user determine which tolerance to use, a accumulated frequency plot of the process capability defined IT grade is proposed. 
-This gives an overview of the current process capability assuming it has not changed since the data has been recorded. 
-The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
+This gives an overview of the current process capability of the selected data. The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
 A normal distribution is fitted to the data to show a continuous function. 
 The sample data we have obtained from analysing the Vaavud wind meter is normal distributed as seen on the normal probability plot \ref{fig:normplot}. 
 More information about the test case and data will follow in the section \ref{sec:result}.
@@ -319,14 +318,14 @@ Selecting a tolerance associated with a low probability will generally impact th
 Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
-\includegraphics{Acum_freqIT.pdf}
-\caption{\label{fig:acumfreq} Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
-Actual data from XXXX. }
+\includegraphics{ITG_total.pdf}
+\caption{\label{fig:acumfreq} Accumulated frequency of IT grade distribution, $C_{pk} =1.66$. 
+Actual data from test case described in Section \ref{sec:result}. }
 \end{figure}
 
 \begin{figure}
 \includegraphics{Normal_plot.pdf}
-\caption{\label{fig:normplot} Normality investigation of IT-grades of Vaavud Windmeter data   }
+\caption{\label{fig:normplot} Normality investigation of IT-grades of measurement data from multiple components, molds of the Vaavud Windmeter test data described in section \ref{sec:result}}
 \end{figure}
 
 It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. 
@@ -354,7 +353,7 @@ The uncertainty of the resulting distribution of IT grades is influenced by seve
 \end{itemize}
 Sample size and number of measurement sets are the only two possible actionable variables. 
 
-\subsubsection{Monte Carlo simulaiton}
+\subsubsection{Monte Carlo simulation}
 To model the uncertainty and accuracy of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
 We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
 
