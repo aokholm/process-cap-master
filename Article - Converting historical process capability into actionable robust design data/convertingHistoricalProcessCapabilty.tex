@@ -121,7 +121,10 @@ Instead of presenting the designer with statistical information, recommended spe
 The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of process capability requests not returning any results. 
 Combined with advances in information technology we hope this will help make PCDBs a viable tool in the mechanical design process.
 
-To test the system we have setup our own test database and populated it with measurement data. Since there exists
+To test the system we have setup our own test database and populated it with measurement data. 
+The process capability data were created for this project and involved the measurement of 75 different samples from 4 different parts using a variety of different measurement techniques. 
+The example data is further explained in section \ref{sec:result}.
+
 
 \subsection{Indexing}
 
@@ -306,7 +309,7 @@ The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated usin
 
 \subsubsection{Analyze normalized data}
 A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. 
-Relevant measurements sets are aggregated based on DC's selected by the user. 
+Relevant measurements sets are aggregated based on design chateristics selected by the user. 
 
 To help the user determine which tolerance to use, a accumulated frequency plot of the process capability defined IT grade is proposed. 
 This gives an overview of the current process capability assuming it has not changed since the data has been recorded. 
@@ -329,12 +332,9 @@ Actual data from XXXX. }
 \caption{\label{fig:normplot} Normality investigation of IT-grades of Vaavud Windmeter data   }
 \end{figure}
 
-It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. 
-It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
-
 Further consideration are done in order display the information in a more comprehensible way.
 \begin{itemize}
-\item The tolerance can be shown in $[mm]$ instead of IT-grade for a user selected dimension.
+\item The tolerance can be shown in $[mm]$ instead of IT-grade if the user selects a nominal dimension.
 \item In a web environment a popup activated by hover interactivity allow the user to see specifics of each data point.
 \item Confidence limits for the estimated distribution should be shown to ensure statistically validity.
 \end{itemize}
@@ -394,10 +394,12 @@ Confidence interval width is measured in IT-grades.
 The number of sample sets has much bigger influence than sample size for sizes above 12 samples.}
 \end{figure}
 
-
-
 \section{Result from test case}
 \label{sec:result}
+
+For the test database 
+
+Measurement 
 
 
 \begin{figure}
