@@ -34,16 +34,19 @@ Mathias Rask Møller, s082536 }
 All manufacturing process produces parts with variation of their specified dimensions.  
 Understanding process variation and creating designs which are insensitive to the variation decreases cost of manufactured goods and increase user satisfaction. 
 This is the main goals of the robust design methodology. 
-Early research did focused on characterising the variation and understanding the related quality loss \cite{taguchi1986introduction}. During the 1990s many major american companies followed trend of robust design and created process capability databases (PCDB), however due the lack of practical tools for accessing process capability variation data these were largely unused for mechanical design purposes \cite{tata1999process}. 
+Early research did focused on characterising the variation and understanding the related quality loss \cite{taguchi1986introduction}. 
+During the 1990s many major american companies followed trend of robust design and created process capability databases (PCDB), however due the lack of practical tools for accessing process capability variation data these were largely unused for mechanical design purposes \cite{tata1999process}. 
 While further research in PCDBs followed it still seems there is challenges needed to be solved before widespread adoption in industry is possible. 
 
 In this paper we will do a literature review of PCDBs looking at both challenges and proposed solutions. 
-We propose a modified indexing scheme for PCDBs and couple it with a new measure of process capability, which is easily understood and applicable for the the mechanical design engineer. This is one step to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
+We propose a modified indexing scheme for PCDBs and couple it with a new measure of process capability, which is easily understood and applicable for the the mechanical design engineer. 
+This is one step to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
 
 \section{Literature review}
 There has been a significant amount of research, which shows use of process capability data (PCD) to set correct tolerances will reduce rework, cost, failure rate, assembly problems and improve product performance \citep{tata1999process}.
 
-In the 90s several papers were published on methods to predict process variation using process models \citep{thornton2000use}. However creating process models can be very complicated and unpractical for many manufacturing process. 
+In the 90s several papers were published on methods to predict process variation using process models \citep{thornton2000use}. 
+However creating process models can be very complicated and unpractical for many manufacturing process. 
 Another option for acquiring process capability data is to measure the actual process performance and store it in a database. \cite{perzyk1998selection} describes such a database for storing general mechanical process capability data for the use of selecting optimal manufacturing methods.
 
 Variance of a components dimension is usually the result of multiple processes. 
@@ -61,7 +64,8 @@ A general model for estimating the relationship between tolerance and price base
 It can be concluded that the relationship follows a simple general formula, but the parameter to relate tolerance to price for the specific manufacturing method needs to be estimated for every process. 
 
 \subsection{Process capability databases in industry}
-\cite{tata1999effective, tata1999process} found that major US companies within automotive, aerospace, military and consumer had created Process Capability Databases (PCDB) and were successfully using them for manufacturing control, but were unable to successfully utilise the PCDB for design. What hindered mechanical design from using PCD? 
+\cite{tata1999effective, tata1999process} found that major US companies within automotive, aerospace, military and consumer had created Process Capability Databases (PCDB) and were successfully using them for manufacturing control, but were unable to successfully utilise the PCDB for design. 
+What hindered mechanical design from using PCD? 
 
 \subsubsection{Key Challenges}
 \textbf{Fragmented Organisation.}  A PCDB is a cross departments part form usually involving manufacturing, quality control and mechanical design within the company. 
@@ -70,7 +74,8 @@ Managers does not fully understand the need for a PCDB and the resources require
 Lack of company wide visions for the PCDB results in locally developed and maintained within a particular manufacturing location or departments. 
 The use of PCD in design projects is not directly encouraged and rewarded. 
 
-\textbf{Data Comunication.} Creating efficient indexing systems that allows for unambiguous process, feature geometry, material and stock selection. The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after data does not exists. 
+\textbf{Data Comunication.} Creating efficient indexing systems that allows for unambiguous process, feature geometry, material and stock selection. 
+The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after data does not exists. 
 The data is not presented in a way which is easily understandable by mechanical designers.
 
 \textbf{Information Technology.} Creating a database thats globally accessible and accept inputs from multiple different clients and interface with existing systems is complex.
@@ -81,7 +86,8 @@ In the book "Variation Risk Management" \cite{thornton2004variation} presents a 
 Key Characteristics (KC) can be a product, system, assembly, part or process characteristics for which the cost of variation is high and the variation is high. 
 KC's should have most focus for optimal use of resources. 
 
-It is individual for different companies what data should be stored in a PCDB, but a general list consist of material, stock, process, feature dimension, lower limit, upper limit, machine, operator number, batch size, mean, standard deviation for each record. Each record is a summation of multiple measurements made of a batch of parts \citep{thornton2004variation}.
+It is individual for different companies what data should be stored in a PCDB, but a general list consist of material, stock, process, feature dimension, lower limit, upper limit, machine, operator number, batch size, mean, standard deviation for each record. 
+Each record is a summation of multiple measurements made of a batch of parts \citep{thornton2004variation}.
 
 Using graph theory a graphical display for manufacturing capability is developed, which provides quick overview \citep{thornton2000use}. 
 One of the key views shows bias of a set of measurements along the horizontal axis and the standard deviation of the measurement set along the vertical axis. 
@@ -89,15 +95,19 @@ Confidence intervals in both bias and std. are shown for each measurement to vis
 A systems for automatically detecting and visualising trends in the data is also described.
 
 \cite{kern2003forecasting} recognised that the success of the system relies on consistent and correct data input. 
-A method to index design characteristics is developed to consistently assign correct key features on parts. Being one of the most elaborate works on PCDB the target seems to highly specialised productions companies. 
+A method to index design characteristics is developed to consistently assign correct key features on parts. 
+Being one of the most elaborate works on PCDB the target seems to highly specialised productions companies. 
 
 
 \subsection{Public Process Capability Data}
-From our own search we haven't been able to find any public available process capability database. We have searched using Google, Google scholar and DTU library, using the search words: "process capability database", "Example process capability", "open process database", "Process variance database", "variance prediction database", "process variance table" without success. 
+From our own search we haven't been able to find any public available process capability database. 
+We have searched using Google, Google scholar and DTU library, using the search words: "process capability database", "Example process capability", "open process database", "Process variance database", "variance prediction database", "process variance table" without success. 
 
-There exists some very general guide tables relating tolerance grade (IT-scale) and machining operation \citep{united1967preferred, american1978preferred}. It is however unclear how the data for the table has been generated.
+There exists some very general guide tables relating tolerance grade (IT-scale) and machining operation \citep{united1967preferred, american1978preferred}. 
+It is however unclear how the data for the table has been generated.
 
-In \cite[p. 715]{oberg2008machinery} there is given a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. Again no source of the information is given. \\[1cm]
+In \cite[p. 715]{oberg2008machinery} there is given a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. 
+Again no source of the information is given. \\[1cm]
 
 \section{Easy to use actionable Process capability database }
 In this article we present a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
@@ -198,12 +208,15 @@ There are several commonly used PCIs each serving their purpose \citep{wu2009ove
 	\item $C_{pmk}$: Version of $C_{pm}$,  sensitive to mean shift. 
 \end{itemize}
 
-Visualising the $CPIs = 1$  shows how a process on target $C_a = 1$ allows the same variation for all PCIs see figure \ref{fig:CPI}. The line for $C_{pm}$ is in below that of $C_{pk}$ except for values of $C_a$ close to 1. 
+Visualising the $CPIs = 1$  shows how a process on target $C_a = 1$ allows the same variation for all PCIs see figure \ref{fig:CPI}. 
+The line for $C_{pm}$ is in below that of $C_{pk}$ except for values of $C_a$ close to 1. 
 Using $C_{pm}$ will in general be more conservative resulting in larger specification limits than $C_{pk}$. The plot shown is for a capability equal to one for higher values this effect is even more pronounced.
 
 \begin{figure}
 \includegraphics[width=0.45\textwidth]{graph_postscript_test.eps}
-\caption{\label{fig:CPI} Nomalised standard deviation as a function of normalised meanshift. $C_p$ referens only to the variance of the process. $C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. $C_{pmk}$ takes both the yield of the product and a loss function. }
+\caption{\label{fig:CPI} Nomalised standard deviation as a function of normalised meanshift. $C_p$ referens only to the variance of the process. 
+$C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. 
+$C_{pmk}$ takes both the yield of the product and a loss function. }
 \end{figure}
 
 For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result - directly related to the yield of the process. The yield of a process is within
@@ -211,7 +224,8 @@ For the purpose of our database we have chosen to use $C_{pk}$, since it provide
 	2\Phi(3C_{pk})-1 \leq \text{yield} < \Phi(3C_{pk}) \nonumber
 \end{equation}
 
-where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. For typical capability levels the resulting non-conforming products in parts per million (ppm) is listed in table \ref{tab:cpl_nc}
+where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. 
+For typical capability levels the resulting non-conforming products in parts per million (ppm) is listed in table \ref{tab:cpl_nc}
 
 \begin{table}
 \begin{ruledtabular}
@@ -241,10 +255,15 @@ In situations where the desired tolerances directly influence product performanc
 The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
 This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
 
-There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. The ANSI and the ISO standards uses the same formula and are quite close to the german DIN standard. 
-These standards display a non-linear relationship between tolerance and dimension. For the same level for precision, the tolerances of large dimensions are smaller relatively than for small dimensions. See figure \ref{fig:tolstd}.
+There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. 
+We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. 
+The ANSI and the ISO standards uses the same formula and are quite close to the german DIN standard. 
+These standards display a non-linear relationship between tolerance and dimension. 
+For the same level for precision, the tolerances of large dimensions are smaller relatively than for small dimensions. See figure \ref{fig:tolstd}.
 
-The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. These standards present an almost linear relationship between tolerance and dimension. This might be due that a major contributing error in moulded parts is a result of creep, since creep errors in general has a linear relationship between overall dimension and error.
+The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. 
+These standards present an almost linear relationship between tolerance and dimension. 
+This might be due that a major contributing error in moulded parts is a result of creep, since creep errors in general has a linear relationship between overall dimension and error.
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
@@ -253,7 +272,8 @@ The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standa
 \end{figure}
 
 These standards are all described using a tables showing the tolerances for a given dimension intervals and precision. 
-In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades (precision levels) between IT6 to IT16 for dimensions from 2 mm to 500 mm. This function is for unknown reasons not included in newer versions of ISO 286 yet table values seems still estimated using this function.
+In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades (precision levels) between IT6 to IT16 for dimensions from 2 mm to 500 mm. 
+This function is for unknown reasons not included in newer versions of ISO 286 yet table values seems still estimated using this function.
 
 \begin{align}
 	T =& 10^{0.2 (ITG -1)} \cdot i \\
@@ -276,26 +296,33 @@ The IT-grade for the measurement set presented in table \ref{tab:sampleset} can 
 The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated using $T = 2 \, PCSL$ and the $\mathrm{ITG_{spec}}$ is specified by the design and is calculated using $T = 2 \,USL$ for symmetric tolerances. 
 
 \subsubsection{Analyze normalized data}
-A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. Relevant measurements sets are aggregated based on DC's selected by the user. 
+A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. 
+Relevant measurements sets are aggregated based on DC's selected by the user. 
 
 To help the user determine which tolerance to use, a accumulated frequency plot of the normalised PCSL is proposed. 
 This gives an overview of the current process capability assuming it has not changed since the data has been recorded. 
 The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
 A normal distribution is fitted to the data to show a continuous function.
 
-Selecting a tolerance associated with a low probability will generally impact the price of production since it either: Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
+Selecting a tolerance associated with a low probability will generally impact the price of production since it either: 
+Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
 \includegraphics{Acum_freqIT.pdf}
 \caption{\label{fig:acumfreq} Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
-20 measurement sets each containing between 3 and 219 samples. Actual data from \cite{thornton2000use}. }
+20 measurement sets each containing between 3 and 219 samples. 
+Actual data from \cite{thornton2000use}. }
 \end{figure}
 
-It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
+It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. 
+It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
 
 \begin{figure}
 \includegraphics{Acum_freqF3.pdf}
-\caption{\label{fig:acumfreqF3} Comparing two differnet DC's. Measurement sets from machine nr. 1031 and 1032 respecfully. Accumulated frequency IT grade distribution, $C_{pk} =1.66$. Actual data from \cite{thornton2000use}. }
+\caption{\label{fig:acumfreqF3} Comparing two differnet DC's. 
+Measurement sets from machine nr. 1031 and 1032 respecfully. 
+Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
+Actual data from \cite{thornton2000use}. }
 \end{figure}
 
 Further consideration are done in order display the information in a more comprehensible way.
@@ -306,7 +333,8 @@ Further consideration are done in order display the information in a more compre
 \end{itemize}
 
 \subsection{Statistical Validity}
-The user needs to trust the information provided by the PCDB. The uncertainty of the resulting distribution of IT grades is influenced by several factors.
+The user needs to trust the information provided by the PCDB. 
+The uncertainty of the resulting distribution of IT grades is influenced by several factors.
 \begin{itemize}
 \item More samples in each measurement set will increase certainty. 
 \item More measurements sets increases the certainty. 
@@ -326,23 +354,33 @@ Each measurement is generated from the measurement set distribution.
 When all measurements has been generated the process is reversed and the distribution parameters of ITG is estimated.
 The simulation is run $N$ times.
 
-Using the Monte Carlo simulation found that the standard deviation of the IT grade distribution is overestimated especially at lower sample sizes dues the increased uncertainty of these. Even at sample sizes of 10 it's still overestimated by 10 \%. This effect can be seen on figure \ref{fig:confidenceIntervals}. The mean value is within 1 \% of the original value and is independent of sample size and number of measurements.  
+Using the Monte Carlo simulation found that the standard deviation of the IT grade distribution is overestimated especially at lower sample sizes dues the increased uncertainty of these. 
+Even at sample sizes of 10 it's still overestimated by 10 \%. 
+This effect can be seen on figure \ref{fig:confidenceIntervals}. The mean value is within 1 \% of the original value and is independent of sample size and number of measurements.  
 
 \begin{figure}
 \includegraphics{confidenceIntervals.pdf}
-\caption{\label{fig:confidenceIntervals}Cummulated frequency plot showing the input distribution of IT-grade $\mathrm{ITG} \sim \mathcal{N} (10, 1)$. The Monte Carlo simulation were run $N = 10,000$ times. The 95\% confidence intervals estimated by the Monte Carlo is simelar to the Wilson score in the center in the part of the probability distribution.}
+\caption{\label{fig:confidenceIntervals}Cummulated frequency plot showing the input distribution of IT-grade $\mathrm{ITG} \sim \mathcal{N} (10, 1)$. 
+The Monte Carlo simulation were run $N = 10,000$ times. 
+The 95\% confidence intervals estimated by the Monte Carlo is simelar to the Wilson score in the center in the part of the probability distribution.}
 \end{figure}
 
 The Monte Carlo simulation were also used to estimated the confidence intervals at different cumulative probabilities using the percentile method.
 The percentile method interval is the interval between the $100 \cdot \alpha$ and $100 \cdot (1-\alpha)$ percentiles of the Monte Carlo distribution. 
 
-To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval for the same input at the Monte Carlo, as can be seen in Figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the wilson score at midsection of probability curve. The confidence intervals for the Wilson score deviates at the top and bottom section which is a property of the wilson approximation.
+To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval for the same input at the Monte Carlo, as can be seen in Figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the wilson score at midsection of probability curve. 
+The confidence intervals for the Wilson score deviates at the top and bottom section which is a property of the wilson approximation.
 
-The effects of sample size and number of measurements sets is displayed in Figure \ref{CLW90_lines.pdf} which shows the confidence interval width at a cumulative probability of 90 \% as a function of sample size and number of measurement sets. Increasing sample size only have an effect up to about 12 samples, additional sample measurements does not increase accuracy. The amount of measurements sets is the main factor for reducing the confidence intervals. If the purpose is too differentiate between DCs then the number of measurements sets is going to limit how small the differences between DCs can be resolved with statistical certainty.
+The effects of sample size and number of measurements sets is displayed in Figure \ref{CLW90_lines.pdf} which shows the confidence interval width at a cumulative probability of 90 \% as a function of sample size and number of measurement sets. 
+Increasing sample size only have an effect up to about 12 samples, additional sample measurements does not increase accuracy. 
+The amount of measurements sets is the main factor for reducing the confidence intervals. 
+If the purpose is too differentiate between DCs then the number of measurements sets is going to limit how small the differences between DCs can be resolved with statistical certainty.
 
 \begin{figure}
 \includegraphics{CLW90_lines.pdf}
-\caption{\label{fig:cl_line} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. Confidence interval width is measured in IT-grades. The number of sample sets has much bigger influence than sample size for sizes above 12 samples.}
+\caption{\label{fig:cl_line} Monte Carlo simulation of the cofidence interval width as a function of both sample size and number of measurement sets. 
+Confidence interval width is measured in IT-grades. 
+The number of sample sets has much bigger influence than sample size for sizes above 12 samples.}
 \end{figure}
 
 
@@ -350,7 +388,8 @@ The effects of sample size and number of measurements sets is displayed in Figur
 \section{Insights from }
 
 
-The effect of a low sample size is shown in figure \ref{fig:effect}. the standard deviation of the deviation is overestimated compared the input distribution.
+The effect of a low sample size is shown in figure \ref{fig:effect}. 
+The standard deviation of the deviation is overestimated compared the input distribution.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
