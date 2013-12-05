@@ -114,13 +114,14 @@ Again no source of the information is given. \\[1cm]
 
 % New Section 
 \section{Improving Process capability database}
-In this article we present a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
+We will now precent a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
 The general principle is to provide an interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
 The core indexing scheme is simplified, but details are retained or improved using a flexible tagging system. 
-Instead of presenting the designer with statistical information, recommended specifications limits based on actual PC is shown directly. 
-The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of PC requests not returning any results. 
+Instead of presenting the designer with statistical information, recommended specifications limits based on actual process capability is shown directly. 
+The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of process capability requests not returning any results. 
+Combined with advances in information technology we hope this will help make PCDBs a viable tool in the mechanical design process.
 
-Combined with advances in information technology we hope this will help make PCDBs a viable tool in the mechanical design process. 
+To test the system we have setup our own test database and populated it with measurement data. Since there exists
 
 \subsection{Indexing}
 
@@ -206,7 +207,7 @@ PCSL &= 3 \cdot 1.66 \cdot 0.0032 \, \mathrm{mm}
 There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
 \begin{itemize}
 	\item $C_a$ : Closeness of process mean to target 
-	\item $C_p$ : Relative size of variation
+	\item $C_p$ : Process precision 
 	\item $C_{pk}$ : Amount of nonconforming (\%NC)
 	\item $C_{pm}$ : Value loss (Taguchi loss function)
 	\item $C_{pmk}$: Version of $C_{pm}$,  sensitive to mean shift. 
@@ -287,7 +288,7 @@ This function is for unknown reasons not included in newer versions of ISO 286 y
 Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T $ is the tolerance width in $[\mu m]$ , which is equal to $2d$. 
 
 In the generalised PCDB the measurement sets PCSL are normalised using said function because ISO 286 is general practice in the industry. 
-Further work on improving the normalisation feature requires more data than what is available to us. Normalization actual data for the different processes.
+Further work on improving the normalisation of tolerences or simply choosing the best tolerence specification requires more data then we have been able to produce with measurement of the Vaavud Wind meter. Normalization actual data for the different processes.
 
 The IT-grade for the measurement set presented in table \ref{tab:sampleset} can be computed.
 
@@ -299,20 +300,26 @@ The IT-grade for the measurement set presented in table \ref{tab:sampleset} can 
 
 The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated using $T = 2 \, PCSL$ and the $\mathrm{ITG_{spec}}$ is specified by the design and is calculated using $T = 2 \,USL$ for symmetric tolerances. 
 
+
+
+
+
 \subsubsection{Analyze normalized data}
 A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. 
 Relevant measurements sets are aggregated based on DC's selected by the user. 
 
-To help the user determine which tolerance to use, a accumulated frequency plot of the normalised PCSL is proposed. 
+To help the user determine which tolerance to use, a accumulated frequency plot of the process capability defined IT grade is proposed. 
 This gives an overview of the current process capability assuming it has not changed since the data has been recorded. 
 The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
-A normal distribution is fitted to the data to show a continuous function.
+A normal distribution is fitted to the data to show a continuous function. 
+The sample data we have obtained from analysing the Vaavud wind meter is normal distributed as seen on the normal probability plot \ref{fig:normplot}. 
+More information about the test case and data will follow in the section \ref{sec:result}.
 
 Selecting a tolerance associated with a low probability will generally impact the price of production since it either: 
 Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
-\includegraphics{Cb_holeshaft.pdf}
+\includegraphics{Acum_freqIT.pdf}
 \caption{\label{fig:acumfreq} Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
 Actual data from XXXX. }
 \end{figure}
@@ -325,20 +332,16 @@ Actual data from XXXX. }
 It is possible to easily compare multiple CDs by displaying them in the same view. In figure \ref{fig:acumfreqF3} PC data from two machines is shown respectively. 
 It is possible to see that the machine marked '1031' performs better than '1032', but '1032' is more consistent.
 
-\begin{figure}
-\includegraphics{Acum_freqF3.pdf}
-\caption{\label{fig:acumfreqF3} Comparing two differnet DC's. 
-Measurement sets from machine nr. 1031 and 1032 respecfully. 
-Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
-Actual data from \cite{thornton2000use}. }
-\end{figure}
-
 Further consideration are done in order display the information in a more comprehensible way.
 \begin{itemize}
 \item The tolerance can be shown in $[mm]$ instead of IT-grade for a user selected dimension.
 \item In a web environment a popup activated by hover interactivity allow the user to see specifics of each data point.
 \item Confidence limits for the estimated distribution should be shown to ensure statistically validity.
 \end{itemize}
+
+
+
+
 
 \subsection{Statistical Validity}
 The user needs to trust the information provided by the PCDB. 
@@ -394,7 +397,16 @@ The number of sample sets has much bigger influence than sample size for sizes a
 
 
 \section{Result from test case}
+\label{sec:result}
 
+
+\begin{figure}
+\includegraphics{Cb_holeshaft.pdf}
+\caption{\label{fig:acumfreqF3} Comparing two differnet design charistics . 
+Measurement sets from machine nr. 1031 and 1032 respecfully. 
+Accumulated frequency IT grade distribution, $C_{pk} =1.66$. 
+Actual data from \cite{thornton2000use}. }
+\end{figure}
 
 
 The effect of a low sample size is shown in figure \ref{fig:effect}. 
