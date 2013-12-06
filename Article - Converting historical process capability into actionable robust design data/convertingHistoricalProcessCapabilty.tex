@@ -408,11 +408,22 @@ The 90 \% cumulative frequency corresponds to an $14.2 \pm 0.4 $ IT grade. If th
 
 X
 
+Comparison of process capabilities for different design characteristics are useful. 
+In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
+The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
+
+In the test case we tried comparing addtional design characteristics.
 \begin{itemize}
 
-\item Mean shift in the measurement technology at production control compare a external measurement results from Danish Technological Institutes credited CT-scanner.
+\item Material specific process capability was compared. For the test database, the material data was confounded to multi cavity mold vs. single cavity and hard steel vs. soft steel mold. No meaningful conclusion.
 
-\item Material spec
+\item Added variance from measurements across mold split lines. No significant difference. 
+
+\item Dimension specific process capability. Ex the PC of $[ 0<x \le 5 ]$, $[5<x\le 10 ] $, $[10<x] \mathrm{mm}$ dimensions compared. Measurements in the range $[5<x \le 10]$ are more precise but too little data to make a general describtion.
+
+\item Effects circular measurements compared to positional. The CT- scanner determines the diameter based on multiple points, which results in addition precision compared to positional measurements.
+
+\item The measurement technology at production plant compare a external measurement results from Danish Technological Institutes credited CT-scanner. Investigating mean shift $C_b$ in measurement technology, no significant difference. 
 
 \end{itemize}
 
@@ -429,6 +440,8 @@ Robust design methodology propose method of design based on process capability. 
 The reason for not choosing the IT-grade corresponding to 100 \% is related to exceptions in the data that create unintionally big tolerances. In the test data is measurements of: long and slender object, unnecessary tight tolerances in non-critical areas and areas that has been changed but changes are shown in the 'Intended design files'. 
 
 
+\section{Conclusion}
+In this paper, a review of literature has shown problems in using process capability databases for design purposes. Population and accessibility are two key factor to a functional process capability database.
 
 \begin{figure}
 \includegraphics{Cb_holeshaft.pdf}
@@ -437,17 +450,17 @@ The process capability of inner measurements such as holes and cavities compared
 Accumulated frequency of IT grade distribution, $C_{pk} =1.66$. 
 Actual data from the Vaavud Windmeter test case. }
 \end{figure}
+We have proposed a statistical approach for making process capability independent of size and a approach for calculation a process capability driven tolerance. The statistical uncertainty has been estimated using Monte Carlo simulation technics and compared to known statistical approximations.
 
 Comparison of process capabilities for different design characteristics are useful. 
 In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
 The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
+A test case has been measured and analyzed to verify assumption in the proposal and to provide a hands on example.
 
 In the test case we tried comparing different design characteristics.
+Failure of designing for process capabilities of the production can lead to additional cost for rework or larger failure rate of products. 
 
-
-
-
-
+When design for a specific process capability the generalized process capability database will provide information of process capability of any measurement for a given material and process.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
