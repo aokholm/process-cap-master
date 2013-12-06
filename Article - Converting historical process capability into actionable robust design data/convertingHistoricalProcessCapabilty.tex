@@ -14,8 +14,6 @@
 
 \begin{document}
 
-
-
 \begin{abstract}
 An approach to generate generalised process capability data in order to populate and add functionality to a process capability database.
 A description of the concept of generalisation, uses and implementation.
@@ -309,15 +307,20 @@ The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated usin
 
 \subsubsection{Analyze normalized data}
 A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. 
-Relevant measurements sets are aggregated based on design chateristics selected by the user. 
+Relevant measurements sets are aggregated based on design characteristics selected by the user. 
 
 To help the user determine which tolerance to use, a accumulated frequency plot of the process capability defined IT grade is proposed. 
-This gives an overview of the current process capability of the selected data. The plot shows the probability, if production capability were randomly selected, to produced the selected part at a specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
-A normal distribution is fitted to the data to show a continuous function. 
-The sample data we have obtained from analysing the Vaavud wind meter is normal distributed as seen on the normal probability plot \ref{fig:normplot}. 
-More information about the test case and data will follow in the section \ref{sec:result}.
+This gives an overview of the current process capability of the selected data. The plot shows the probability, if production capability were randomly selected, to produced the selected part at the specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
+To even out random effects in the measurements sets a normal distribution fitted and wilson score confidence intervals is added based on number of measurements sets to show statistical certainty.  
+The IT grades distribution is assumed to be normal distributed due the central limit theorem, which from our sample data seems to be correct, see figure \ref{fig:normplot}.
 
-Selecting a tolerance associated with a low probability will generally impact the price of production since it either: 
+Based on the experience gained from our test data the 90 \% cumulative probability gives the standard tolerance grade, which should be used for designing new parts. 
+The reason for choosing 90 \% cumulative frequency and not 100 \% is due a large degree of exceptions in the upper 10 \% of the measurements sets.
+These exceptions include dimensions of: long and slender objects, unnecessary tight tolerances in non-critical areas and dimensions where the specifications has been come desynchronised from manufacturing targets.
+
+As a designer it's often temping use a IT-grade at a lower cumulative probability, however statistically this will result in errors. Instead the designer should try to specify the given design characteristics more precisely for the given task hoping these will result in a tighter permissible tolerances.
+
+If a tolerance associated with a low probability of occurrence is chosen generally this will impact the price of production since it either: 
 Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
@@ -330,13 +333,6 @@ Actual data from test case described in Section \ref{sec:result}. }
 \includegraphics{Normal_plot.pdf}
 \caption{\label{fig:normplot} Normality investigation of IT-grades of measurement data from multiple components, molds of the Vaavud Windmeter test data described in section \ref{sec:result}}
 \end{figure}
-
-Further consideration are done in order display the information in a more comprehensible way.
-\begin{itemize}
-\item The tolerance can be shown in $[mm]$ instead of IT-grade if the user selects a nominal dimension.
-\item In a web environment a popup activated by hover interactivity allow the user to see specifics of each data point.
-\item Confidence limits for the estimated distribution should be shown to ensure statistically validity.
-\end{itemize}
 
 
 
@@ -402,55 +398,27 @@ The tested parts were all injection moulded.
 Three parts were made of POM (PTFE filled) in the same mould. 
 The fourth part is made using a blend of PC and a ABS.
 
-\subsection{results}
+\subsection{Results}
 
-One result is the overall distribution of process capability driven IT grades shown in figure \ref{fig:acumfreq}. 
+The 90 \% cumulative frequency of all measurements corresponds to an $14.2 \pm 0.4 $ IT grade. We tried to find design characteristics which results in a tighter permissible tolerances. Linear dimensions within a single mould half did not show significant better performance than dimensions across mold split lines.  Small, medium and large dimensions performed to the same required tolerance.  
 
-
-The 90 \% cumulative frequency corresponds to an $14.2 \pm 0.4 $ IT grade. 
-If the same production method and materials were going to used for a new project the 14.2 IT grade would be the recommended minimum tolerance. 
-One very interesting related finding were the very small (or non existing)  correlation between the specified tolerance and the actual process capability driven tolerance as seen in figure \ref{fig:ITG_ITGSpec}. 
+We found that there were a very small (or non existing)  correlation between the specified tolerance and the actual process capability driven tolerance as seen in figure \ref{fig:ITG_ITGSpec}. 
 This clearly shows the need for process capability driven tolerances as a part of robust design. 
-The dotted line represent the same 90 \% cumulative frequency as shown in figure \ref{fig:acumfreq}. 
-The reason for choosing 90 \% cumulative frequency is related to a large degree of exceptions in the upper 10 \% of the measurements sets.
-These exceptions include dimensions of: long and slender objects, unnecessary tight tolerances in non-critical areas and dimensions where the specifications has been come desynchronised with the manufacturing targets. 
+
+Given the available data a new part produced using the same production method and materials should be tolerances with a minimum of 14.2 IT grade. 
+
+Having a database with easy sortable production data can also be used for finding general trends, which can benefit the designer, but will be valuable to the production directly. We found that a general tendency in the part that holes were larger than and specified and compared to shafts measurements using a the mean shift normalised with the specification limit $C_b$ \ref{fig:Cb_holeshaft}. This could be due the mold tested is early in their lifespan and still have a lot of steel left. 
 
 \begin{figure}
 \includegraphics{ITG_ITGSpec.pdf}
 \caption{\label{fig:ITG_ITGSpec} Correlation between specified tolerances and actual tolerances. 
 Data points above the full line is measurements that exceed the specified tolerance. 
-The dotted line represents 80\% of the data.}
+The dotted line represents 90\% cumulative frequency.}
 \end{figure}
-
-
-In the quest for finding design characteristics which results in a tighter permissible tolerances we have tried to analyse our sample data for multiple different design characteristics. This is the results:
-\begin{itemize}
-
-\item Linear dimension within a single mould half did not show significant better performance than dimensions across mold split lines. 
-
-\item Small, medium and large dimensions performed to the same required tolerance. The dimensions were divided into bins of $[ 0<x \le 5 ]$, $[5<x\le 10 ] $, $[10<x] \ \mathrm{(mm)}$. 
-Dimensions in the range $[5<x \le 10]$ seems to have a lower required tolerance grade, but more measurements were needed in order to have statistical significance.
-
-\item The CT- scanner determines the diameter based on multiple points, which results in addition precision compared to positional measurements.
-
-\item The measurement technology at production plant compare a external measurement results from Danish Technological Institutes credited CT-scanner. Investigating mean shift $C_b$ in measurement technology, no significant difference. 
-
-\end{itemize}
-
-With more data it would be very interesting to investigate 
-\begin{itemize}
-	\item Material specific process capability was compared. For the test database, the material data was confounded to multi cavity mold vs. single cavity and hard steel vs. soft steel mold. No meaningful conclusion.
-\end{itemize}
-
-In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
-The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
 
 \begin{figure}
 \includegraphics{Cb_holeshaft.pdf}
-\caption{\label{fig:Cb_holeshaft} Comparison of two different design characteristics. 
-The process capability of inner measurements such as holes and cavities compared against outside measurements such as shafts, rods and cubes. 
-Accumulated frequency of IT grade distribution, $C_{pk} =1.66$. 
-Actual data from the Vaavud Windmeter test case. }
+\caption{\label{fig:Cb_holeshaft} The mean shift normalised with the specification limit of inner measurements such as holes and cavities compared against outside measurements such as shafts, rods and cubes. }
 \end{figure}
 
 
