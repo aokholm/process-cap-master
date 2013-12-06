@@ -396,37 +396,24 @@ The number of sample sets has much bigger influence than sample size for sizes a
 \label{sec:result}
 
 To test the concept an experimental database were made. 
-Vaavud, a minor company making anemometers, provided technical drawings,  samples for the project and an inspection reports. 
+Vaavud, a minor company making anemometers, provided technical drawings,  samples and inspection reports. 
 Additional measurements were done by Danish Technological Institute using Zeiss CT scanning equipment.
-
 The tested parts were all injection moulded. 
 Three parts were made of POM (PTFE filled) in the same mould. 
 The fourth part is made using a blend of PC and a ABS.
 
-The first result is the overall distribution of process capability driven IT grades shown in figure \ref{fig:acumfreq}. 
-The 90 \% cumulative frequency corresponds to an $14.2 \pm 0.4 $ IT grade. If the same production method and materials were going to used for a new project the 14.2 IT grade would be the recommended minimum tolerance. In the quest for finding design characteristics which would result in a tighter permissible tolerance we have tried to analyse our sample data for multiple different design characteristics. 
+\subsection{results}
 
-X
+One result is the overall distribution of process capability driven IT grades shown in figure \ref{fig:acumfreq}. 
 
-Comparison of process capabilities for different design characteristics are useful. 
-In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
-The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
 
-In the test case we tried comparing addtional design characteristics.
-\begin{itemize}
-
-\item Material specific process capability was compared. For the test database, the material data was confounded to multi cavity mold vs. single cavity and hard steel vs. soft steel mold. No meaningful conclusion.
-
-\item Added variance from measurements across mold split lines. No significant difference. 
-
-\item Dimension specific process capability. Ex the PC of $[ 0<x \le 5 ]$, $[5<x\le 10 ] $, $[10<x] \mathrm{mm}$ dimensions compared. Measurements in the range $[5<x \le 10]$ are more precise but too little data to make a general describtion.
-
-\item Effects circular measurements compared to positional. The CT- scanner determines the diameter based on multiple points, which results in addition precision compared to positional measurements.
-
-\item The measurement technology at production plant compare a external measurement results from Danish Technological Institutes credited CT-scanner. Investigating mean shift $C_b$ in measurement technology, no significant difference. 
-
-\end{itemize}
-
+The 90 \% cumulative frequency corresponds to an $14.2 \pm 0.4 $ IT grade. 
+If the same production method and materials were going to used for a new project the 14.2 IT grade would be the recommended minimum tolerance. 
+One very interesting related finding were the very small (or non existing)  correlation between the specified tolerance and the actual process capability driven tolerance as seen in figure \ref{fig:ITG_ITGSpec}. 
+This clearly shows the need for process capability driven tolerances as a part of robust design. 
+The dotted line represent the same 90 \% cumulative frequency as shown in figure \ref{fig:acumfreq}. 
+The reason for choosing 90 \% cumulative frequency is related to a large degree of exceptions in the upper 10 \% of the measurements sets.
+These exceptions include dimensions of: long and slender objects, unnecessary tight tolerances in non-critical areas and dimensions where the specifications has been come desynchronised with the manufacturing targets. 
 
 \begin{figure}
 \includegraphics{ITG_ITGSpec.pdf}
@@ -435,13 +422,28 @@ Data points above the full line is measurements that exceed the specified tolera
 The dotted line represents 80\% of the data.}
 \end{figure}
 
-Traditionally mechanical designer apply tolerances needed for functionality of a product with little regard process capability. Unfortunately it seems like there is very little correlation between the specified tolerance and the actual process capability driven tolerance as seen in figure \ref{fig:ITG_ITGSpec}.
-Robust design methodology propose method of design based on process capability. A design that at robust in relation to variance The dotted line in figure \ref{fig:ITG_ITGSpec} represent 90 \% of data corresponding to a IT grade of $14.2$ or 90 \% probability in figure \ref{fig:acumfreq}. A design that in robust in relation to variance 
-The reason for not choosing the IT-grade corresponding to 100 \% is related to exceptions in the data that create unintionally big tolerances. In the test data is measurements of: long and slender object, unnecessary tight tolerances in non-critical areas and areas that has been changed but changes are shown in the 'Intended design files'. 
 
+In the quest for finding design characteristics which results in a tighter permissible tolerances we have tried to analyse our sample data for multiple different design characteristics. This is the results:
+\begin{itemize}
 
-\section{Conclusion}
-In this paper, a review of literature has shown problems in using process capability databases for design purposes. Population and accessibility are two key factor to a functional process capability database.
+\item Linear dimension within a single mould half did not show significant better performance than dimensions across mold split lines. 
+
+\item Small, medium and large dimensions performed to the same required tolerance. The dimensions were divided into bins of $[ 0<x \le 5 ]$, $[5<x\le 10 ] $, $[10<x] \ \mathrm{(mm)}$. 
+Dimensions in the range $[5<x \le 10]$ seems to have a lower required tolerance grade, but more measurements were needed in order to have statistical significance.
+
+\item The CT- scanner determines the diameter based on multiple points, which results in addition precision compared to positional measurements.
+
+\item The measurement technology at production plant compare a external measurement results from Danish Technological Institutes credited CT-scanner. Investigating mean shift $C_b$ in measurement technology, no significant difference. 
+
+\end{itemize}
+
+With more data it would be very interesting to investigate 
+\begin{itemize}
+	\item Material specific process capability was compared. For the test database, the material data was confounded to multi cavity mold vs. single cavity and hard steel vs. soft steel mold. No meaningful conclusion.
+\end{itemize}
+
+In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
+The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
 
 \begin{figure}
 \includegraphics{Cb_holeshaft.pdf}
@@ -450,12 +452,13 @@ The process capability of inner measurements such as holes and cavities compared
 Accumulated frequency of IT grade distribution, $C_{pk} =1.66$. 
 Actual data from the Vaavud Windmeter test case. }
 \end{figure}
-We have proposed a statistical approach for making process capability independent of size and a approach for calculation a process capability driven tolerance. The statistical uncertainty has been estimated using Monte Carlo simulation technics and compared to known statistical approximations.
 
-Comparison of process capabilities for different design characteristics are useful. 
-In figure \ref{fig:Cb_holeshaft} are internal and external measurements compared for $C_b$ normalised bias.
-The is a tendency, the internal measurements (holes) are bigger than the external measurements (shafts) which can be explained by: early production run, purposely under dimensioned in production to ensure assembly, etc. 
-A test case has been measured and analyzed to verify assumption in the proposal and to provide a hands on example.
+
+
+\section{Conclusion}
+In this paper, a review of literature has shown problems in using process capability databases for design purposes. Population and accessibility are two key factor to a functional process capability database.
+
+We have proposed a statistical approach for making process capability independent of size and a approach for calculation a process capability driven tolerance. The statistical uncertainty has been estimated using Monte Carlo simulation technics and compared to known statistical approximations.
 
 In the test case we tried comparing different design characteristics.
 Failure of designing for process capabilities of the production can lead to additional cost for rework or larger failure rate of products. 
