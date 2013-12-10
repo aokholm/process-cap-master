@@ -145,7 +145,7 @@ For an example, the commonly used PCI:
 	C_{pk} = \frac{d - | \mu - m|}{3 \sigma} \nonumber
 \end{equation}
 
-where $d = (USL−LSL)/2$ is half the specification limit and $m = (USL + LSL)/2$ is the midpoint between the specification limits. This can be reversed for a known $C_{pk}$ to calculate the desired symmetric tolerance.
+where $d = (USL-LSL/2$ is half the specification limit and $m = (USL + LSL)/2$ is the midpoint between the specification limits. This can be reversed for a known $C_{pk}$ to calculate the desired symmetric tolerance.
 
 \begin{equation}
 	d = 3 C_{pk} \sigma + | \mu - m|
@@ -170,7 +170,7 @@ There are several commonly used PCIs each serving their own purpose  \citep{wu20
 	\item $C_{pmk}$: Version of $C_{pm}$,  sensitive to mean shift. 
 \end{itemize}
 
-The difference between the different CPIs can more clearly be understood by looking at figure \ref{fig:CPI}, where the relationship between closeness to target $C_a$ and the standard deviation \sigma normalized using the half specification width $d$ is shown. The line for $C_{pm}$ is below that of $C_{pk}$ except for values of $C_a$ close to 1. Using $C_{pm}$ will in general be more conservative resulting in larger specification limits than $C_{pk}$. $C_{pkm}$ combines the value loss function $C_pm$ with the relation to yield of $C_pk$. $C_pkm$ is very conservative. For higher CPI values this effect is more pronounced.
+The difference between the different CPIs can more clearly be understood by looking at figure \ref{fig:CPI}, where the relationship between closeness to target $C_a$ and the standard deviation $\sigma$ normalized using the half specification width $d$ is shown. The line for $C_{pm}$ is below that of $C_{pk}$ except for values of $C_a$ close to 1. Using $C_{pm}$ will in general be more conservative resulting in larger specification limits than $C_{pk}$. $C_{pkm}$ combines the value loss function $C_pm$ with the relation to yield of $C_{pk}$. $C_{pkm}$ is very conservative. For higher CPI values this effect is more pronounced.
 
 
 \begin{figure}
@@ -282,7 +282,9 @@ Using the Monte Carlo simulation found that the standard deviation of the IT gra
 Even at sample sizes of 10 it's still overestimated by 10 \%. 
 This effect can be seen on figure \ref{fig:confidenceIntervals}. The mean value is within 1 \% of the original value and is independent of sample size and number of measurements.  
 
-The Monte Carlo simulations were also used to estimate the confidence intervals at different cumulative probabilities using the percentile method. The percentile method interval is the interval between the $ 100 \cdot \alpha$ and $100 \cdot (1 − \alpha)$ percentiles of the Monte Carlo distribution.  To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval, as seen in figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the Wilson score at midsection of the probability curve. The confidence intervals for the Wilson score deviates at the top and bottom section, which is a property of the Wilson approximation.
+The Monte Carlo simulations were also used to estimate the confidence intervals at different cumulative probabilities using the percentile method. The percentile method interval is the interval between the
+$ 100 \cdot \alpha$ and $100 \cdot (1- \alpha)$ percentiles of the Monte Carlo distribution.
+To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval, as seen in figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the Wilson score at midsection of the probability curve. The confidence intervals for the Wilson score deviates at the top and bottom section, which is a property of the Wilson approximation.
 
 \begin{figure}
 \includegraphics{confidenceIntervals.pdf}
@@ -321,7 +323,9 @@ The $90\%$ cumulative frequency of all measurements corresponds to a $14.2 \pm 0
 
 We found a very small (or non-existent) correlation between the specified tolerance and the actual process capability driven tolerance, as seen in figure \ref{fig:ITG_ITGSpec}. Which means it makes little or no difference if you apply specified tolerance to each measurement on a part drawing. This clearly shows the need for process capability driven tolerances as a part of robust design. Given the available data, a new part produced using the same production method and materials should be given a tolerance no tighter than 14.2 IT grade. 
 
-Having a database with easy sortable production data can also be used for finding general trends, which can benefit the designer and will be valuable to the production directly. E.g. we found that holes were larger than specified compared to shafts using the mean shift normalised with the specification limit, see figure \ref{\label{fig:Cb_holeshaft}}. This is likely a deliberate choice by the mould maker, since subsequent tool wear will reduce this systematic deviation from target. Further more corrections will be cheap, since it does not require the making of a new mould part. 
+Having a database with easy sortable production data can also be used for finding general trends, which can benefit the designer and will be valuable to the production directly. 
+E.g. we found that holes were larger than specified compared to shafts using the mean shift normalised with the specification limit, see figure \ref{fig:Cb_holeshaft}. 
+This is likely a deliberate choice by the mould maker, since subsequent tool wear will reduce this systematic deviation from target. Further more corrections will be cheap, since it does not require the making of a new mould part. 
 
 \begin{figure}
 \includegraphics{ITG_ITGSpec.pdf}
