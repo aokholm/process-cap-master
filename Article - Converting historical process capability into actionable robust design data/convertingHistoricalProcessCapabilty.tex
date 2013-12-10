@@ -19,9 +19,12 @@ An approach to generate generalised process capability data in order to populate
 A description of the concept of generalisation, uses and implementation.
 \end{abstract}
 
-\title{Improving process capabaility database usage for robust design engineering by generalizing measurement data}
+\title{Improving process capabaility database usage for robust design engineering by generalising measurement data}
 \author{Andreas Bruun Okholm, s082562\\
-Mathias Rask Møller, s082536 }
+Mathias Rask Møller, s082536\\
+Thomas J Howard\\
+Martin Ebro\\
+Maria Holmberg}
 \affiliation{Technical University of Denmark}
  
 \date{\today}
@@ -30,101 +33,77 @@ Mathias Rask Møller, s082536 }
 %Introduction
 
 \section{Introduction}
-\cite{arvidsson2008principles} \cite{ebro2012foundation}
-All manufacturing processes produces parts with variation of their specified dimensions.  
-Understanding process variation and creating designs which are insensitive to the variation decreases cost of manufactured goods and increase user satisfaction. 
-This is the main goals of the robust design methodology. 
-Early research focused on characterising the variation and understanding the related quality loss \cite{taguchi1986introduction}. 
-During the 1990s many major american companies followed trend of robust design and created process capability databases (PCDB), however due the lack of practical tools for accessing process capability variation data these were largely unused for mechanical design purposes \cite{tata1999process}. 
-While further research in PCDBs followed it still seems there is challenges needed to be solved before widespread adoption in industry is possible. 
 
-In this paper we will do a literature review of PCDBs looking at both challenges and proposed solutions. 
-We propose a modified indexing scheme for PCDBs and couple it with a new measure of process capability, which is easily understood and applicable for the the mechanical design engineer. 
+All manufacturing processes produce parts with variation from the specified dimensions. Understanding process variance and creating designs which are insensitive to the variance decreases cost of manufactured goods and increase user satisfaction. 
+This is the main goal of the robust design methodology.
+Early research focused on characterising the variance and understanding its relation to quality loss \cite{taguchi1986introduction}. 
+During the 1990s many major American companies followed a trend of robust design and created process capability databases (PCDB), however due to the lack of practical tools for accessing process capability variation data these were largely unused for mechanical design purposes\cite{tata1999process}. 
+While further research in PCDBs followed, it still seems there are challenges to be solved before widespread adoption in industry is possible.
+
+In this paper, a literature review will be conducted on PCDBs looking at both challenges and proposed solutions. 
+We propose a modified indexing scheme for PCDBs and couple it with a new measure of process capability, which is easily understood and directly applicable for the mechanical design engineer. 
 This is one step to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
 
 \section{Literature review}
-There has been a significant amount of research, which shows use of process capability data (PCD) to set correct tolerances will reduce rework, cost, failure rate, assembly problems and improve product performance \citep{tata1999process}.
+Manufactured parts are designed with an allowable geometric variation. The outer limits of the allowable variation are the tolerances. The tolerances make sure the product will assemble and function as intended during use. In the early stages of new product designs tolerances are typically not taking into account. Instead the near final design will pass through a manufacturing or quality department, which will find and set the needed tolerances for the design to work as intended. This leads to very tight tolerances, which are very difficult and expensive to maintain in production. Robust design methodology focuses on creating engineering designs, which are insensitive to geometric variation reducing the need for tight tolerances. While the tolerances can generally be widened maintaining the same output performance, the goal is to find an optimum, which balances the cost of increased tolerance requirements, design complexity and the quality loss associated with design parameters being off target \citep{arvidsson2008principles}.
 
-In the 90s several papers were published on methods to predict process variation using process models \citep{thornton2000use}. 
+To estimate the optimum level of tolerances, knowing the current process capability data (PCD) is essential. “PCD is defined as the expected and obtained standard deviations and mean shifts for a feature produced by a particular process and made of a particular material”  \citep{tata1999process}.
+
+There has been a significant amount of research, which shows use of process capability data to set correct tolerances will reduce rework, cost, failure rate, assembly problems and improve product performance  \citep{tata1999process}.
+This will create a shift in design methodology, from ‘Design of Tolerances’, to ‘Design to Process Capabilities’ (DtPC). 
+
+\subsection{Generating Process Capability Data}
+In the 1990s, several papers were published on methods to predict process variation using process models  \citep{thornton2000use}. 
+
+However creating process models can be very complicated and impractical for many manufacturing processes. Another option for acquiring PCD is to measure the actual process performance and store it in a database. In a typical manufacturing process multiple parts are measured during a first article inspection (FAI) and subsequently during routine process checks. 
+
+From the measurement reports the mean shift $|\mu - m|$ and standard deviation $\sigma$ of the measurement set is calculated. 
+Where $\mu$ is the process mean and $m$ the target dimension. This data is stored in the database along with the nominal size from a technical drawing and an index, which makes it possible to find the given data based on a combination of the feature, the features geometry, process and material attributes. 
+
+\cite{thornton2004variation} combines the feature and its geometry/dimension into one index e.g. a hole and its depth or a chamfer and its angle. 
+
 However creating process models can be very complicated and unpractical for many manufacturing process. 
 Another option for acquiring process capability data is to measure the actual process performance and store it in a database. \cite{perzyk1998selection} describes such a database for storing general mechanical process capability data for the use of selecting optimal manufacturing methods.
 
-Variance of a components dimension is usually the result of multiple processes. 
- \cite{kern2003forecasting} has developed a framework for a general process capability database that utilise a model of input and output variation of each (sub) manufacturing process. 
+\cite{kern2003forecasting}  proposed index scheme differs slightly, feature types are more abstract such as a front face or inner diameter. The geometry attribute is more generalized and loosely based on geometric product specification (GPS) e.g. the position or concentricity. This allows the engineer to easily search for a geometry attribute such as concentricity across many different feature types.
 
-\subsection{Using Process Capability Data}
-\cite{kern2003forecasting} identifies the following fields of study, where PCD is necessary for proper analysis: Design for Quality including Design for Six Sigma (DFSS), Quality Function Deployment (QFD), robust design, manufacturing variation modelling \& propagation, selective Assembly and tolerance allocation. 
-Additionally Response Surface Methodology (RSM) and Statistical Process Control (SPC) does gather process data, which could be used in a PCD. 
-The PCD is also necessary for the sub contractor to make qualified offers.
+In order to do more advanced analysis, more data is often included in the PCDB including stock (the material stock type before processing), lower specification limit (LSL), upper specification limit (USL), machine, operator number, batch size and part volume.
 
+The issue with these indexing schemes is that they are not very obvious and it is even ambiguous how to index a measurement set. To solve this problem \cite{kern2003forecasting} developed an assistance tool to aid the designer to select the correct index attributes. It seems the indexing schemes have become too complicated and abstract to be used efficiently. The issue of selecting the correct attributes arises every time a new design has to be evaluated in order to find the correct PCD. There is a tendency in robust design methodology towards applying robust design methods in the very early stages of product development \cite{ebro2012foundation}. If tolerance considerations should be included at this early stage the speed and ease of use of the PCDB is very important. 
 
-\subsection{Cost of manufacturing}
-Including cost into the process capability database will make will make it possible to easily include the production price for the within design decisions \citep{perzyk1998selection, thornton2000use}. 
-A general model for estimating the relationship between tolerance and price based on 5 different sources has been developed by \cite{sfantsikopoulos1990cost}.
-It can be concluded that the relationship follows a simple general formula, but the parameter to relate tolerance to price for the specific manufacturing method needs to be estimated for every process. 
+\begin{figure}
+\includegraphics[width=0.45\textwidth]{bias_std.pdf}
+\caption{\label{fig:bias_std} Graphical display of process capability data as proposed by\cite{thornton2000use}}
+\end{figure}
 
-\subsection{Process capability databases in industry}
-\cite{tata1999effective, tata1999process} found that major US companies within automotive, aerospace, military and consumer had created Process Capability Databases (PCDB) and were successfully using them for manufacturing control, but were unable to successfully utilise the PCDB for design. 
-What hindered mechanical design from using PCD? 
+\subsection{Displaying Process Capability Data}
+One way to make PCD more efficient to use is through clever graphical displays, which provides quick overview of important characteristics. \cite{thornton2000use} describes the development of a graphical view to show PCD. A x-y plot of mean shifts and standard deviation is showed for the selected measurement sets, see figure \ref{fig:bias_std}. 
 
-\subsubsection{Key Challenges}
-\textbf{Fragmented Organisation.}  A PCDB is a cross department project  usually involving manufacturing, quality control and mechanical design within the company. 
-Creating a project which meets the interests of all department is challenging. 
-Managers does not fully understand the need for a PCDB and the resources required to collect and analyse the information. 
-Lack of company wide visions for the PCDB results in locally developed and maintained within a particular manufacturing location or departments. 
-The use of PCD in design projects is not directly encouraged and rewarded. 
+Confidence intervals of both mean shift and standard deviation is shown for each measurement set to visualise the statistical significance. Guides shows which measurement sets could maintain a tolerance of e.g. $\pm 0.1 mm$. The view is great for the process engineer, showing overall process capability and indicating areas where easy gains in process capability is possible by adjusting the mean shift. 
 
-\textbf{Data Comunication.} Creating efficient indexing systems that allows for unambiguous process, feature geometry, material and stock selection. 
-The databases are typically not easily searchable which makes it very difficult to find the correct data and in many cases the data sought after does not exists. 
-The data is not presented in a way which is easily understandable by mechanical designers.
-
-\textbf{Information Technology.} Creating a database thats globally accessible and accept inputs from multiple different clients and interface with existing systems is complex.
-Developing the indexing systems and user interface for multiple different uses cases is also resource demanding task.  
-
-\subsubsection{Proposed Solutions}
-In the book "Variation Risk Management" \cite{thornton2004variation} presents a variety variation management strategies to be used in a company. 
-Key Characteristics (KC) can be a product, system, assembly, part or process characteristics for which the cost of variation is high and the variation is high. 
-KC's should have most focus for optimal use of resources. 
-
-It is individual for different companies what data should be stored in a PCDB, but a general list consist of material, stock, process, feature dimension, lower limit, upper limit, machine, operator number, batch size, mean, standard deviation for each record. 
-Each record is a summation of multiple measurements made of a batch of parts \citep{thornton2004variation}.
-
-Using graph theory a graphical display for manufacturing capability is developed, which provides quick overview \citep{thornton2000use}. 
-One of the key views shows bias of a set of measurements along the horizontal axis and the standard deviation of the measurement set along the vertical axis. 
-Confidence intervals in both bias and std. are shown for each measurement to visualise the statistical significance. 
-A systems for automatically detecting and visualising trends in the data is also described.
-
-\cite{kern2003forecasting} recognised that the success of the system relies on consistent and correct data input. 
-A method to index design characteristics is developed to consistently assign correct key features on parts. 
-Being one of the most elaborate works on PCDB the target seems to highly specialised productions companies. 
-
-
-\subsection{Public Process Capability Data}
-From our own search we haven't been able to find any public available process capability database. 
-We have searched using Google, Google scholar and DTU library, using the search words: "process capability database", "Example process capability", "open process database", "Process variance database", "variance prediction database", "process variance table" without success. 
-
-There exists some very general guide tables relating tolerance grade (IT-scale) and machining operation \citep{united1967preferred, american1978preferred}. 
-It is however unclear how the data for the table has been generated.
-
-In \cite[p. 715]{oberg2008machinery} there is given a figure showing the surface roughness from common production methods. From 50 Ra to 0.012. 
-Again no source of the information is given. \\[1cm]
-
+However for the designer the plot is tedious to interpret, he is concerned with the actual tolerances possible for the given design and not the mean shifts and standard deviations.
 
 % New Section 
-\section{Improving Process capability database}
-We will now precent a concept of data indexing, processing and presentation which tries to make it faster and easier for the mechanical designer to efficiently use process capability data in new designs. 
-The general principle is to provide an interface where the data is presented in a much more generalised than typically done in PCDB interfaces. 
-The core indexing scheme is simplified, but details are retained or improved using a flexible tagging system. 
-Instead of presenting the designer with statistical information, recommended specifications limits based on actual process capability is shown directly. 
-The specification limits is normalised in regard to the specified dimension making more use out of each dataset, minimising the risk of process capability requests not returning any results. 
-Combined with advances in information technology we hope this will help make PCDBs a viable tool in the mechanical design process.
+\section{Improving Process Capability Database}
+We will now present a concept of data indexing, processing and presentation, which tries to make it faster and easier for the designer to efficiently use PCD in new designs. The general principle is to provide an interface where the data is presented more generalised than typically done in PCDB interfaces. The indexing scheme is simplified, and made more flexible by using a tagging system. 
 
-To test the system we have setup our own test database and populated it with measurement data. 
-The process capability data were created for this project and involved the measurement of 75 different samples from 4 different parts using a variety of different measurement techniques. 
-The example data is further explained in section \ref{sec:result}.
-
+Instead of presenting the designer with statistical information, the recommended tolerances based on actual process capability are shown directly. The tolerances are normalised in regard to the specified dimension making more use of each dataset, minimising the risk of process capability requests not returning any results. Combined with advances in information technology we hope this will help make PCDBs viable in the early phases of product development as a robust design tool. Such a tool could also be basis for a PCDB driven tolerance estimation plugin for CAD software.
+To test the system we have setup our own test database and populated it with measurement data. The PCD were created for this project and involved the measurement of 75 different samples from 4 different parts using a variety of different measurement techniques. The example data are further explained in section \ref{sec:result}.
 
 \subsection{Indexing}
+
+PCDBs need to be indexed to efficiently retrieve PCD of relevance to the current design. We propose to use material, process and geometry as the primary attributes. The material and process is defined as in previous work, e.g. the material could be ABS plastic and the process injection moulding. 
+
+The geometry is the tolerance type, which is specified on the technical drawing. This includes the GPS tolerance options (e.g. concentricity or position) or just simple tolerances (e.g. distance, diameter). The direct relationship between the information on the drawings and the index attributes makes the selection of the correct geometry unambiguous. Another benefit of using the standard tolerance options is that the designers are already familiar terminology. 
+This is combined with a tagging system, where additional tags can be inputted. Measurement sets affected by additional properties such as high length to width ratios or special surface treatment could be optionally tagged. Tags are not stored in the same manner in the database table as primary index and regular attributes, but in a separate table, which allows none or multiple tags to point to the same measurement set. This difference becomes apparent in the user interface where tags help the user to easily input additional information about the measurement set. The tagging system allows indexing design attributes that are specific to a single production method or material. E.g. for injection moulding it is possible to index the following design attributes:
+
+\begin{itemize}
+\item Material type of the mould: aluminium, steel, hardened, etc.
+\item Mould/Process iterations (T0, T1, T2...) could give valuable insights of which specification limits require mould rework or process adjustment.
+\item Tagging dimensions measured across parting lines could potentially show a general increase in desired specification limits. 
+\end{itemize}
+
+A complete database record of a measurement set can be seen in table 1 showing all of the input data of the measurement set.
 
 \begingroup
 \squeezetable
@@ -133,13 +112,13 @@ The example data is further explained in section \ref{sec:result}.
 \begin{ruledtabular}
 \caption{\label{tab:sampleset} Measurement set - As stored in the PCDB}
 \begin{tabular}{lllllllll}
-\textbf{Material*} 		& \textbf{Process*} 		& \textbf{Meas. Equipment}  	& \textbf{Target*} 	& \textbf{LSL} 	& \textbf{USL} 	& \textbf{Mean Shift*} 	& \textbf{Std.}   $\hat{\sigma}$ * & 	\\
-Thermoplastic 			& Moulding			& CT Scanning				& 3.00			& 2.99		& 3.01		& -0.0486			& 0.0032				\\
- - ABS, PC blend		& - Injection Mould.		& Zeiss metrotom 800	\\
+\textbf{Material} 		& \textbf{Process} 		& \textbf{Geometry}  		& \textbf{Target}  	& \textbf{USL} 		& \textbf{Mean Shift} & \textbf{Std.}   ${\sigma}$  \\
+Thermoplastic 			& Moulding			& Diameter 			& 3.00			& 3.01			& -0.0486			& 0.0032				  \\
+ - ABS, PC blend		& - Injection Mould.			\\
 \\
-\textbf{General Tag (1)} 	& \textbf{General Tag (2)} & \textbf{General Tag (3)} 	& \textbf{Geometry}		& \textbf{Measurement Date} 	& \textbf{N samples} 	\\
-Mould Type			& Product color			& Production run			& Diameter				& 13 oct. 2013  			& 12\\
-- Steel 				& - Red				& - PR3				\\
+\textbf{General Tag (1)} 	& \textbf{General Tag (2)} & \textbf{General Tag (3)}  & \textbf{Meas. Equipment}  	& \textbf{LSL} & \textbf{Measurement Date} 	& \textbf{N samples} \\
+Mould Type			& inside				& Production run		 & CT Scanning			& 2.99		& 13 oct. 2013  			& 12\\
+- Steel 				& 					& - PR3				 & Zeiss metrotom 800\\
 - - NAK80 
 \end{tabular}%
 \end{ruledtabular}
@@ -147,65 +126,42 @@ Mould Type			& Product color			& Production run			& Diameter				& 13 oct. 2013  
 \endgroup
 
 
-PCDBs needs to be indexed to efficiently retrieve data of relevance to the current design. 
-The data stored in a PCDB is typically measurement sets; the statistical result of a number of measurements from a given part dimension combined with the design characteristics (DC). 
-Feature, geometry, material and process is suggested by \cite{kern2003forecasting} to be the primary DCs. 
-For each primary DC there exists a tree structure of possibilities. An example of an index using Kerns proposed design index could be "Plane", "Position", "Aluminium", "Turning" as feature, geometry, material and process respectively. 
-
-We propose to use \emph{material} and \emph{process} as the only required DCs. 
-\emph{Geometry} information: distance, radius, diameter or positions is readily available from the measurement tool and should be stored as well, but not necessarily used when querying the database.
-This is combined with a \emph{tagging system}, where additional tags can be inputted. 
-Common tags can be selected from tree structure. 
-Tags gives flexibility since more than one tag can be applied to one measurement set and it is possible to index for DCs that are specific to a single production method or material. 
-
-Example: For injection moulding it would be interesting to index the following DCs:
-\begin{itemize}
-\item Material type of the mould: aluminium, steel, hardened, etc.
-\item Mould/Process iterations (T0, T1, T2, ...) could also give valuable insights of which specification limits requires mould rework or process adjustment. 
-\item Tagging dimensions measured a crosses parting lines could potentially showing a general increase in desired specification limits.
-\end{itemize}
-It would not be possible to index these DCs, which are specific for the process without having optional tags. 
-A complete database record of a sample set can be seen in table \ref{tab:sampleset} showing all data connected to the sampleset. 
-
-\emph{No feature index:}
-In casting and injection moulding, two of the most used processes for mass produced part, feature is not necessarily an important DC. 
-The individual features are manufactured by the same computer-aided manufacturing (CAM) milling machine with the same process parameters. 
-For features with special properties such as high length to width ratios could be optionally tagged. 
-In a fully integrated robust design process interaction between components are reduced to as small and simple surfaces as possible further reducing the need for a features index.
-
 \subsection{Processing Capability Data}
 
-Processing the capability data consists of three steps: 
+Processing the capability data consists of three steps, detailed in the following sub sections:
 
 \begin{enumerate}
-	\item Compute the process capability specification limit (PCSL) - the required specification limits (tolerance) to achieve a desired performance using the given process capability.
-	\item Normalise the PCSLs so it is independent of dimension.
-	\item Fit operating curves to the PCSL data grouped by different design characteristics.
+	\item Compute the process capability specification limit (PCSL). 
+	\item Normalise the PCSLs so it is independent of dimension. 
+	\item Fit operating curves to the PCSL data grouped by different design attributes. 
 \end{enumerate}
 
 \subsubsection{Process Capability Specification Limit}
-The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} has been widely adopted in statistical process control, been extended and further researched for better understanding \citep{wu2009overview}. 
-Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using process capabilities indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
+The process capability indices ($C_p$ and $C_{pk}$) described by \cite{kane1986process} and further developed \citep{wu2009overview}  ], have been widely adopted in statistical process control. Instead of looking at process mean $\mu$, standard deviation $\sigma$ and specification upper and lower limits $USL$, $LSL$ using process capability indices (PCIs) transforms these values into unit less numbers, which provides a quick overview of how a process is performing.
 
-The PCIs ability to transform process variables of any object into unit less capability index can be reversed to calculate desirable specification limits. For en example the commonly used PCI $C_{pk}$ 
+For an example, the commonly used PCI:
+
 \begin{equation}
 	C_{pk} = \frac{d - | \mu - m|}{3 \sigma} \nonumber
 \end{equation}
-can be reversed
+
+where $d = (USL−LSL)/2$ is half the specification limit and $m = (USL + LSL)/2$ is the midpoint between the specification limits. This can be reversed for a known $C_{pk}$ to calculate the desired symmetric tolerance.
+
 \begin{equation}
 	d = 3 C_{pk} \sigma + | \mu - m|
 \end{equation}
-Where $d = (USL - LSL) / 2$ is half the specification limit and $m = (USL + LSL) / 2$ is the midpoint between the specification limits. When $d$ is reversely used to estimated the required tolerance to achieve the desired process capability index value we call this the process capability specification limit (PCSL). 
 
-Using the data from table \ref{tab:sampleset} and a $C_{pk} = 1.66$. The PCSL is computed: 
+To highlight the difference between $d$ used to calculate PCIs, and $d$ used as an estimator for symmetric tolerances based on PCD we have named the variable process capability specification limit ($PCSL$). Using the data from table \ref{tab:sampleset} and a $C_{pk} = 1,66$. The PCSL is computed:
+
 \begin{align*}
 PCSL &= 3 \cdot 1.66 \cdot 0.0032 \, \mathrm{mm}
 + |0.0486  \, \mathrm{mm}| \\
 &= 0.0645  \, \mathrm{mm}
 \end{align*}
 
+The recommended tolerance for the measurement in table  \ref{tab:sampleset}  is $3 \ mm \pm 0,0645 \ mm$. 
 
-There are several commonly used PCIs each serving their purpose \citep{wu2009overview, taguchi1986introduction}
+There are several commonly used PCIs each serving their own purpose  \citep{wu2009overview, taguchi1986introduction};
 \begin{itemize}
 	\item $C_a$ : Closeness of process mean to target 
 	\item $C_p$ : Process precision 
@@ -214,23 +170,26 @@ There are several commonly used PCIs each serving their purpose \citep{wu2009ove
 	\item $C_{pmk}$: Version of $C_{pm}$,  sensitive to mean shift. 
 \end{itemize}
 
-Visualising the $CPIs = 1$  shows how a process on target $C_a = 1$ allows the same variation for all PCIs see figure \ref{fig:CPI}. 
-The line for $C_{pm}$ is in below that of $C_{pk}$ except for values of $C_a$ close to 1. 
-Using $C_{pm}$ will in general be more conservative resulting in larger specification limits than $C_{pk}$. The plot shown is for a capability equal to one for higher values this effect is even more pronounced.
+The difference between the different CPIs can more clearly be understood by looking at figure \ref{fig:CPI}, where the relationship between closeness to target $C_a$ and the standard deviation \sigma normalized using the half specification width $d$ is shown. The line for $C_{pm}$ is below that of $C_{pk}$ except for values of $C_a$ close to 1. Using $C_{pm}$ will in general be more conservative resulting in larger specification limits than $C_{pk}$. $C_{pkm}$ combines the value loss function $C_pm$ with the relation to yield of $C_pk$. $C_pkm$ is very conservative. For higher CPI values this effect is more pronounced.
+
 
 \begin{figure}
-\includegraphics[width=0.45\textwidth]{graph_postscript_test.eps}
-\caption{\label{fig:CPI} Nomalised standard deviation as a function of $C_a$ \emph{closeness of process mean to target}. $C_p$ referens only to the variance of the process. 
-$C_{pk}$ is related to the yield of the product. $C_{pm}$ takes a loss function in to account relates to a target dimension. 
-$C_{pmk}$ takes both the yield of the product and a loss function. }
+\includegraphics[width=0.45\textwidth]{cpm_cpk.pdf}
+\caption{\label{fig:CPI} Comparison of the different process capability indices.  }
 \end{figure}
 
-For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most easily understandable result - directly related to the yield of the process. The yield of a process is within
+For the purpose of our database we have chosen to use $C_{pk}$, since it provides the most understandable result directly related to the yield of the process. The yield of a process is within
 \begin{equation}
 	2\Phi(3C_{pk})-1 \leq \text{yield} < \Phi(3C_{pk}) \nonumber
 \end{equation}
 
-where $\Phi(\cdot)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. 
+where $\Phi(x)$ is the cumulative distribution function of the standard normal distribution N(0,1) \citep{boyles1991taguchi}. 
+
+The optimal process capability index value depends on the application, however there exists a quality control practice called six sigma ($6\sigma$).  This advocates a target of $C_{pk} = 2$ (equivalent to $6\sigma$) for short term process capability, which has been shown to generally improve manufacturing quality and profits \cite{koch2004design}.
+
+It is assumed that the process drifts over time up to $1,5 \ \sigma$ (effectively resulting in a sigma level of $4,5$), which still results in an acceptable $3,4$ ppm defects. For the $PCSL$ to reflect six sigma production capability, the $C_{pk}$ input for each measurement set should be varied from $2,0$ to $1,5$ $C_{pk}$ depending on whether the measurement set reflects the short or long term capability. For simplicity we propose to use a general value of $C_{pk} = 1,66$ to account for a mixture of long term and short term measurements. 
+
+
 For typical capability levels the resulting non-conforming products in parts per million (ppm) is listed in table \ref{tab:cpl_nc}
 
 \begin{table}
@@ -247,128 +206,87 @@ For typical capability levels the resulting non-conforming products in parts per
 \end{ruledtabular}
 \end{table}
 
-The optimal process capability index value depends on the application, however there exists a practice in quality control called six sigma $(6 \sigma)$, which advocates the use of six sigma ($C_{pk} = 2$) for short term process capability will generally improve manufacturing quality and profits \cite{koch2004design}. 
-
-It's assumed that the process drifts over time up to $1.5 \sigma$  (effectively resulting in a sigma level of 4.5), which still results in an acceptable 3.4 ppm defects.
-For the PCSL to reflect six sigma production capability the $C_{pk}$ input with each measurement set should be varied from 2.0 to 1.5 $C_{pk}$ depending wether the measurement set reflects the short or long term capability. 
-For simplicity we propose to use a value general value of $C_{pk} = 1.66$ to account for a  mixture of long term and short term measurements. 
-
-We have focused on $C_{pk}$ through most of this section.
-In situations where the desired tolerances directly influence product performance, for instance in lens optics construction, using the more abstract $C_{pm}$ might make more sense. 
-
-
 \subsubsection{Normalization}
-The calculated Process Capability Specification Limits (PCSL) are normalised so it can be used to predict PCSLs for any dimension within the limit of the normalisation algorithm. 
-This reduces the required amount of data in the database before it's useful for mechanical design since it is possible to use PC information from components of different sizes.
+The PCSLs are normalised in regard to dimension. This means that we only need a few measurements at different dimensions before a designer can use this to calculate the tightest achievable tolerance for any nominal dimension (for the same production process and material). There exist industrial standards used for manufacturing which describe the normal relationship between linear dimensions and tolerances. The authors have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. The ANSI and the ISO standards use the same formula and are quite close to the German DIN standard. These standards display a non-linear relationship between tolerance and dimension. For the same level of precision, the tolerances of large dimensions are relatively smaller than for small dimensions (see figure  \ref{fig:tolstd}).
+The plotted lines are: \citeauthor{DIN16901} (POM 120),  \citeauthor{NFT58000} (normal),  \citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium).
 
-There exists industrial standards used for manufacturing which describe the "normal" relationships between linear dimensions and tolerances. 
-We have analysed the most commonly used standards for general tolerances: American \citeauthor{american1978preferred}, European \citeauthor{ISO286} and the German \citeauthor{DIN7168}. 
-The ANSI and the ISO standards uses the same formula and are quite close to the german DIN standard. 
-These standards display a non-linear relationship between tolerance and dimension. 
-For the same level for precision, the tolerances of large dimensions are smaller relatively than for small dimensions. See figure \ref{fig:tolstd}.
 
-The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. 
-These standards present an almost linear relationship between tolerance and dimension. 
-This might be due that a major contributing error in moulded parts is a result of creep, since creep errors in general has a linear relationship between overall dimension and error.
+The German \citeauthor{DIN16901} and the French \citeauthor{NFT58000} are standards specifically for moulded plastic parts. These standards present an almost linear relationship between tolerance and dimension for dimensions above $10 \ mm$. This might be due to creep which is a major contributor to production error in moulded parts. 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{Tolerance_standards.pdf}
-\caption{\label{fig:tolstd} \citeauthor{DIN16901} (POM 120) and \citeauthor{NFT58000} (normal) are standards that relate dimension and tolerance specifically for moulded plastic components. They are almost linear for sizes above 10 mm. 
-\citeauthor{american1978preferred} (gr. 13) and \citeauthor{DIN7168} (medium) describes a general relationship between linear tolerances and dimension. All standards included several levels of precission.}
+\includegraphics{Tolerance_standards.pdf}
+\caption{\label{fig:tolstd}Standards for relation of dimension and tolerance.}
 \end{figure}
 
-These standards are all described using a tables showing the tolerances for a given dimension intervals and precision. 
-In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for IT-grades (precision levels) between IT6 to IT16 for dimensions from 2 mm to 500 mm. 
-This function is for unknown reasons not included in newer versions of ISO 286 yet table values seems still estimated using this function.
+These standards are all described in technical reports using tables to show the tolerance for a given dimension interval and precision. In a note for \citeauthor{american1978preferred} and later mentioned in \citeauthor{ISO286} a continuous function is described for international tolerance (IT) grades (precision levels) between IT6 and IT16 for dimensions from $2 \ mm$ to $500 \ mm$. This function is for unknown reasons not included in newer versions of \citeauthor{ISO286} yet table values still seem estimated using this function. The relationship is as follows
 
 \begin{align}
-	T =& 10^{0.2 (ITG -1)} \cdot i \\
-	i =& 0.45 \sqrt[3]{D} + 10^{-3} \, D 
+	d=& \frac{10^{0.2 (ITG -1)} \cdot i}{2} \\
+	i =& 0.45 \sqrt[3]{T} + 10^{-3} \, T 
 \end{align}
 
-Where $i$ is standard tolerance factor, $D$ is the nominal mean dimension $D = \sqrt{D_{\textrm{min}} D_\textrm{max}}$ in $[mm]$ and $T $ is the tolerance width in $[\mu m]$ , which is equal to $2d$. 
-
-In the generalised PCDB the measurement sets PCSL are normalised using said function because ISO 286 is general practice in the industry. 
-Further work on improving the normalisation of tolerences or simply choosing the best tolerence specification requires more data then we have been able to produce with measurement of the Vaavud Wind meter. Normalization actual data for the different processes.
-
-The IT-grade for the measurement set presented in table \ref{tab:sampleset} can be computed.
+where $i$ is the standard tolerance factor, $T$ is the target dimension in $[mm]$ and d half specification width in $[\mu m]$. We use said function to normalize the PCSL because the \citeauthor{ISO286}  is widely used in the industry. Further work on improving the normalisation of tolerances or simply choosing the best tolerance specification standard requires more data than we have been able to generate in our test case described in section \ref{sec:result}. The IT grade (ITG) for the measurement set presented in table \ref{tab:sampleset} can be computed
 
 \begin{align*}
-&\mathrm{ITG} = 5 \cdot \log_{10} \left\{ \frac{T \cdot 10^3}{ 0.45  D^{\frac{1}{3}} + D \cdot10^{-3} }\right\} +1 \\
-&\mathrm{ITG_{spec} }= 13.4 \\
-&\mathrm{ITG_{actual}} = 12.5
+&\mathrm{ITG} = 5 \cdot \log_{10} \left\{ \frac{2d \cdot 10^3}{ 0.45  T^{\frac{1}{3}} + T \cdot10^{-3} }\right\} +1 \mathrm{IT grade}\\
+&\mathrm{ITG_{specified} } = 13.4 \mathrm{IT grade}\\
+&\mathrm{ITG_{actual}}  = 12.5 \mathrm{IT grade}
 \end{align*}
 
-The $\mathrm{ITG_{actual}}$ is based on the measurements  and is calculated using $T = 2 \, PCSL$ and the $\mathrm{ITG_{spec}}$ is specified by the design and is calculated using $T = 2 \,USL$ for symmetric tolerances. 
-
-
-
-
+$\mathrm{ITG_{actual}}$ is based on the process capability by replacing $d$ with $PCSL$, the process capability driven symmetric tolerance. $\mathrm{ITG_{specified}}$ is the IT grade specified in the design. A lower actual IT grade than the specified IT grade means that the process is performing within the tolerance limits.
 
 \subsubsection{Analyze normalized data}
-A further analysis of the underlying measurements sets is done to present the user with a easier to use data view. 
-Relevant measurements sets are aggregated based on design characteristics selected by the user. 
-
-To help the user determine which tolerance to use, a accumulated frequency plot of the process capability defined IT grade is proposed. 
-This gives an overview of the current process capability of the selected data. The plot shows the probability, if production capability were randomly selected, to produced the selected part at the specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}. 
-To even out random effects in the measurements sets a normal distribution fitted and wilson score confidence intervals is added based on number of measurements sets to show statistical certainty.  
-The IT grades distribution is assumed to be normal distributed due the central limit theorem, which from our sample data seems to be correct, see figure \ref{fig:normplot}.
-
-Based on the experience gained from our test data the 90 \% cumulative probability gives the standard tolerance grade, which should be used for designing new parts. 
-The reason for choosing 90 \% cumulative frequency and not 100 \% is due a large degree of exceptions in the upper 10 \% of the measurements sets.
-These exceptions include dimensions of: long and slender objects, unnecessary tight tolerances in non-critical areas and dimensions where the specifications has been come desynchronised from manufacturing targets.
-
-As a designer it's often temping use a IT-grade at a lower cumulative probability, however statistically this will result in errors. Instead the designer should try to specify the given design characteristics more precisely for the given task hoping these will result in a tighter permissible tolerances.
-
-If a tolerance associated with a low probability of occurrence is chosen generally this will impact the price of production since it either: 
-Increases risks of rework to hit the target $C_{pk}$ or requires more precise machines than what is used for the measured components.
+A further analysis of the underlying measurement sets is done to present the user with an easier to use data view. Relevant measurement sets are aggregated based on design attributes selected by the user.
+To help the user determine which tolerance to use, an accumulated frequency plot of the process capability IT grade distribution is proposed. This gives an overview of the current process capability for the selected design attributes. The plot shows the probability to produce the selected part at the specified $C_{pk}$ and tolerance, see figure \ref{fig:acumfreq}.
 
 \begin{figure}
 \includegraphics{ITG_total.pdf}
-\caption{\label{fig:acumfreq} Accumulated frequency of IT grade distribution, $C_{pk} =1.66$. 
-Actual data from test case described in Section \ref{sec:result}. }
+\caption{\label{fig:acumfreq} Accumulated frequency of IT grade distribution with Wilson score confidence intervals.  }
 \end{figure}
+
+To even out random effects in the measurements sets, a normal distribution fitted and Wilson score confidence intervals are added based on the number of measurements sets, to show statistical certainty. The IT grades distribution is assumed to be normally distributed due the central limit theorem, which from our sample data seems to be correct, see figure \ref{fig:normplot}. Based on the experience gained from our test data the 90\% cumulative probability should be the standard tolerance grade used for designing new parts. 
+
+The reason for choosing 90\% cumulative frequency and not 100\% is due to a large degree of exceptions in the upper 10\% of the measurements sets. These exceptions include dimensions of: long and slender objects, unnecessary tight tolerances in non-critical areas and dimensions where specifications have become desynchronised from manufacturing targets.
+
+As a designer it is often temping to use an IT grade at a lower cumulative probability, however statistically this will result in errors. Instead the designer should try to specify the given design characteristics more precisely for the given task, hoping these will result in a tighter permissible tolerances.
+
+If a tolerance associated with a low probability of occurrence is chosen generally this will impact the price of production since it either: Increases risks of rework to hit the target $C_pk$ or requires more precise machines than what is used for the measured components.
 
 \begin{figure}
 \includegraphics{Normal_plot.pdf}
-\caption{\label{fig:normplot} Normality investigation of IT-grades of measurement data from multiple components, molds of the Vaavud Windmeter test data described in section \ref{sec:result}}
+\caption{\label{fig:normplot} Normality investigation of IT grade of measurement data.}
 \end{figure}
 
-
-
-
-
 \subsection{Statistical Validity}
-The user needs to trust the information provided by the PCDB. 
-The uncertainty of the resulting distribution of IT grades is influenced by several factors.
+The user needs to trust the information provided by the PCDB. The uncertainty of the resulting distribution of IT grades is influenced by several factors.
+
 \begin{itemize}
 \item More samples in each measurement set will increase certainty. 
-\item More measurements sets increases the certainty. 
-\item Lower standard deviation of the IT grade distribution will increase the certainty.
-\item Higher mean deviations from target $C_a$ will slightly increase the certainty especially at low sample sizes.
+\item More measurements sets increase certainty. 
+\item Lower standard deviation of the IT grade distribution will increase certainty.
+\item Higher mean deviations from target Ca will slightly increase certainty especially at low sample sizes. 
 \end{itemize}
 Sample size and number of measurement sets are the only two possible actionable variables. 
 
 \subsubsection{Monte Carlo simulation}
-To model the uncertainty and accuracy of the IT-grade distribution we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. 
-We assume that the IT-grade (ITG) from each measurement set is continuous random variate with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$
+To model the uncertainty and accuracy of the IT grade distribution, we have chosen to use Monte Carlo simulation, since it would be very difficult to accurately model analytically. We assume that the IT grade from each measurement set is a continuous random variable with mean $\mu_{\mathrm{ITG}}$ and standard deviation $\sigma_{\mathrm{ITG}}$ giving $\mathrm{ITG} \sim \mathcal{N} (\mu_{\mathrm{ITG}}, \sigma_{\mathrm{ITG}}^2)$.
 
-The randomly generated ITG is converted into a normal distribution of individual measurements X using a fixed target dimension of $m = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.6$. 
+The randomly generated ITG is converted into a normal distribution of individual measurements X using a fixed target dimension of $T = 100 \mathrm{\ [mm]}$ and closeness to target $C_a = 0.6$. 
 The standard deviation $\sigma_{X}$ and mean shift $| \mu - m|$ can be calculated yielding the distribution parameters $\mathrm{X} \sim \mathcal{N} (| \mu - m|, {\mu_{\mathrm{X}}}^2)$. 
 
-Each measurement is generated from the measurement set distribution.
-When all measurements has been generated the process is reversed and the distribution parameters of ITG is estimated.
-The simulation is run $N$ times.
+Each measurement is generated from the measurement set distribution. When all measurements have been generated the process is reversed and the distribution parameters of the ITG are estimated. The simulation is run $N$ times. 
+
+The Monte Carlo simulation predicts that the standard deviation of the IT grade distribution is overestimated especially at lower sample sizes due the increased uncertainty of these. Even at sample sizes of 10 it is still overestimated by 10\%. This effect can also be seen on figure \ref{fig:confidenceIntervals}, the results of a simulation run with the following parameters: $\mathrm{ITG} ~ N (10, 1)$, sample sizes = 10, number of sample sets = 20, $N$ = 10 000.  
 
 Using the Monte Carlo simulation found that the standard deviation of the IT grade distribution is overestimated especially at lower sample sizes dues the increased uncertainty of these. 
 Even at sample sizes of 10 it's still overestimated by 10 \%. 
 This effect can be seen on figure \ref{fig:confidenceIntervals}. The mean value is within 1 \% of the original value and is independent of sample size and number of measurements.  
 
+The Monte Carlo simulations were also used to estimate the confidence intervals at different cumulative probabilities using the percentile method. The percentile method interval is the interval between the $ 100 \cdot \alpha$ and $100 \cdot (1 − \alpha)$ percentiles of the Monte Carlo distribution.  To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval, as seen in figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the Wilson score at midsection of the probability curve. The confidence intervals for the Wilson score deviates at the top and bottom section, which is a property of the Wilson approximation.
+
 \begin{figure}
 \includegraphics{confidenceIntervals.pdf}
-\caption{\label{fig:confidenceIntervals}Cummulated frequency plot showing the input distribution of IT-grade $\mathrm{ITG} \sim \mathcal{N} (10, 1)$. 
-The Monte Carlo simulation were run $N = 10,000$ times. 
-The 95\% confidence intervals estimated by the Monte Carlo is simliar to the Wilson score in the center in the part of the probability distribution.}
+\caption{\label{fig:confidenceIntervals} Monte Carlo cumulated frequency plot.}
 \end{figure}
 
 The Monte Carlo simulation were also used to estimated the confidence intervals at different cumulative probabilities using the percentile method.
@@ -377,10 +295,7 @@ The percentile method interval is the interval between the $100 \cdot \alpha$ an
 To verify the simulation we compared the confidence intervals to a simple approximation of the interval based on the Wilson score interval for the same input at the Monte Carlo, as can be seen in Figure \ref{fig:confidenceIntervals}. The Monte Carlo interval width is very close to the wilson score at midsection of probability curve. 
 The confidence intervals for the Wilson score deviates at the top and bottom section which is a property of the wilson approximation.
 
-The effects of sample size and number of measurements sets is displayed in Figure \ref{CLW90_lines.pdf} which shows the confidence interval width at a cumulative probability of 90 \% as a function of sample size and number of measurement sets. 
-Increasing sample size only have an effect up to about 12 samples, additional sample measurements does not increase accuracy. 
-The amount of measurements sets is the main factor for reducing the confidence intervals. 
-If the purpose is too differentiate between design characteristics then the number of measurements sets is going to limit how small the differences between design characteristics can be resolved with statistical certainty.
+The effects of sample size and number of measurement sets is displayed in Figure \ref{CLW90_lines.pdf}, which shows the symmetric confidence interval at a cumulative probability of $90\%$ as a function of sample size and number of measurement sets. Increasing the sample size only have an effect up to about 12 samples, additional sample measurements do not increase accuracy. The amount of measurement sets is the main factor for reducing the confidence intervals. If the purpose is to differentiate between design attributes then the number of measurement sets is going to limit how small the differences between design attributes can be resolved with statistical certainty.
 
 \begin{figure}
 \includegraphics{CLW90_lines.pdf}
@@ -391,23 +306,22 @@ The number of sample sets has much bigger influence than sample size for sizes a
 \section{Result from test case}
 \label{sec:result}
 
-To test the concept an experimental database were made. 
-Vaavud, a minor company making anemometers, provided technical drawings,  samples and inspection reports. 
-Additional measurements were done by Danish Technological Institute using Zeiss CT scanning equipment.
-The tested parts were all injection moulded. 
-Three parts were made of POM (PTFE filled) in a multi cavity mould. 
-The last part were made using a blend of PC and a ABS.
+To test the concept an experimental database were made. Vaavud, a small company making anemometers, provided technical drawings, samples and inspection reports. Danish Technological Institute provided additional measurements made using their Zeiss CT scanning equipment. The tested parts were all injection moulded. Three parts were made of POM (PTFE filled) in a multi cavity mould. The last part was made using a blend of PC and ABS.
 
 \subsection{Results}
 
-The 90 \% cumulative frequency of all measurements corresponds to an $14.2 \pm 0.4 $ IT grade. We tried to find design characteristics which results in a tighter permissible tolerances. Linear dimensions within a single mould half did not show significant better performance than dimensions across mold split lines.  Small, medium and large dimensions performed to the same required tolerance.  
+The $90\%$ cumulative frequency of all measurements corresponds to a $14.2 \pm 0.4 \mathrm{IT grade}$. In order to find design attributes with lower minimum permissible tolerances we investigated mould properties, materials, geometries etc. 
 
-We found that there were a very small (or non existing)  correlation between the specified tolerance and the actual process capability driven tolerance as seen in figure \ref{fig:ITG_ITGSpec}. 
-This clearly shows the need for process capability driven tolerances as a part of robust design. 
+\begin{itemize}
+\item Linear dimensions within a single mould half did not show significant better performance than dimensions across mould split lines. 
+\item Linear dimension performed to the same IT grade level as radii and diameters.
+\item Internal and external diameters and radii showed no significant difference.
+\item Small ($0-5 \ mm$), medium ($5-10 \ mm$) and large dimensions ($10+ \ mm$) performed to the same required tolerance, though the largest dimension were only 80 mm.
+\end{itemize}
 
-Given the available data a new part produced using the same production method and materials should be tolerances with a minimum of 14.2 IT grade. 
+We found a very small (or non-existent) correlation between the specified tolerance and the actual process capability driven tolerance, as seen in figure \ref{fig:ITG_ITGSpec}. Which means it makes little or no difference if you apply specified tolerance to each measurement on a part drawing. This clearly shows the need for process capability driven tolerances as a part of robust design. Given the available data, a new part produced using the same production method and materials should be given a tolerance no tighter than 14.2 IT grade. 
 
-Having a database with easy sortable production data can also be used for finding general trends, which can benefit the designer, but will be valuable to the production directly. We found that a general tendency in the part that holes were larger than and specified and compared to shafts measurements using a the mean shift normalised with the specification limit $C_b$ \ref{fig:Cb_holeshaft}. This could be due the mold tested is early in their lifespan and still have a lot of steel left. 
+Having a database with easy sortable production data can also be used for finding general trends, which can benefit the designer and will be valuable to the production directly. E.g. we found that holes were larger than specified compared to shafts using the mean shift normalised with the specification limit, see figure \ref{\label{fig:Cb_holeshaft}}. This is likely a deliberate choice by the mould maker, since subsequent tool wear will reduce this systematic deviation from target. Further more corrections will be cheap, since it does not require the making of a new mould part. 
 
 \begin{figure}
 \includegraphics{ITG_ITGSpec.pdf}
@@ -424,14 +338,10 @@ The dotted line represents 90\% cumulative frequency.}
 
 
 \section{Conclusion}
-In this paper, a review of literature has shown problems in using process capability databases for design purposes. Population and accessibility are two key factor to a functional process capability database.
-
-We have proposed a statistical approach for making process capability independent of size and a approach for calculation a process capability driven tolerance. The statistical uncertainty has been estimated using Monte Carlo simulation technics and compared to known statistical approximations.
-
-In the test case we tried comparing different design characteristics.
-Failure of designing for process capabilities of the production can lead to additional cost for rework or larger failure rate of products. 
-
-When design for a specific process capability the generalized process capability database will provide information of process capability of any measurement for a given material and process.
+In this paper, a review of literature has shown problems in using process capability databases for design purposes. An efficient indexing scheme and easy to use user interface are two key factors to a functional process capability database.
+We have proposed a statistical approach for making process capability independent of dimension and an approach for calculating a process capability driven tolerance. The statistical uncertainty has been estimated using Monte Carlo simulation and compared to known statistical approximations.
+In the test case we compared different design attributes and in general no significant differences were found. For new designs using the same process and material the minimum tolerance should be 14.2 IT grade. Failure of designing for process capabilities of the production can lead to additional cost for rework or larger failure rate of products.
+When designing a new component the generalised process capability database will provide easy access to information of the process capability of the given material and process.
 
 \section*{References}
 \bibliography{../PCDBmasterBibliography/PCDB_Master_bib.bib}
